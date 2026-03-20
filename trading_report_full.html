@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>期货交易报告 - 完整版</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f5f5f5;padding:20px}
+.container{max-width:1600px;margin:0 auto}
+h1{text-align:center;margin:30px 0}h2{border-left:4px solid #1890ff;padding-left:10px;margin:30px 0 15px}
+h3{margin:20px 0 10px;color:#555}
+.info{background:#e6f7ff;border:1px solid #91d5ff;padding:15px;border-radius:8px;margin:20px 0}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin:20px 0}
+.card{background:#fff;padding:20px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+.card .l{color:#666;font-size:13px}.card .v{font-size:24px;font-weight:bold;margin-top:8px}
+.pos{color:#52c41a}.neg{color:#f5222d}
+.section{background:#fff;padding:20px;border-radius:8px;margin:20px 0;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:20px 0}
+.stat{background:#fafafa;padding:10px;border-radius:6px;text-align:center}
+.stat .l{font-size:12px;color:#666}.stat .v{font-size:16px;font-weight:bold;margin-top:5px}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th,td{padding:6px 8px;border-bottom:1px solid #eee;text-align:left}
+th{background:#fafafa;position:sticky;top:0;font-weight:600}
+.scroll{max-height:600px;overflow-y:auto}
+.tag{padding:2px 8px;border-radius:10px;font-size:11px;display:inline-block;margin:1px}
+.LONG{background:#e6f7ff;color:#1890ff}.SHORT{background:#fff7e6;color:#fa8c16}
+.止盈{background:#f6ffed;color:#52c41a}.止损{background:#fff1f0;color:#f5222d}.强平{background:#fff7e6;color:#fa8c16}
+.exit-info{font-size:11px;color:#666}
+</style></head><body><div class="container">
+<h1>📊 期货交易回测报告 - 完整版</h1>
+<div class="info">
+<strong>回测时间：</strong>2025-03-19 至 2026-03-19 | 
+<strong>总资金：</strong>每品种 100,000 元 | 
+<strong>总盈亏：</strong><span class="pos">+1,990元</span>
+</div>
+<div class="cards">
+<div class="card"><div class="l">总交易</div><div class="v">142</div></div>
+<div class="card"><div class="l">总盈亏</div><div class="v pos">+1,990元</div></div>
+<div class="card"><div class="l">品种</div><div class="v">4</div></div>
+<div class="card"><div class="l">胜率</div><div class="v">19.1%</div></div>
+</div>
+
+<div class="section">
+<h2>🎯 硅铁主连 <span style="font-size:12px;color:#666">(止损:31 | 强平:10)</span></h2>
+<div class="stats">
+<div class="stat"><div class="l">次数</div><div class="v">41</div></div>
+<div class="stat"><div class="l">盈亏</div><div class="v pos">+10,650元</div></div>
+<div class="stat"><div class="l">盈利</div><div class="v pos">10</div></div>
+<div class="stat"><div class="l">亏损</div><div class="v neg">31</div></div>
+<div class="stat"><div class="l">胜率</div><div class="v">24.4%</div></div>
+</div>
+<h3>📋 交易明细</h3>
+<div class="scroll"><table>
+<tr><th>日期</th><th>开仓</th><th>平仓</th><th>方向</th><th>手数</th><th>盈亏</th><th>累计</th><th>出场方式</th></tr>
+<tr>
+<td>2025-04-30</td>
+<td>10:10</td>
+<td>11:05</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-850</td>
+<td class="neg">-850</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-05-07</td>
+<td>09:50</td>
+<td>09:55</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-450</td>
+<td class="neg">-1,300</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-05-23</td>
+<td>10:05</td>
+<td>14:55</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="pos">+4200</td>
+<td class="pos">+2,900</td>
+<td><span class="tag 强平">强平</span></td>
+</tr>
+<tr>
+<td>2025-05-26</td>
+<td>09:55</td>
+<td>10:10</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-550</td>
+<td class="pos">+2,350</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-05-30</td>
+<td>10:35</td>
+<td>10:45</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-950</td>
+<td class="pos">+1,400</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-06-04</td>
+<td>11:05</td>
+<td>11:20</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-650</td>
+<td class="pos">+750</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-07-02</td>
+<td>09:50</td>
+<td>14:55</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="pos">+6500</td>
+<td class="pos">+7,250</td>
+<td><span class="tag 强平">强平</span></td>
+</tr>
+<tr>
+<td>2025-07-15</td>
+<td>10:45</td>
+<td>10:50</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="neg">-850</td>
+<td class="pos">+6,400</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-07-21</td>
+<td>09:50</td>
+<td>09:55</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="neg">-1050</td>
+<td class="pos">+5,350</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-07-22</td>
+<td>11:15</td>
+<td>11:20</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="neg">-750</td>
+<td class="pos">+4,600</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-07-25</td>
+<td>09:40</td>
+<td>09:45</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="neg">-1150</td>
+<td class="pos">+3,450</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-07-29</td>
+<td>11:00</td>
+<td>14:55</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="pos">+7500</td>
+<td class="pos">+10,950</td>
+<td><span class="tag 强平">强平</span></td>
+</tr>
+<tr>
+<td>2025-08-11</td>
+<td>10:45</td>
+<td>10:50</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="neg">-350</td>
+<td class="pos">+10,600</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-08-22</td>
+<td>10:10</td>
+<td>10:30</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-550</td>
+<td class="pos">+10,050</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-08-25</td>
+<td>09:35</td>
+<td>09:45</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-750</td>
+<td class="pos">+9,300</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-09-01</td>
+<td>10:55</td>
+<td>11:20</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-950</td>
+<td class="pos">+8,350</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-09-03</td>
+<td>09:55</td>
+<td>10:45</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-450</td>
+<td class="pos">+7,900</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-09-17</td>
+<td>11:05</td>
+<td>14:55</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="pos">+2200</td>
+<td class="pos">+10,100</td>
+<td><span class="tag 强平">强平</span></td>
+</tr>
+<tr>
+<td>2025-09-19</td>
+<td>09:50</td>
+<td>10:10</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="neg">-850</td>
+<td class="pos">+9,250</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-09-25</td>
+<td>10:55</td>
+<td>14:55</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="pos">+2400</td>
+<td class="pos">+11,650</td>
+<td><span class="tag 强平">强平</span></td>
+</tr>
+<tr>
+<td>2025-09-30</td>
+<td>09:40</td>
+<td>10:30</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-450</td>
+<td class="pos">+11,200</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-10-09</td>
+<td>09:35</td>
+<td>09:40</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-650</td>
+<td class="pos">+10,550</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-10-10</td>
+<td>10:40</td>
+<td>10:45</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-550</td>
+<td class="pos">+10,000</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-10-14</td>
+<td>10:00</td>
+<td>10:30</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-1050</td>
+<td class="pos">+8,950</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-10-20</td>
+<td>09:40</td>
+<td>10:05</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-650</td>
+<td class="pos">+8,300</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-11-06</td>
+<td>11:20</td>
+<td>14:55</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="pos">+700</td>
+<td class="pos">+9,000</td>
+<td><span class="tag 强平">强平</span></td>
+</tr>
+<tr>
+<td>2025-11-10</td>
+<td>10:55</td>
+<td>14:55</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="pos">+2100</td>
+<td class="pos">+11,100</td>
+<td><span class="tag 强平">强平</span></td>
+</tr>
+<tr>
+<td>2025-11-12</td>
+<td>09:35</td>
+<td>09:40</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-350</td>
+<td class="pos">+10,750</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-11-21</td>
+<td>09:50</td>
+<td>09:55</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-550</td>
+<td class="pos">+10,200</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-12-10</td>
+<td>10:10</td>
+<td>10:30</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-750</td>
+<td class="pos">+9,450</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-12-18</td>
+<td>10:05</td>
+<td>10:10</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="neg">-750</td>
+<td class="pos">+8,700</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-12-19</td>
+<td>09:50</td>
+<td>09:55</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="neg">-550</td>
+<td class="pos">+8,150</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-12-24</td>
+<td>10:05</td>
+<td>10:30</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="neg">-650</td>
+<td class="pos">+7,500</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-12-25</td>
+<td>09:45</td>
+<td>09:50</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="neg">-850</td>
+<td class="pos">+6,650</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-12-30</td>
+<td>10:50</td>
+<td>13:45</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="neg">-250</td>
+<td class="pos">+6,400</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2026-01-06</td>
+<td>11:15</td>
+<td>14:55</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="pos">+2800</td>
+<td class="pos">+9,200</td>
+<td><span class="tag 强平">强平</span></td>
+</tr>
+<tr>
+<td>2026-01-20</td>
+<td>10:00</td>
+<td>10:55</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-750</td>
+<td class="pos">+8,450</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2026-02-02</td>
+<td>09:40</td>
+<td>10:10</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="neg">-950</td>
+<td class="pos">+7,500</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2026-02-12</td>
+<td>10:45</td>
+<td>14:55</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="pos">+2300</td>
+<td class="pos">+9,800</td>
+<td><span class="tag 强平">强平</span></td>
+</tr>
+<tr>
+<td>2026-03-03</td>
+<td>10:55</td>
+<td>11:00</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="neg">-450</td>
+<td class="pos">+9,350</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2026-03-06</td>
+<td>10:55</td>
+<td>14:55</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="pos">+1300</td>
+<td class="pos">+10,650</td>
+<td><span class="tag 强平">强平</span></td>
+</tr>
+</table></div></div>
+<div class="section">
+<h2>🎯 鸡蛋主连 <span style="font-size:12px;color:#666">(强平:8 | 止损:31)</span></h2>
+<div class="stats">
+<div class="stat"><div class="l">次数</div><div class="v">39</div></div>
+<div class="stat"><div class="l">盈亏</div><div class="v pos">+3,300元</div></div>
+<div class="stat"><div class="l">盈利</div><div class="v pos">8</div></div>
+<div class="stat"><div class="l">亏损</div><div class="v neg">31</div></div>
+<div class="stat"><div class="l">胜率</div><div class="v">20.5%</div></div>
+</div>
+<h3>📋 交易明细</h3>
+<div class="scroll"><table>
+<tr><th>日期</th><th>开仓</th><th>平仓</th><th>方向</th><th>手数</th><th>盈亏</th><th>累计</th><th>出场方式</th></tr>
+<tr>
+<td>2025-04-24</td>
+<td>09:35</td>
+<td>14:55</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>8</td>
+<td class="pos">+2160</td>
+<td class="pos">+2,160</td>
+<td><span class="tag 强平">强平</span></td>
+</tr>
+<tr>
+<td>2025-05-14</td>
+<td>10:35</td>
+<td>10:40</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>8</td>
+<td class="neg">-480</td>
+<td class="pos">+1,680</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-05-15</td>
+<td>11:05</td>
+<td>11:25</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>8</td>
+<td class="neg">-160</td>
+<td class="pos">+1,520</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-05-19</td>
+<td>09:45</td>
+<td>10:05</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>8</td>
+<td class="neg">-640</td>
+<td class="pos">+880</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-06-16</td>
+<td>11:05</td>
+<td>13:30</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>6</td>
+<td class="neg">-300</td>
+<td class="pos">+580</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-06-17</td>
+<td>10:05</td>
+<td>10:30</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>7</td>
+<td class="neg">-490</td>
+<td class="pos">+90</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-06-18</td>
+<td>09:40</td>
+<td>09:55</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>6</td>
+<td class="neg">-600</td>
+<td class="neg">-510</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-06-20</td>
+<td>09:35</td>
+<td>09:50</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>6</td>
+<td class="neg">-660</td>
+<td class="neg">-1,170</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-07-04</td>
+<td>09:40</td>
+<td>09:45</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>6</td>
+<td class="neg">-420</td>
+<td class="neg">-1,590</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-08-04</td>
+<td>10:45</td>
+<td>14:55</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>7</td>
+<td class="pos">+1750</td>
+<td class="pos">+160</td>
+<td><span class="tag 强平">强平</span></td>
+</tr>
+<tr>
+<td>2025-08-11</td>
+<td>10:35</td>
+<td>14:55</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>7</td>
+<td class="pos">+4200</td>
+<td class="pos">+4,360</td>
+<td><span class="tag 强平">强平</span></td>
+</tr>
+<tr>
+<td>2025-08-14</td>
+<td>11:10</td>
+<td>13:35</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>7</td>
+<td class="neg">-910</td>
+<td class="pos">+3,450</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-08-15</td>
+<td>09:55</td>
+<td>10:00</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>7</td>
+<td class="neg">-280</td>
+<td class="pos">+3,170</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-08-19</td>
+<td>09:50</td>
+<td>10:55</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>8</td>
+<td class="neg">-640</td>
+<td class="pos">+2,530</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-08-25</td>
+<td>09:40</td>
+<td>09:45</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>8</td>
+<td class="neg">-720</td>
+<td class="pos">+1,810</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-10-09</td>
+<td>09:45</td>
+<td>13:35</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>8</td>
+<td class="neg">-1200</td>
+<td class="pos">+610</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-10-10</td>
+<td>10:00</td>
+<td>14:55</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>8</td>
+<td class="pos">+3120</td>
+<td class="pos">+3,730</td>
+<td><span class="tag 强平">强平</span></td>
+</tr>
+<tr>
+<td>2025-10-16</td>
+<td>11:15</td>
+<td>11:25</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>8</td>
+<td class="neg">-480</td>
+<td class="pos">+3,250</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-10-29</td>
+<td>09:45</td>
+<td>10:45</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>7</td>
+<td class="neg">-350</td>
+<td class="pos">+2,900</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-10-30</td>
+<td>11:20</td>
+<td>14:20</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>7</td>
+<td class="neg">-350</td>
+<td class="pos">+2,550</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-11-03</td>
+<td>09:45</td>
+<td>10:30</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>7</td>
+<td class="neg">-490</td>
+<td class="pos">+2,060</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-11-04</td>
+<td>10:05</td>
+<td>10:10</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>7</td>
+<td class="neg">-560</td>
+<td class="pos">+1,500</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-11-05</td>
+<td>10:10</td>
+<td>14:55</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>7</td>
+<td class="pos">+2940</td>
+<td class="pos">+4,440</td>
+<td><span class="tag 强平">强平</span></td>
+</tr>
+<tr>
+<td>2025-11-20</td>
+<td>09:45</td>
+<td>10:40</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>7</td>
+<td class="neg">-1260</td>
+<td class="pos">+3,180</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-11-24</td>
+<td>10:30</td>
+<td>10:55</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>7</td>
+<td class="neg">-490</td>
+<td class="pos">+2,690</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-12-12</td>
+<td>09:35</td>
+<td>09:40</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>8</td>
+<td class="neg">-560</td>
+<td class="pos">+2,130</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-12-16</td>
+<td>09:35</td>
+<td>10:05</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>8</td>
+<td class="neg">-880</td>
+<td class="pos">+1,250</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-12-17</td>
+<td>09:35</td>
+<td>09:55</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>8</td>
+<td class="neg">-720</td>
+<td class="pos">+530</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-12-19</td>
+<td>11:05</td>
+<td>14:55</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>8</td>
+<td class="pos">+1280</td>
+<td class="pos">+1,810</td>
+<td><span class="tag 强平">强平</span></td>
+</tr>
+<tr>
+<td>2026-01-20</td>
+<td>10:40</td>
+<td>10:50</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>8</td>
+<td class="neg">-800</td>
+<td class="pos">+1,010</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2026-01-21</td>
+<td>10:10</td>
+<td>10:45</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>8</td>
+<td class="neg">-720</td>
+<td class="pos">+290</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2026-01-22</td>
+<td>10:00</td>
+<td>14:55</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>8</td>
+<td class="pos">+3680</td>
+<td class="pos">+3,970</td>
+<td><span class="tag 强平">强平</span></td>
+</tr>
+<tr>
+<td>2026-01-26</td>
+<td>10:35</td>
+<td>11:00</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>8</td>
+<td class="neg">-1040</td>
+<td class="pos">+2,930</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2026-02-03</td>
+<td>10:05</td>
+<td>10:35</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>8</td>
+<td class="neg">-640</td>
+<td class="pos">+2,290</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2026-02-05</td>
+<td>10:50</td>
+<td>14:55</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>8</td>
+<td class="pos">+2720</td>
+<td class="pos">+5,010</td>
+<td><span class="tag 强平">强平</span></td>
+</tr>
+<tr>
+<td>2026-02-06</td>
+<td>09:45</td>
+<td>09:50</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>8</td>
+<td class="neg">-240</td>
+<td class="pos">+4,770</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2026-02-24</td>
+<td>09:45</td>
+<td>10:30</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>7</td>
+<td class="neg">-630</td>
+<td class="pos">+4,140</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2026-02-25</td>
+<td>10:05</td>
+<td>10:35</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>7</td>
+<td class="neg">-490</td>
+<td class="pos">+3,650</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2026-03-06</td>
+<td>10:55</td>
+<td>13:30</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>7</td>
+<td class="neg">-350</td>
+<td class="pos">+3,300</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+</table></div></div>
+<div class="section">
+<h2>🎯 豆粕主连 <span style="font-size:12px;color:#666">(止损:25 | 强平:3)</span></h2>
+<div class="stats">
+<div class="stat"><div class="l">次数</div><div class="v">28</div></div>
+<div class="stat"><div class="l">盈亏</div><div class="v neg">-3,980元</div></div>
+<div class="stat"><div class="l">盈利</div><div class="v pos">3</div></div>
+<div class="stat"><div class="l">亏损</div><div class="v neg">25</div></div>
+<div class="stat"><div class="l">胜率</div><div class="v">10.7%</div></div>
+</div>
+<h3>📋 交易明细</h3>
+<div class="scroll"><table>
+<tr><th>日期</th><th>开仓</th><th>平仓</th><th>方向</th><th>手数</th><th>盈亏</th><th>累计</th><th>出场方式</th></tr>
+<tr>
+<td>2025-08-12</td>
+<td>09:55</td>
+<td>10:30</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>8</td>
+<td class="neg">-160</td>
+<td class="neg">-160</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-08-14</td>
+<td>10:05</td>
+<td>10:35</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>7</td>
+<td class="neg">-700</td>
+<td class="neg">-860</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-08-19</td>
+<td>11:00</td>
+<td>11:20</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>7</td>
+<td class="neg">-280</td>
+<td class="neg">-1,140</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-08-20</td>
+<td>09:45</td>
+<td>10:00</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>7</td>
+<td class="neg">-280</td>
+<td class="neg">-1,420</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-09-02</td>
+<td>09:55</td>
+<td>10:50</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>8</td>
+<td class="neg">-240</td>
+<td class="neg">-1,660</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-09-03</td>
+<td>10:30</td>
+<td>10:40</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>8</td>
+<td class="neg">-320</td>
+<td class="neg">-1,980</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-09-15</td>
+<td>10:05</td>
+<td>10:55</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>8</td>
+<td class="neg">-560</td>
+<td class="neg">-2,540</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-09-26</td>
+<td>10:55</td>
+<td>14:55</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>8</td>
+<td class="pos">+400</td>
+<td class="neg">-2,140</td>
+<td><span class="tag 强平">强平</span></td>
+</tr>
+<tr>
+<td>2025-10-10</td>
+<td>09:45</td>
+<td>10:10</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>8</td>
+<td class="neg">-400</td>
+<td class="neg">-2,540</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-10-21</td>
+<td>09:55</td>
+<td>10:00</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>8</td>
+<td class="neg">-400</td>
+<td class="neg">-2,940</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-11-05</td>
+<td>11:05</td>
+<td>14:55</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>8</td>
+<td class="pos">+2880</td>
+<td class="neg">-60</td>
+<td><span class="tag 强平">强平</span></td>
+</tr>
+<tr>
+<td>2025-11-07</td>
+<td>11:10</td>
+<td>11:15</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>8</td>
+<td class="neg">-320</td>
+<td class="neg">-380</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-11-14</td>
+<td>09:50</td>
+<td>10:35</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>8</td>
+<td class="neg">-560</td>
+<td class="neg">-940</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-12-03</td>
+<td>09:35</td>
+<td>09:40</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>8</td>
+<td class="neg">-400</td>
+<td class="neg">-1,340</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-12-05</td>
+<td>09:55</td>
+<td>10:00</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>8</td>
+<td class="neg">-240</td>
+<td class="neg">-1,580</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-12-09</td>
+<td>09:45</td>
+<td>09:50</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>9</td>
+<td class="neg">-450</td>
+<td class="neg">-2,030</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-12-10</td>
+<td>09:55</td>
+<td>10:40</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>9</td>
+<td class="neg">-360</td>
+<td class="neg">-2,390</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-12-11</td>
+<td>11:15</td>
+<td>13:40</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>9</td>
+<td class="neg">-450</td>
+<td class="neg">-2,840</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-12-17</td>
+<td>09:50</td>
+<td>10:55</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>9</td>
+<td class="neg">-270</td>
+<td class="neg">-3,110</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2026-01-21</td>
+<td>10:05</td>
+<td>11:00</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>9</td>
+<td class="neg">-450</td>
+<td class="neg">-3,560</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2026-02-04</td>
+<td>10:30</td>
+<td>10:40</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>9</td>
+<td class="neg">-180</td>
+<td class="neg">-3,740</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2026-02-05</td>
+<td>11:00</td>
+<td>13:30</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>9</td>
+<td class="neg">-270</td>
+<td class="neg">-4,010</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2026-02-13</td>
+<td>10:35</td>
+<td>10:55</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>8</td>
+<td class="neg">-240</td>
+<td class="neg">-4,250</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2026-02-26</td>
+<td>09:45</td>
+<td>09:50</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>8</td>
+<td class="neg">-320</td>
+<td class="neg">-4,570</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2026-03-06</td>
+<td>09:40</td>
+<td>10:00</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>8</td>
+<td class="neg">-640</td>
+<td class="neg">-5,210</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2026-03-11</td>
+<td>10:45</td>
+<td>14:55</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>8</td>
+<td class="pos">+3040</td>
+<td class="neg">-2,170</td>
+<td><span class="tag 强平">强平</span></td>
+</tr>
+<tr>
+<td>2026-03-13</td>
+<td>09:40</td>
+<td>10:30</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>7</td>
+<td class="neg">-770</td>
+<td class="neg">-2,940</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2026-03-16</td>
+<td>11:25</td>
+<td>13:55</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>8</td>
+<td class="neg">-1040</td>
+<td class="neg">-3,980</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+</table></div></div>
+<div class="section">
+<h2>🎯 尿素主连 <span style="font-size:12px;color:#666">(强平:7 | 止损:27)</span></h2>
+<div class="stats">
+<div class="stat"><div class="l">次数</div><div class="v">34</div></div>
+<div class="stat"><div class="l">盈亏</div><div class="v neg">-7,980元</div></div>
+<div class="stat"><div class="l">盈利</div><div class="v pos">7</div></div>
+<div class="stat"><div class="l">亏损</div><div class="v neg">27</div></div>
+<div class="stat"><div class="l">胜率</div><div class="v">20.6%</div></div>
+</div>
+<h3>📋 交易明细</h3>
+<div class="scroll"><table>
+<tr><th>日期</th><th>开仓</th><th>平仓</th><th>方向</th><th>手数</th><th>盈亏</th><th>累计</th><th>出场方式</th></tr>
+<tr>
+<td>2025-04-23</td>
+<td>11:15</td>
+<td>14:55</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="pos">+800</td>
+<td class="pos">+800</td>
+<td><span class="tag 强平">强平</span></td>
+</tr>
+<tr>
+<td>2025-04-25</td>
+<td>09:35</td>
+<td>09:50</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-1200</td>
+<td class="neg">-400</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-05-12</td>
+<td>10:45</td>
+<td>10:55</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>9</td>
+<td class="neg">-1080</td>
+<td class="neg">-1,480</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-05-13</td>
+<td>10:35</td>
+<td>14:35</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>9</td>
+<td class="neg">-720</td>
+<td class="neg">-2,200</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-05-14</td>
+<td>10:00</td>
+<td>10:10</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>9</td>
+<td class="neg">-1080</td>
+<td class="neg">-3,280</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-05-15</td>
+<td>10:10</td>
+<td>10:30</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>9</td>
+<td class="neg">-360</td>
+<td class="neg">-3,640</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-06-03</td>
+<td>09:45</td>
+<td>10:00</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-800</td>
+<td class="neg">-4,440</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-06-05</td>
+<td>10:05</td>
+<td>14:55</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="pos">+4800</td>
+<td class="pos">+360</td>
+<td><span class="tag 强平">强平</span></td>
+</tr>
+<tr>
+<td>2025-06-11</td>
+<td>11:05</td>
+<td>11:10</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-600</td>
+<td class="neg">-240</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-06-26</td>
+<td>10:35</td>
+<td>11:10</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-4000</td>
+<td class="neg">-4,240</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-06-27</td>
+<td>10:35</td>
+<td>10:50</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-1000</td>
+<td class="neg">-5,240</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-07-11</td>
+<td>10:50</td>
+<td>10:55</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="neg">-600</td>
+<td class="neg">-5,840</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-07-24</td>
+<td>10:35</td>
+<td>10:40</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="neg">-800</td>
+<td class="neg">-6,640</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-07-25</td>
+<td>09:35</td>
+<td>10:55</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="neg">-2400</td>
+<td class="neg">-9,040</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-07-31</td>
+<td>09:45</td>
+<td>14:55</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="pos">+3200</td>
+<td class="neg">-5,840</td>
+<td><span class="tag 强平">强平</span></td>
+</tr>
+<tr>
+<td>2025-08-05</td>
+<td>11:00</td>
+<td>11:15</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-600</td>
+<td class="neg">-6,440</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-08-13</td>
+<td>10:55</td>
+<td>11:15</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-1200</td>
+<td class="neg">-7,640</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-08-14</td>
+<td>11:25</td>
+<td>14:55</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="pos">+1800</td>
+<td class="neg">-5,840</td>
+<td><span class="tag 强平">强平</span></td>
+</tr>
+<tr>
+<td>2025-09-03</td>
+<td>09:50</td>
+<td>14:55</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="pos">+6600</td>
+<td class="pos">+760</td>
+<td><span class="tag 强平">强平</span></td>
+</tr>
+<tr>
+<td>2025-09-19</td>
+<td>10:50</td>
+<td>14:55</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="pos">+1600</td>
+<td class="pos">+2,360</td>
+<td><span class="tag 强平">强平</span></td>
+</tr>
+<tr>
+<td>2025-09-23</td>
+<td>10:05</td>
+<td>10:35</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-800</td>
+<td class="pos">+1,560</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-10-14</td>
+<td>09:45</td>
+<td>09:50</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-400</td>
+<td class="pos">+1,160</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-10-15</td>
+<td>11:25</td>
+<td>13:35</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-600</td>
+<td class="pos">+560</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-10-17</td>
+<td>10:10</td>
+<td>10:30</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-1200</td>
+<td class="neg">-640</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-10-20</td>
+<td>09:45</td>
+<td>09:50</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="neg">-1000</td>
+<td class="neg">-1,640</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-12-03</td>
+<td>09:55</td>
+<td>10:40</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="neg">-1000</td>
+<td class="neg">-2,640</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-12-11</td>
+<td>11:25</td>
+<td>14:55</td>
+<td><span class="tag SHORT">SHORT</span></td>
+<td>10</td>
+<td class="pos">+1000</td>
+<td class="neg">-1,640</td>
+<td><span class="tag 强平">强平</span></td>
+</tr>
+<tr>
+<td>2025-12-25</td>
+<td>10:10</td>
+<td>11:20</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="neg">-800</td>
+<td class="neg">-2,440</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-12-30</td>
+<td>10:45</td>
+<td>13:30</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="neg">-400</td>
+<td class="neg">-2,840</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2025-12-31</td>
+<td>09:35</td>
+<td>09:45</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="neg">-800</td>
+<td class="neg">-3,640</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2026-01-05</td>
+<td>10:40</td>
+<td>11:20</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="neg">-1000</td>
+<td class="neg">-4,640</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2026-01-27</td>
+<td>10:40</td>
+<td>11:15</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>10</td>
+<td class="neg">-1000</td>
+<td class="neg">-5,640</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2026-03-12</td>
+<td>10:40</td>
+<td>10:45</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>9</td>
+<td class="neg">-1440</td>
+<td class="neg">-7,080</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+<tr>
+<td>2026-03-16</td>
+<td>09:35</td>
+<td>09:40</td>
+<td><span class="tag LONG">LONG</span></td>
+<td>9</td>
+<td class="neg">-900</td>
+<td class="neg">-7,980</td>
+<td><span class="tag 止损">止损</span></td>
+</tr>
+</table></div></div></div></body></html>

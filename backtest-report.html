@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多品种回测分析报告</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', Arial, sans-serif; background: #f5f7fa; padding: 20px; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        h1 { text-align: center; color: #2c3e50; margin-bottom: 10px; }
+        .subtitle { text-align: center; color: #7f8c8d; margin-bottom: 30px; }
+        .summary-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .card h3 { color: #7f8c8d; font-size: 14px; margin-bottom: 10px; }
+        .card .value { font-size: 28px; font-weight: bold; }
+        .positive { color: #e74c3c; }
+        .negative { color: #27ae60; }
+        .charts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .chart-container { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .chart-container h3 { margin-bottom: 15px; color: #2c3e50; }
+        .variety-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+        .variety-table th, .variety-table td { padding: 12px; text-align: left; border-bottom: 1px solid #ecf0f1; }
+        .variety-table th { background: #34495e; color: white; }
+        .variety-table tr:hover { background: #f8f9fa; }
+        .insights { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 30px; }
+        .insights h3 { color: #2c3e50; margin-bottom: 15px; border-left: 4px solid #3498db; padding-left: 15px; }
+        .insight-item { margin-bottom: 15px; padding: 10px; background: #f8f9fa; border-radius: 5px; }
+        .insight-item strong { color: #e74c3c; }
+        .exit-chart { height: 300px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 多品种回测分析报告</h1>
+        <p class="subtitle">回测时间：2025-03-19 至 2026-03-19 | 总资金：100,000 元 | 仓位：20%-30%</p>
+        
+        <div class="summary-cards">
+            <div class="card">
+                <h3>总盈亏</h3>
+                <div class="value positive">+4,460 元</div>
+            </div>
+            <div class="card">
+                <h3>总交易次数</h3>
+                <div class="value">113 笔</div>
+            </div>
+            <div class="card">
+                <h3>平均胜率</h3>
+                <div class="value negative">30.9%</div>
+            </div>
+            <div class="card">
+                <h3>止盈/止损比</h3>
+                <div class="value">24/78</div>
+            </div>
+        </div>
+
+        <table class="variety-table">
+            <thead>
+                <tr>
+                    <th>品种</th>
+                    <th>交易次数</th>
+                    <th>累计盈亏 (元)</th>
+                    <th>胜率</th>
+                    <th>平均手数</th>
+                    <th>止盈/止损/强平</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>豆粕主连</td>
+                    <td>26</td>
+                    <td class="negative">-790</td>
+                    <td>30.8%</td>
+                    <td>8.4</td>
+                    <td>7 / 18 / 1</td>
+                </tr>
+                <tr>
+                    <td>鸡蛋主连</td>
+                    <td>28</td>
+                    <td class="positive">+3,730</td>
+                    <td>25.0%</td>
+                    <td>7.5</td>
+                    <td>2 / 21 / 5</td>
+                </tr>
+                <tr>
+                    <td>尿素主连</td>
+                    <td>31</td>
+                    <td class="negative">-4,180</td>
+                    <td>32.3%</td>
+                    <td>9.9</td>
+                    <td>10 / 21 / 0</td>
+                </tr>
+                <tr>
+                    <td>硅铁主连</td>
+                    <td>28</td>
+                    <td class="positive">+5,700</td>
+                    <td>35.7%</td>
+                    <td>10.0</td>
+                    <td>5 / 18 / 5</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="charts-grid">
+            <div class="chart-container">
+                <h3>品种盈亏对比</h3>
+                <canvas id="profitChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3>胜率对比</h3>
+                <canvas id="winrateChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3>出场方式分布</h3>
+                <canvas id="exitChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3>交易次数分布</h3>
+                <canvas id="tradeCountChart"></canvas>
+            </div>
+        </div>
+
+        <div class="insights">
+            <h3>📈 关键发现与建议</h3>
+            <div class="insight-item">
+                <strong>1. 硅铁表现最佳：</strong> 累计盈利 +5,700 元，胜率 35.7% 为四个品种中最高。建议重点关注硅铁的 trending 行情，可适当增加仓位配置。
+            </div>
+            <div class="insight-item">
+                <strong>2. 鸡蛋低胜率但高盈利：</strong> 胜率仅 25% 但盈利 +3,730 元，说明盈亏比优秀。策略在鸡蛋上呈现"小亏大赚"特征，值得保持。
+            </div>
+            <div class="insight-item">
+                <strong>3. 尿素需优化：</strong> 亏损 -4,180 元，虽然止盈 10 笔最多，但止损 21 笔。建议检查尿素品种的入场信号，或考虑降低仓位。
+            </div>
+            <div class="insight-item">
+                <strong>4. 止损过多：</strong> 总止损 78 笔 vs 止盈 24 笔，比例约 3.25:1。建议优化止损策略，可考虑放宽止损或改进入场时机。
+            </div>
+            <div class="insight-item">
+                <strong>5. 强平贡献显著：</strong> 11 笔强平中多为盈利（如鸡蛋 +3120、+2940、+3680、+2720 元），说明趋势持仓策略有效，可考虑优化移动止损让利润奔跑。
+            </div>
+            <div class="insight-item">
+                <strong>6. 整体胜率偏低：</strong> 平均胜率 30.9%，但总盈利为正，说明策略是"趋势跟踪"类型。关键是要让盈利单充分发展，同时控制亏损单幅度。
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const colorPalette = {
+            red: '#e74c3c',
+            green: '#27ae60',
+            blue: '#3498db',
+            orange: '#f39c12',
+            purple: '#9b59b6'
+        };
+
+        new Chart(document.getElementById('profitChart'), {
+            type: 'bar',
+            data: {
+                labels: ['豆粕', '鸡蛋', '尿素', '硅铁'],
+                datasets: [{
+                    label: '累计盈亏 (元)',
+                    data: [-790, 3730, -4180, 5700],
+                    backgroundColor: [-790, 3730, -4180, 5700].map(v => v >= 0 ? colorPalette.green : colorPalette.red)
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: { beginAtZero: false }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('winrateChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['豆粕 30.8%', '鸡蛋 25.0%', '尿素 32.3%', '硅铁 35.7%'],
+                datasets: [{
+                    data: [30.8, 25.0, 32.3, 35.7],
+                    backgroundColor: [colorPalette.blue, colorPalette.orange, colorPalette.purple, colorPalette.green]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('exitChart'), {
+            type: 'pie',
+            data: {
+                labels: ['止盈 24 笔', '止损 78 笔', '强平 11 笔'],
+                datasets: [{
+                    data: [24, 78, 11],
+                    backgroundColor: [colorPalette.green, colorPalette.red, colorPalette.blue]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('tradeCountChart'), {
+            type: 'bar',
+            data: {
+                labels: ['豆粕', '鸡蛋', '尿素', '硅铁'],
+                datasets: [{
+                    label: '交易次数',
+                    data: [26, 28, 31, 28],
+                    backgroundColor: colorPalette.blue
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

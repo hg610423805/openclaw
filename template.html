@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>期货交易回测报告</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; padding: 20px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    h1 { text-align: center; color: #333; margin-bottom: 30px; font-size: 28px; }
+    h2 { color: #444; margin: 30px 0 15px; font-size: 20px; border-left: 4px solid #1890ff; padding-left: 10px; }
+    .summary-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px; }
+    .card { background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .card h3 { color: #666; font-size: 14px; margin-bottom: 10px; }
+    .card .value { font-size: 28px; font-weight: bold; }
+    .positive { color: #52c41a; }
+    .negative { color: #f5222d; }
+    .chart-container { background: white; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .chart-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; }
+    table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 20px; }
+    th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #eee; }
+    th { background: #fafafa; font-weight: 600; }
+    tr:hover { background: #f5f5f5; }
+    .product-tag { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; }
+    .product-tag 豆粕 { background: #e6f7ff; color: #1890ff; }
+    .product-tag 鸡蛋 { background: #fff7e6; color: #fa8c16; }
+    .product-tag 尿素 { background: #f6ffed; color: #52c41a; }
+    .product-tag 硅铁 { background: #fff0f6; color: #eb2f96; }
+    .info-box { background: #e6f7ff; border: 1px solid #91d5ff; border-radius: 8px; padding: 15px; margin-bottom: 20px; }
+    .info-box p { color: #0050b3; margin: 5px 0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📊 期货交易回测报告</h1>
+    <div class="info-box">
+      <p><strong>回测时间：</strong>2025-03-19 至 2026-03-19</p>
+      <p><strong>总资金：</strong>每个品种 100,000 元（独立测试）</p>
+    </div>
+    <div class="summary-cards">
+      <div class="card"><h3>总盈亏</h3><div class="value {{TOTAL_PNL_CLASS}}">{{TOTAL_PNL}} 元</div></div>
+      <div class="card"><h3>总交易笔数</h3><div class="value">{{TOTAL_TRADES}}</div></div>
+      <div class="card"><h3>胜率</h3><div class="value">{{WIN_RATE}}%</div></div>
+      <div class="card"><h3>回测月份</h3><div class="value">{{MONTH_COUNT}} 个月</div></div>
+    </div>
+    <h2>📈 月度盈亏走势</h2>
+    <div class="chart-container"><canvas id="monthlyChart"></canvas></div>
+    <h2>📉 累计收益曲线</h2>
+    <div class="chart-container"><canvas id="cumulativeChart"></canvas></div>
+    <h2>🎯 品种表现</h2>
+    <div class="chart-row">
+      <div class="chart-container"><canvas id="productPnlChart"></canvas></div>
+      <div class="chart-container"><canvas id="productCountChart"></canvas></div>
+    </div>
+    <h2>📋 品种数据</h2>
+    <table><thead><tr><th>品种</th><th>次数</th><th>盈亏 (元)</th><th>胜率</th></tr></thead><tbody>{{PRODUCT_ROWS}}</tbody></table>
+    <h2>📅 月度数据</h2>
+    <table><thead><tr><th>月份</th><th>次数</th><th>盈利</th><th>亏损</th><th>净盈亏</th></tr></thead><tbody>{{MONTHLY_ROWS}}</tbody></table>
+  </div>
+  <script>
+    new Chart(document.getElementById('monthlyChart'), {
+      type: 'bar',
+      data: { labels: {{MONTH_LABELS}}, datasets: [{ label: '盈亏', data: {{MONTH_DATA}}, backgroundColor: {{MONTH_COLORS}}, borderWidth: 1 }] },
+      options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+    });
+    new Chart(document.getElementById('cumulativeChart'), {
+      type: 'line',
+      data: { labels: {{CUM_LABELS}}, datasets: [{ label: '累计', data: {{CUM_DATA}}, borderColor: '#1890ff', fill: true, tension: 0.1 }] },
+      options: { responsive: true, plugins: { legend: { display: false } } }
+    });
+    new Chart(document.getElementById('productPnlChart'), {
+      type: 'bar',
+      data: { labels: {{PROD_LABELS}}, datasets: [{ label: '总盈亏', data: {{PROD_DATA}}, backgroundColor: {{MONTH_COLORS.slice(0,4)}}, borderWidth: 1 }] },
+      options: { responsive: true, indexAxis: 'y', plugins: { legend: { display: false } } }
+    });
+    new Chart(document.getElementById('productCountChart'), {
+      type: 'doughnut',
+      data: { labels: {{PROD_LABELS}}, datasets: [{ data: {{PROD_COUNTS}}, backgroundColor: ['#1890ff', '#fa8c16', '#52c41a', '#eb2f96'] }] },
+      options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+    });
+  </script>
+</body>
+</html>

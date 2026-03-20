@@ -1,0 +1,1729 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>期货交易回测报告 - 详细版</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; padding: 20px; }
+    .container { max-width: 1400px; margin: 0 auto; }
+    h1 { text-align: center; color: #333; margin-bottom: 30px; font-size: 28px; }
+    h2 { color: #444; margin: 30px 0 15px; font-size: 20px; border-left: 4px solid #1890ff; padding-left: 10px; }
+    h3 { color: #555; margin: 20px 0 10px; font-size: 16px; }
+    .summary-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px; }
+    .card { background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .card h3 { color: #666; font-size: 14px; margin-bottom: 10px; }
+    .card .value { font-size: 28px; font-weight: bold; }
+    .positive { color: #52c41a; }
+    .negative { color: #f5222d; }
+    .chart-container { background: white; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .product-section { background: white; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid #eee; }
+    th { background: #fafafa; font-weight: 600; position: sticky; top: 0; }
+    tr:hover { background: #f5f5f5; }
+    .scroll-table { max-height: 400px; overflow-y: auto; }
+    .scroll-table table { width: 100%; }
+    .tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; }
+    .tag-LONG { background: #e6f7ff; color: #1890ff; }
+    .tag-SHORT { background: #fff7e6; color: #fa8c16; }
+    .info-box { background: #e6f7ff; border: 1px solid #91d5ff; border-radius: 8px; padding: 15px; margin-bottom: 20px; }
+    .info-box p { color: #0050b3; margin: 5px 0; }
+    .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 15px; }
+    .stat-item { background: #fafafa; padding: 10px; border-radius: 6px; text-align: center; }
+    .stat-item .label { font-size: 12px; color: #666; }
+    .stat-item .value { font-size: 18px; font-weight: bold; margin-top: 5px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📊 期货交易回测报告 - 详细版</h1>
+    
+    <div class="info-box">
+      <p><strong>回测时间：</strong>2025-03-19 至 2026-03-19</p>
+      <p><strong>总资金：</strong>每个品种 100,000 元（独立测试）</p>
+      <p><strong>总盈亏：</strong>36620.0 元</p>
+    </div>
+    
+    <div class="summary-cards">
+      <div class="card"><h3>总交易笔数</h3><div class="value">221</div></div>
+      <div class="card"><h3>总盈亏</h3><div class="value positive">+36620.0 元</div></div>
+      <div class="card"><h3>盈利月份</h3><div class="value">8/12</div></div>
+      <div class="card"><h3>品种数</h3><div class="value">4</div></div>
+    </div>
+    
+    <h2>📈 累计收益曲线</h2>
+    <div class="chart-container"><canvas id="cumulativeChart"></canvas></div>
+
+    <div class="product-section">
+      <h2>🎯 硅铁主连</h2>
+      <div class="stats-row">
+        <div class="stat-item"><div class="label">交易次数</div><div class="value">57</div></div>
+        <div class="stat-item"><div class="label">总盈亏</div><div class="value positive">+22650 元</div></div>
+        <div class="stat-item"><div class="label">盈利</div><div class="value positive">22</div></div>
+        <div class="stat-item"><div class="label">亏损</div><div class="value negative">34</div></div>
+        <div class="stat-item"><div class="label">胜率</div><div class="value">38.6%</div></div>
+      </div>
+      
+      <h3>📋 每日交易明细</h3>
+      <div class="scroll-table">
+        <table>
+          <thead>
+            <tr><th>日期</th><th>方向</th><th>手数</th><th>盈亏 (元)</th><th>累计盈亏</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2025-04-22</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="positive">+1200</td>
+              <td class="positive">+1200</td>
+            </tr>
+            <tr>
+              <td>2025-04-23</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-300</td>
+              <td class="positive">+900</td>
+            </tr>
+            <tr>
+              <td>2025-04-24</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="positive">+100</td>
+              <td class="positive">+1000</td>
+            </tr>
+            <tr>
+              <td>2025-04-29</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="positive">+400</td>
+              <td class="positive">+1400</td>
+            </tr>
+            <tr>
+              <td>2025-04-30</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-850</td>
+              <td class="positive">+550</td>
+            </tr>
+            <tr>
+              <td>2025-05-06</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-100</td>
+              <td class="positive">+450</td>
+            </tr>
+            <tr>
+              <td>2025-05-07</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-450</td>
+              <td class="positive">+0</td>
+            </tr>
+            <tr>
+              <td>2025-05-23</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="positive">+4200</td>
+              <td class="positive">+4200</td>
+            </tr>
+            <tr>
+              <td>2025-05-26</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-550</td>
+              <td class="positive">+3650</td>
+            </tr>
+            <tr>
+              <td>2025-05-29</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="positive">+1200</td>
+              <td class="positive">+4850</td>
+            </tr>
+            <tr>
+              <td>2025-05-30</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-950</td>
+              <td class="positive">+3900</td>
+            </tr>
+            <tr>
+              <td>2025-06-03</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="positive">+700</td>
+              <td class="positive">+4600</td>
+            </tr>
+            <tr>
+              <td>2025-06-04</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-650</td>
+              <td class="positive">+3950</td>
+            </tr>
+            <tr>
+              <td>2025-06-05</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="positive">+300</td>
+              <td class="positive">+4250</td>
+            </tr>
+            <tr>
+              <td>2025-07-02</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="positive">+6500</td>
+              <td class="positive">+10750</td>
+            </tr>
+            <tr>
+              <td>2025-07-10</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="positive">+4000</td>
+              <td class="positive">+14750</td>
+            </tr>
+            <tr>
+              <td>2025-07-15</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-850</td>
+              <td class="positive">+13900</td>
+            </tr>
+            <tr>
+              <td>2025-07-21</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-1050</td>
+              <td class="positive">+12850</td>
+            </tr>
+            <tr>
+              <td>2025-07-22</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-750</td>
+              <td class="positive">+12100</td>
+            </tr>
+            <tr>
+              <td>2025-07-25</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-1150</td>
+              <td class="positive">+10950</td>
+            </tr>
+            <tr>
+              <td>2025-07-29</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="positive">+7500</td>
+              <td class="positive">+18450</td>
+            </tr>
+            <tr>
+              <td>2025-08-11</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-350</td>
+              <td class="positive">+18100</td>
+            </tr>
+            <tr>
+              <td>2025-08-22</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-550</td>
+              <td class="positive">+17550</td>
+            </tr>
+            <tr>
+              <td>2025-08-25</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-750</td>
+              <td class="positive">+16800</td>
+            </tr>
+            <tr>
+              <td>2025-09-01</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-950</td>
+              <td class="positive">+15850</td>
+            </tr>
+            <tr>
+              <td>2025-09-03</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-450</td>
+              <td class="positive">+15400</td>
+            </tr>
+            <tr>
+              <td>2025-09-17</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="positive">+2200</td>
+              <td class="positive">+17600</td>
+            </tr>
+            <tr>
+              <td>2025-09-18</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="">0</td>
+              <td class="positive">+17600</td>
+            </tr>
+            <tr>
+              <td>2025-09-19</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-850</td>
+              <td class="positive">+16750</td>
+            </tr>
+            <tr>
+              <td>2025-09-25</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="positive">+2400</td>
+              <td class="positive">+19150</td>
+            </tr>
+            <tr>
+              <td>2025-09-30</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-450</td>
+              <td class="positive">+18700</td>
+            </tr>
+            <tr>
+              <td>2025-10-09</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-650</td>
+              <td class="positive">+18050</td>
+            </tr>
+            <tr>
+              <td>2025-10-10</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-550</td>
+              <td class="positive">+17500</td>
+            </tr>
+            <tr>
+              <td>2025-10-14</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-1050</td>
+              <td class="positive">+16450</td>
+            </tr>
+            <tr>
+              <td>2025-10-20</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-650</td>
+              <td class="positive">+15800</td>
+            </tr>
+            <tr>
+              <td>2025-11-06</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="positive">+700</td>
+              <td class="positive">+16500</td>
+            </tr>
+            <tr>
+              <td>2025-11-10</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="positive">+2100</td>
+              <td class="positive">+18600</td>
+            </tr>
+            <tr>
+              <td>2025-11-12</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-350</td>
+              <td class="positive">+18250</td>
+            </tr>
+            <tr>
+              <td>2025-11-18</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="positive">+1500</td>
+              <td class="positive">+19750</td>
+            </tr>
+            <tr>
+              <td>2025-11-21</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-550</td>
+              <td class="positive">+19200</td>
+            </tr>
+            <tr>
+              <td>2025-12-10</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-750</td>
+              <td class="positive">+18450</td>
+            </tr>
+            <tr>
+              <td>2025-12-17</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="positive">+1200</td>
+              <td class="positive">+19650</td>
+            </tr>
+            <tr>
+              <td>2025-12-18</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-750</td>
+              <td class="positive">+18900</td>
+            </tr>
+            <tr>
+              <td>2025-12-19</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-550</td>
+              <td class="positive">+18350</td>
+            </tr>
+            <tr>
+              <td>2025-12-24</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-650</td>
+              <td class="positive">+17700</td>
+            </tr>
+            <tr>
+              <td>2025-12-25</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-850</td>
+              <td class="positive">+16850</td>
+            </tr>
+            <tr>
+              <td>2025-12-29</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="positive">+1300</td>
+              <td class="positive">+18150</td>
+            </tr>
+            <tr>
+              <td>2025-12-30</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-250</td>
+              <td class="positive">+17900</td>
+            </tr>
+            <tr>
+              <td>2026-01-06</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="positive">+2800</td>
+              <td class="positive">+20700</td>
+            </tr>
+            <tr>
+              <td>2026-01-20</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-750</td>
+              <td class="positive">+19950</td>
+            </tr>
+            <tr>
+              <td>2026-01-29</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="positive">+600</td>
+              <td class="positive">+20550</td>
+            </tr>
+            <tr>
+              <td>2026-02-02</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-950</td>
+              <td class="positive">+19600</td>
+            </tr>
+            <tr>
+              <td>2026-02-12</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="positive">+2300</td>
+              <td class="positive">+21900</td>
+            </tr>
+            <tr>
+              <td>2026-03-03</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-450</td>
+              <td class="positive">+21450</td>
+            </tr>
+            <tr>
+              <td>2026-03-06</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="positive">+1300</td>
+              <td class="positive">+22750</td>
+            </tr>
+            <tr>
+              <td>2026-03-11</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-400</td>
+              <td class="positive">+22350</td>
+            </tr>
+            <tr>
+              <td>2026-03-17</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="positive">+300</td>
+              <td class="positive">+22650</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="product-section">
+      <h2>🎯 尿素主连</h2>
+      <div class="stats-row">
+        <div class="stat-item"><div class="label">交易次数</div><div class="value">60</div></div>
+        <div class="stat-item"><div class="label">总盈亏</div><div class="value positive">+6460 元</div></div>
+        <div class="stat-item"><div class="label">盈利</div><div class="value positive">23</div></div>
+        <div class="stat-item"><div class="label">亏损</div><div class="value negative">35</div></div>
+        <div class="stat-item"><div class="label">胜率</div><div class="value">38.3%</div></div>
+      </div>
+      
+      <h3>📋 每日交易明细</h3>
+      <div class="scroll-table">
+        <table>
+          <thead>
+            <tr><th>日期</th><th>方向</th><th>手数</th><th>盈亏 (元)</th><th>累计盈亏</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2025-04-23</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="positive">+800</td>
+              <td class="positive">+800</td>
+            </tr>
+            <tr>
+              <td>2025-04-25</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-1200</td>
+              <td class="negative">-400</td>
+            </tr>
+            <tr>
+              <td>2025-04-29</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="positive">+2600</td>
+              <td class="positive">+2200</td>
+            </tr>
+            <tr>
+              <td>2025-05-09</td>
+              <td><span class="tag">LONG</span></td>
+              <td>9</td>
+              <td class="negative">-720</td>
+              <td class="positive">+1480</td>
+            </tr>
+            <tr>
+              <td>2025-05-12</td>
+              <td><span class="tag">LONG</span></td>
+              <td>9</td>
+              <td class="negative">-1080</td>
+              <td class="positive">+400</td>
+            </tr>
+            <tr>
+              <td>2025-05-13</td>
+              <td><span class="tag">LONG</span></td>
+              <td>9</td>
+              <td class="negative">-720</td>
+              <td class="negative">-320</td>
+            </tr>
+            <tr>
+              <td>2025-05-14</td>
+              <td><span class="tag">LONG</span></td>
+              <td>9</td>
+              <td class="negative">-1080</td>
+              <td class="negative">-1400</td>
+            </tr>
+            <tr>
+              <td>2025-05-15</td>
+              <td><span class="tag">LONG</span></td>
+              <td>9</td>
+              <td class="negative">-360</td>
+              <td class="negative">-1760</td>
+            </tr>
+            <tr>
+              <td>2025-05-28</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="positive">+1600</td>
+              <td class="negative">-160</td>
+            </tr>
+            <tr>
+              <td>2025-05-29</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="">0</td>
+              <td class="negative">-160</td>
+            </tr>
+            <tr>
+              <td>2025-06-03</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-800</td>
+              <td class="negative">-960</td>
+            </tr>
+            <tr>
+              <td>2025-06-04</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="positive">+1200</td>
+              <td class="positive">+240</td>
+            </tr>
+            <tr>
+              <td>2025-06-05</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="positive">+4800</td>
+              <td class="positive">+5040</td>
+            </tr>
+            <tr>
+              <td>2025-06-11</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-600</td>
+              <td class="positive">+4440</td>
+            </tr>
+            <tr>
+              <td>2025-06-12</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="positive">+1200</td>
+              <td class="positive">+5640</td>
+            </tr>
+            <tr>
+              <td>2025-06-26</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-4000</td>
+              <td class="positive">+1640</td>
+            </tr>
+            <tr>
+              <td>2025-06-27</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-1000</td>
+              <td class="positive">+640</td>
+            </tr>
+            <tr>
+              <td>2025-07-11</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-600</td>
+              <td class="positive">+40</td>
+            </tr>
+            <tr>
+              <td>2025-07-24</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-800</td>
+              <td class="negative">-760</td>
+            </tr>
+            <tr>
+              <td>2025-07-25</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-2400</td>
+              <td class="negative">-3160</td>
+            </tr>
+            <tr>
+              <td>2025-07-31</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="positive">+3200</td>
+              <td class="positive">+40</td>
+            </tr>
+            <tr>
+              <td>2025-08-01</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="positive">+600</td>
+              <td class="positive">+640</td>
+            </tr>
+            <tr>
+              <td>2025-08-05</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-600</td>
+              <td class="positive">+40</td>
+            </tr>
+            <tr>
+              <td>2025-08-13</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-1200</td>
+              <td class="negative">-1160</td>
+            </tr>
+            <tr>
+              <td>2025-08-14</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="positive">+1800</td>
+              <td class="positive">+640</td>
+            </tr>
+            <tr>
+              <td>2025-09-03</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="positive">+6600</td>
+              <td class="positive">+7240</td>
+            </tr>
+            <tr>
+              <td>2025-09-09</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="positive">+1000</td>
+              <td class="positive">+8240</td>
+            </tr>
+            <tr>
+              <td>2025-09-16</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="">0</td>
+              <td class="positive">+8240</td>
+            </tr>
+            <tr>
+              <td>2025-09-19</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="positive">+1600</td>
+              <td class="positive">+9840</td>
+            </tr>
+            <tr>
+              <td>2025-09-23</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-800</td>
+              <td class="positive">+9040</td>
+            </tr>
+            <tr>
+              <td>2025-10-09</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="positive">+800</td>
+              <td class="positive">+9840</td>
+            </tr>
+            <tr>
+              <td>2025-10-10</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-800</td>
+              <td class="positive">+9040</td>
+            </tr>
+            <tr>
+              <td>2025-10-14</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-400</td>
+              <td class="positive">+8640</td>
+            </tr>
+            <tr>
+              <td>2025-10-15</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-600</td>
+              <td class="positive">+8040</td>
+            </tr>
+            <tr>
+              <td>2025-10-17</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-1200</td>
+              <td class="positive">+6840</td>
+            </tr>
+            <tr>
+              <td>2025-10-20</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="negative">-1000</td>
+              <td class="positive">+5840</td>
+            </tr>
+            <tr>
+              <td>2025-11-13</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="positive">+400</td>
+              <td class="positive">+6240</td>
+            </tr>
+            <tr>
+              <td>2025-11-20</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-1200</td>
+              <td class="positive">+5040</td>
+            </tr>
+            <tr>
+              <td>2025-12-02</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="positive">+400</td>
+              <td class="positive">+5440</td>
+            </tr>
+            <tr>
+              <td>2025-12-03</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-1000</td>
+              <td class="positive">+4440</td>
+            </tr>
+            <tr>
+              <td>2025-12-11</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>10</td>
+              <td class="positive">+1000</td>
+              <td class="positive">+5440</td>
+            </tr>
+            <tr>
+              <td>2025-12-18</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="positive">+800</td>
+              <td class="positive">+6240</td>
+            </tr>
+            <tr>
+              <td>2025-12-24</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="positive">+600</td>
+              <td class="positive">+6840</td>
+            </tr>
+            <tr>
+              <td>2025-12-25</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-800</td>
+              <td class="positive">+6040</td>
+            </tr>
+            <tr>
+              <td>2025-12-29</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-200</td>
+              <td class="positive">+5840</td>
+            </tr>
+            <tr>
+              <td>2025-12-30</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-400</td>
+              <td class="positive">+5440</td>
+            </tr>
+            <tr>
+              <td>2025-12-31</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-800</td>
+              <td class="positive">+4640</td>
+            </tr>
+            <tr>
+              <td>2026-01-05</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-1000</td>
+              <td class="positive">+3640</td>
+            </tr>
+            <tr>
+              <td>2026-01-09</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-400</td>
+              <td class="positive">+3240</td>
+            </tr>
+            <tr>
+              <td>2026-01-14</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="positive">+800</td>
+              <td class="positive">+4040</td>
+            </tr>
+            <tr>
+              <td>2026-01-26</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-400</td>
+              <td class="positive">+3640</td>
+            </tr>
+            <tr>
+              <td>2026-01-27</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-1000</td>
+              <td class="positive">+2640</td>
+            </tr>
+            <tr>
+              <td>2026-01-28</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="positive">+600</td>
+              <td class="positive">+3240</td>
+            </tr>
+            <tr>
+              <td>2026-01-29</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-200</td>
+              <td class="positive">+3040</td>
+            </tr>
+            <tr>
+              <td>2026-02-11</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="positive">+1200</td>
+              <td class="positive">+4240</td>
+            </tr>
+            <tr>
+              <td>2026-02-12</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="negative">-600</td>
+              <td class="positive">+3640</td>
+            </tr>
+            <tr>
+              <td>2026-03-11</td>
+              <td><span class="tag">LONG</span></td>
+              <td>10</td>
+              <td class="positive">+4800</td>
+              <td class="positive">+8440</td>
+            </tr>
+            <tr>
+              <td>2026-03-12</td>
+              <td><span class="tag">LONG</span></td>
+              <td>9</td>
+              <td class="negative">-1440</td>
+              <td class="positive">+7000</td>
+            </tr>
+            <tr>
+              <td>2026-03-13</td>
+              <td><span class="tag">LONG</span></td>
+              <td>9</td>
+              <td class="positive">+360</td>
+              <td class="positive">+7360</td>
+            </tr>
+            <tr>
+              <td>2026-03-16</td>
+              <td><span class="tag">LONG</span></td>
+              <td>9</td>
+              <td class="negative">-900</td>
+              <td class="positive">+6460</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="product-section">
+      <h2>🎯 鸡蛋主连</h2>
+      <div class="stats-row">
+        <div class="stat-item"><div class="label">交易次数</div><div class="value">55</div></div>
+        <div class="stat-item"><div class="label">总盈亏</div><div class="value positive">+5650 元</div></div>
+        <div class="stat-item"><div class="label">盈利</div><div class="value positive">15</div></div>
+        <div class="stat-item"><div class="label">亏损</div><div class="value negative">40</div></div>
+        <div class="stat-item"><div class="label">胜率</div><div class="value">27.3%</div></div>
+      </div>
+      
+      <h3>📋 每日交易明细</h3>
+      <div class="scroll-table">
+        <table>
+          <thead>
+            <tr><th>日期</th><th>方向</th><th>手数</th><th>盈亏 (元)</th><th>累计盈亏</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2025-04-24</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="positive">+2160</td>
+              <td class="positive">+2160</td>
+            </tr>
+            <tr>
+              <td>2025-04-30</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="negative">-80</td>
+              <td class="positive">+2080</td>
+            </tr>
+            <tr>
+              <td>2025-05-06</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="negative">-80</td>
+              <td class="positive">+2000</td>
+            </tr>
+            <tr>
+              <td>2025-05-07</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="negative">-320</td>
+              <td class="positive">+1680</td>
+            </tr>
+            <tr>
+              <td>2025-05-13</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="positive">+480</td>
+              <td class="positive">+2160</td>
+            </tr>
+            <tr>
+              <td>2025-05-14</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="negative">-480</td>
+              <td class="positive">+1680</td>
+            </tr>
+            <tr>
+              <td>2025-05-15</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="negative">-160</td>
+              <td class="positive">+1520</td>
+            </tr>
+            <tr>
+              <td>2025-05-19</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="negative">-640</td>
+              <td class="positive">+880</td>
+            </tr>
+            <tr>
+              <td>2025-06-03</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="negative">-240</td>
+              <td class="positive">+640</td>
+            </tr>
+            <tr>
+              <td>2025-06-04</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="positive">+240</td>
+              <td class="positive">+880</td>
+            </tr>
+            <tr>
+              <td>2025-06-13</td>
+              <td><span class="tag">LONG</span></td>
+              <td>7</td>
+              <td class="negative">-490</td>
+              <td class="positive">+390</td>
+            </tr>
+            <tr>
+              <td>2025-06-16</td>
+              <td><span class="tag">LONG</span></td>
+              <td>6</td>
+              <td class="negative">-300</td>
+              <td class="positive">+90</td>
+            </tr>
+            <tr>
+              <td>2025-06-17</td>
+              <td><span class="tag">LONG</span></td>
+              <td>7</td>
+              <td class="negative">-490</td>
+              <td class="negative">-400</td>
+            </tr>
+            <tr>
+              <td>2025-06-18</td>
+              <td><span class="tag">LONG</span></td>
+              <td>6</td>
+              <td class="negative">-600</td>
+              <td class="negative">-1000</td>
+            </tr>
+            <tr>
+              <td>2025-06-20</td>
+              <td><span class="tag">LONG</span></td>
+              <td>6</td>
+              <td class="negative">-660</td>
+              <td class="negative">-1660</td>
+            </tr>
+            <tr>
+              <td>2025-07-04</td>
+              <td><span class="tag">LONG</span></td>
+              <td>6</td>
+              <td class="negative">-420</td>
+              <td class="negative">-2080</td>
+            </tr>
+            <tr>
+              <td>2025-07-18</td>
+              <td><span class="tag">LONG</span></td>
+              <td>6</td>
+              <td class="negative">-600</td>
+              <td class="negative">-2680</td>
+            </tr>
+            <tr>
+              <td>2025-07-21</td>
+              <td><span class="tag">LONG</span></td>
+              <td>6</td>
+              <td class="negative">-120</td>
+              <td class="negative">-2800</td>
+            </tr>
+            <tr>
+              <td>2025-08-04</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>7</td>
+              <td class="positive">+1750</td>
+              <td class="negative">-1050</td>
+            </tr>
+            <tr>
+              <td>2025-08-11</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>7</td>
+              <td class="positive">+4200</td>
+              <td class="positive">+3150</td>
+            </tr>
+            <tr>
+              <td>2025-08-14</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>7</td>
+              <td class="negative">-910</td>
+              <td class="positive">+2240</td>
+            </tr>
+            <tr>
+              <td>2025-08-15</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>7</td>
+              <td class="negative">-280</td>
+              <td class="positive">+1960</td>
+            </tr>
+            <tr>
+              <td>2025-08-18</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>7</td>
+              <td class="positive">+350</td>
+              <td class="positive">+2310</td>
+            </tr>
+            <tr>
+              <td>2025-08-19</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="negative">-640</td>
+              <td class="positive">+1670</td>
+            </tr>
+            <tr>
+              <td>2025-08-21</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="positive">+560</td>
+              <td class="positive">+2230</td>
+            </tr>
+            <tr>
+              <td>2025-08-25</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="negative">-720</td>
+              <td class="positive">+1510</td>
+            </tr>
+            <tr>
+              <td>2025-08-28</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="positive">+480</td>
+              <td class="positive">+1990</td>
+            </tr>
+            <tr>
+              <td>2025-10-09</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="negative">-1200</td>
+              <td class="positive">+790</td>
+            </tr>
+            <tr>
+              <td>2025-10-10</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="positive">+3120</td>
+              <td class="positive">+3910</td>
+            </tr>
+            <tr>
+              <td>2025-10-16</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="negative">-480</td>
+              <td class="positive">+3430</td>
+            </tr>
+            <tr>
+              <td>2025-10-29</td>
+              <td><span class="tag">LONG</span></td>
+              <td>7</td>
+              <td class="negative">-350</td>
+              <td class="positive">+3080</td>
+            </tr>
+            <tr>
+              <td>2025-10-30</td>
+              <td><span class="tag">LONG</span></td>
+              <td>7</td>
+              <td class="negative">-350</td>
+              <td class="positive">+2730</td>
+            </tr>
+            <tr>
+              <td>2025-11-03</td>
+              <td><span class="tag">LONG</span></td>
+              <td>7</td>
+              <td class="negative">-490</td>
+              <td class="positive">+2240</td>
+            </tr>
+            <tr>
+              <td>2025-11-04</td>
+              <td><span class="tag">LONG</span></td>
+              <td>7</td>
+              <td class="negative">-560</td>
+              <td class="positive">+1680</td>
+            </tr>
+            <tr>
+              <td>2025-11-05</td>
+              <td><span class="tag">LONG</span></td>
+              <td>7</td>
+              <td class="positive">+2940</td>
+              <td class="positive">+4620</td>
+            </tr>
+            <tr>
+              <td>2025-11-20</td>
+              <td><span class="tag">LONG</span></td>
+              <td>7</td>
+              <td class="negative">-1260</td>
+              <td class="positive">+3360</td>
+            </tr>
+            <tr>
+              <td>2025-11-24</td>
+              <td><span class="tag">LONG</span></td>
+              <td>7</td>
+              <td class="negative">-490</td>
+              <td class="positive">+2870</td>
+            </tr>
+            <tr>
+              <td>2025-11-26</td>
+              <td><span class="tag">LONG</span></td>
+              <td>7</td>
+              <td class="positive">+770</td>
+              <td class="positive">+3640</td>
+            </tr>
+            <tr>
+              <td>2025-12-02</td>
+              <td><span class="tag">LONG</span></td>
+              <td>7</td>
+              <td class="negative">-280</td>
+              <td class="positive">+3360</td>
+            </tr>
+            <tr>
+              <td>2025-12-12</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="negative">-560</td>
+              <td class="positive">+2800</td>
+            </tr>
+            <tr>
+              <td>2025-12-16</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="negative">-880</td>
+              <td class="positive">+1920</td>
+            </tr>
+            <tr>
+              <td>2025-12-17</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="negative">-720</td>
+              <td class="positive">+1200</td>
+            </tr>
+            <tr>
+              <td>2025-12-19</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="positive">+1280</td>
+              <td class="positive">+2480</td>
+            </tr>
+            <tr>
+              <td>2026-01-20</td>
+              <td><span class="tag">LONG</span></td>
+              <td>8</td>
+              <td class="negative">-800</td>
+              <td class="positive">+1680</td>
+            </tr>
+            <tr>
+              <td>2026-01-21</td>
+              <td><span class="tag">LONG</span></td>
+              <td>8</td>
+              <td class="negative">-720</td>
+              <td class="positive">+960</td>
+            </tr>
+            <tr>
+              <td>2026-01-22</td>
+              <td><span class="tag">LONG</span></td>
+              <td>8</td>
+              <td class="positive">+3680</td>
+              <td class="positive">+4640</td>
+            </tr>
+            <tr>
+              <td>2026-01-26</td>
+              <td><span class="tag">LONG</span></td>
+              <td>8</td>
+              <td class="negative">-1040</td>
+              <td class="positive">+3600</td>
+            </tr>
+            <tr>
+              <td>2026-02-03</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="negative">-640</td>
+              <td class="positive">+2960</td>
+            </tr>
+            <tr>
+              <td>2026-02-05</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="positive">+2720</td>
+              <td class="positive">+5680</td>
+            </tr>
+            <tr>
+              <td>2026-02-06</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="negative">-240</td>
+              <td class="positive">+5440</td>
+            </tr>
+            <tr>
+              <td>2026-02-13</td>
+              <td><span class="tag">LONG</span></td>
+              <td>7</td>
+              <td class="positive">+1890</td>
+              <td class="positive">+7330</td>
+            </tr>
+            <tr>
+              <td>2026-02-24</td>
+              <td><span class="tag">LONG</span></td>
+              <td>7</td>
+              <td class="negative">-630</td>
+              <td class="positive">+6700</td>
+            </tr>
+            <tr>
+              <td>2026-02-25</td>
+              <td><span class="tag">LONG</span></td>
+              <td>7</td>
+              <td class="negative">-490</td>
+              <td class="positive">+6210</td>
+            </tr>
+            <tr>
+              <td>2026-03-06</td>
+              <td><span class="tag">LONG</span></td>
+              <td>7</td>
+              <td class="negative">-350</td>
+              <td class="positive">+5860</td>
+            </tr>
+            <tr>
+              <td>2026-03-12</td>
+              <td><span class="tag">LONG</span></td>
+              <td>7</td>
+              <td class="negative">-210</td>
+              <td class="positive">+5650</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="product-section">
+      <h2>🎯 豆粕主连</h2>
+      <div class="stats-row">
+        <div class="stat-item"><div class="label">交易次数</div><div class="value">49</div></div>
+        <div class="stat-item"><div class="label">总盈亏</div><div class="value positive">+1860 元</div></div>
+        <div class="stat-item"><div class="label">盈利</div><div class="value positive">14</div></div>
+        <div class="stat-item"><div class="label">亏损</div><div class="value negative">33</div></div>
+        <div class="stat-item"><div class="label">胜率</div><div class="value">28.6%</div></div>
+      </div>
+      
+      <h3>📋 每日交易明细</h3>
+      <div class="scroll-table">
+        <table>
+          <thead>
+            <tr><th>日期</th><th>方向</th><th>手数</th><th>盈亏 (元)</th><th>累计盈亏</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2025-08-11</td>
+              <td><span class="tag">LONG</span></td>
+              <td>8</td>
+              <td class="negative">-640</td>
+              <td class="negative">-640</td>
+            </tr>
+            <tr>
+              <td>2025-08-12</td>
+              <td><span class="tag">LONG</span></td>
+              <td>8</td>
+              <td class="negative">-160</td>
+              <td class="negative">-800</td>
+            </tr>
+            <tr>
+              <td>2025-08-14</td>
+              <td><span class="tag">LONG</span></td>
+              <td>7</td>
+              <td class="negative">-700</td>
+              <td class="negative">-1500</td>
+            </tr>
+            <tr>
+              <td>2025-08-18</td>
+              <td><span class="tag">LONG</span></td>
+              <td>7</td>
+              <td class="negative">-420</td>
+              <td class="negative">-1920</td>
+            </tr>
+            <tr>
+              <td>2025-08-19</td>
+              <td><span class="tag">LONG</span></td>
+              <td>7</td>
+              <td class="negative">-280</td>
+              <td class="negative">-2200</td>
+            </tr>
+            <tr>
+              <td>2025-08-20</td>
+              <td><span class="tag">LONG</span></td>
+              <td>7</td>
+              <td class="negative">-280</td>
+              <td class="negative">-2480</td>
+            </tr>
+            <tr>
+              <td>2025-09-02</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="negative">-240</td>
+              <td class="negative">-2720</td>
+            </tr>
+            <tr>
+              <td>2025-09-03</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="negative">-320</td>
+              <td class="negative">-3040</td>
+            </tr>
+            <tr>
+              <td>2025-09-15</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="negative">-560</td>
+              <td class="negative">-3600</td>
+            </tr>
+            <tr>
+              <td>2025-09-17</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="positive">+480</td>
+              <td class="negative">-3120</td>
+            </tr>
+            <tr>
+              <td>2025-09-18</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="negative">-320</td>
+              <td class="negative">-3440</td>
+            </tr>
+            <tr>
+              <td>2025-09-23</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="positive">+2080</td>
+              <td class="negative">-1360</td>
+            </tr>
+            <tr>
+              <td>2025-09-26</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="positive">+400</td>
+              <td class="negative">-960</td>
+            </tr>
+            <tr>
+              <td>2025-10-10</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="negative">-400</td>
+              <td class="negative">-1360</td>
+            </tr>
+            <tr>
+              <td>2025-10-14</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="positive">+1680</td>
+              <td class="positive">+320</td>
+            </tr>
+            <tr>
+              <td>2025-10-17</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="negative">-80</td>
+              <td class="positive">+240</td>
+            </tr>
+            <tr>
+              <td>2025-10-21</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="negative">-400</td>
+              <td class="negative">-160</td>
+            </tr>
+            <tr>
+              <td>2025-10-31</td>
+              <td><span class="tag">LONG</span></td>
+              <td>8</td>
+              <td class="positive">+1200</td>
+              <td class="positive">+1040</td>
+            </tr>
+            <tr>
+              <td>2025-11-03</td>
+              <td><span class="tag">LONG</span></td>
+              <td>8</td>
+              <td class="negative">-240</td>
+              <td class="positive">+800</td>
+            </tr>
+            <tr>
+              <td>2025-11-05</td>
+              <td><span class="tag">LONG</span></td>
+              <td>8</td>
+              <td class="positive">+2880</td>
+              <td class="positive">+3680</td>
+            </tr>
+            <tr>
+              <td>2025-11-07</td>
+              <td><span class="tag">LONG</span></td>
+              <td>8</td>
+              <td class="negative">-320</td>
+              <td class="positive">+3360</td>
+            </tr>
+            <tr>
+              <td>2025-11-10</td>
+              <td><span class="tag">LONG</span></td>
+              <td>8</td>
+              <td class="negative">-240</td>
+              <td class="positive">+3120</td>
+            </tr>
+            <tr>
+              <td>2025-11-14</td>
+              <td><span class="tag">LONG</span></td>
+              <td>8</td>
+              <td class="negative">-560</td>
+              <td class="positive">+2560</td>
+            </tr>
+            <tr>
+              <td>2025-12-02</td>
+              <td><span class="tag">LONG</span></td>
+              <td>8</td>
+              <td class="">0</td>
+              <td class="positive">+2560</td>
+            </tr>
+            <tr>
+              <td>2025-12-03</td>
+              <td><span class="tag">LONG</span></td>
+              <td>8</td>
+              <td class="negative">-400</td>
+              <td class="positive">+2160</td>
+            </tr>
+            <tr>
+              <td>2025-12-04</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="">0</td>
+              <td class="positive">+2160</td>
+            </tr>
+            <tr>
+              <td>2025-12-05</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="negative">-240</td>
+              <td class="positive">+1920</td>
+            </tr>
+            <tr>
+              <td>2025-12-08</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>8</td>
+              <td class="positive">+800</td>
+              <td class="positive">+2720</td>
+            </tr>
+            <tr>
+              <td>2025-12-09</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>9</td>
+              <td class="negative">-450</td>
+              <td class="positive">+2270</td>
+            </tr>
+            <tr>
+              <td>2025-12-10</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>9</td>
+              <td class="negative">-360</td>
+              <td class="positive">+1910</td>
+            </tr>
+            <tr>
+              <td>2025-12-11</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>9</td>
+              <td class="negative">-450</td>
+              <td class="positive">+1460</td>
+            </tr>
+            <tr>
+              <td>2025-12-17</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>9</td>
+              <td class="negative">-270</td>
+              <td class="positive">+1190</td>
+            </tr>
+            <tr>
+              <td>2025-12-19</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>9</td>
+              <td class="positive">+270</td>
+              <td class="positive">+1460</td>
+            </tr>
+            <tr>
+              <td>2025-12-24</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>9</td>
+              <td class="positive">+630</td>
+              <td class="positive">+2090</td>
+            </tr>
+            <tr>
+              <td>2026-01-15</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>9</td>
+              <td class="positive">+180</td>
+              <td class="positive">+2270</td>
+            </tr>
+            <tr>
+              <td>2026-01-16</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>9</td>
+              <td class="negative">-90</td>
+              <td class="positive">+2180</td>
+            </tr>
+            <tr>
+              <td>2026-01-21</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>9</td>
+              <td class="negative">-450</td>
+              <td class="positive">+1730</td>
+            </tr>
+            <tr>
+              <td>2026-02-03</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>9</td>
+              <td class="positive">+1350</td>
+              <td class="positive">+3080</td>
+            </tr>
+            <tr>
+              <td>2026-02-04</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>9</td>
+              <td class="negative">-180</td>
+              <td class="positive">+2900</td>
+            </tr>
+            <tr>
+              <td>2026-02-05</td>
+              <td><span class="tag">SHORT</span></td>
+              <td>9</td>
+              <td class="negative">-270</td>
+              <td class="positive">+2630</td>
+            </tr>
+            <tr>
+              <td>2026-02-13</td>
+              <td><span class="tag">LONG</span></td>
+              <td>8</td>
+              <td class="negative">-240</td>
+              <td class="positive">+2390</td>
+            </tr>
+            <tr>
+              <td>2026-02-26</td>
+              <td><span class="tag">LONG</span></td>
+              <td>8</td>
+              <td class="negative">-320</td>
+              <td class="positive">+2070</td>
+            </tr>
+            <tr>
+              <td>2026-03-03</td>
+              <td><span class="tag">LONG</span></td>
+              <td>8</td>
+              <td class="negative">-1200</td>
+              <td class="positive">+870</td>
+            </tr>
+            <tr>
+              <td>2026-03-05</td>
+              <td><span class="tag">LONG</span></td>
+              <td>8</td>
+              <td class="positive">+320</td>
+              <td class="positive">+1190</td>
+            </tr>
+            <tr>
+              <td>2026-03-06</td>
+              <td><span class="tag">LONG</span></td>
+              <td>8</td>
+              <td class="negative">-640</td>
+              <td class="positive">+550</td>
+            </tr>
+            <tr>
+              <td>2026-03-11</td>
+              <td><span class="tag">LONG</span></td>
+              <td>8</td>
+              <td class="positive">+3040</td>
+              <td class="positive">+3590</td>
+            </tr>
+            <tr>
+              <td>2026-03-13</td>
+              <td><span class="tag">LONG</span></td>
+              <td>7</td>
+              <td class="negative">-770</td>
+              <td class="positive">+2820</td>
+            </tr>
+            <tr>
+              <td>2026-03-16</td>
+              <td><span class="tag">LONG</span></td>
+              <td>8</td>
+              <td class="negative">-1040</td>
+              <td class="positive">+1780</td>
+            </tr>
+            <tr>
+              <td>2026-03-17</td>
+              <td><span class="tag">LONG</span></td>
+              <td>8</td>
+              <td class="positive">+80</td>
+              <td class="positive">+1860</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <script>
+    new Chart(document.getElementById('cumulativeChart'), {
+      type: 'line',
+      data: {
+        labels: ["2025-04-22", "2025-04-23", "2025-04-23", "2025-04-24", "2025-04-24", "2025-04-25", "2025-04-29", "2025-04-29", "2025-04-30", "2025-04-30", "2025-05-06", "2025-05-06", "2025-05-07", "2025-05-07", "2025-05-09", "2025-05-12", "2025-05-13", "2025-05-13", "2025-05-14", "2025-05-14", "2025-05-15", "2025-05-15", "2025-05-19", "2025-05-23", "2025-05-26", "2025-05-28", "2025-05-29", "2025-05-29", "2025-05-30", "2025-06-03", "2025-06-03", "2025-06-03", "2025-06-04", "2025-06-04", "2025-06-04", "2025-06-05", "2025-06-05", "2025-06-11", "2025-06-12", "2025-06-13", "2025-06-16", "2025-06-17", "2025-06-18", "2025-06-20", "2025-06-26", "2025-06-27", "2025-07-02", "2025-07-04", "2025-07-10", "2025-07-11", "2025-07-15", "2025-07-18", "2025-07-21", "2025-07-21", "2025-07-22", "2025-07-24", "2025-07-25", "2025-07-25", "2025-07-29", "2025-07-31", "2025-08-01", "2025-08-04", "2025-08-05", "2025-08-11", "2025-08-11", "2025-08-11", "2025-08-12", "2025-08-13", "2025-08-14", "2025-08-14", "2025-08-14", "2025-08-15", "2025-08-18", "2025-08-18", "2025-08-19", "2025-08-19", "2025-08-20", "2025-08-21", "2025-08-22", "2025-08-25", "2025-08-25", "2025-08-28", "2025-09-01", "2025-09-02", "2025-09-03", "2025-09-03", "2025-09-03", "2025-09-09", "2025-09-15", "2025-09-16", "2025-09-17", "2025-09-17", "2025-09-18", "2025-09-18", "2025-09-19", "2025-09-19", "2025-09-23", "2025-09-23", "2025-09-25", "2025-09-26", "2025-09-30", "2025-10-09", "2025-10-09", "2025-10-09", "2025-10-10", "2025-10-10", "2025-10-10", "2025-10-10", "2025-10-14", "2025-10-14", "2025-10-14", "2025-10-15", "2025-10-16", "2025-10-17", "2025-10-17", "2025-10-20", "2025-10-20", "2025-10-21", "2025-10-29", "2025-10-30", "2025-10-31", "2025-11-03", "2025-11-03", "2025-11-04", "2025-11-05", "2025-11-05", "2025-11-06", "2025-11-07", "2025-11-10", "2025-11-10", "2025-11-12", "2025-11-13", "2025-11-14", "2025-11-18", "2025-11-20", "2025-11-20", "2025-11-21", "2025-11-24", "2025-11-26", "2025-12-02", "2025-12-02", "2025-12-02", "2025-12-03", "2025-12-03", "2025-12-04", "2025-12-05", "2025-12-08", "2025-12-09", "2025-12-10", "2025-12-10", "2025-12-11", "2025-12-11", "2025-12-12", "2025-12-16", "2025-12-17", "2025-12-17", "2025-12-17", "2025-12-18", "2025-12-18", "2025-12-19", "2025-12-19", "2025-12-19", "2025-12-24", "2025-12-24", "2025-12-24", "2025-12-25", "2025-12-25", "2025-12-29", "2025-12-29", "2025-12-30", "2025-12-30", "2025-12-31", "2026-01-05", "2026-01-06", "2026-01-09", "2026-01-14", "2026-01-15", "2026-01-16", "2026-01-20", "2026-01-20", "2026-01-21", "2026-01-21", "2026-01-22", "2026-01-26", "2026-01-26", "2026-01-27", "2026-01-28", "2026-01-29", "2026-01-29", "2026-02-02", "2026-02-03", "2026-02-03", "2026-02-04", "2026-02-05", "2026-02-05", "2026-02-06", "2026-02-11", "2026-02-12", "2026-02-12", "2026-02-13", "2026-02-13", "2026-02-24", "2026-02-25", "2026-02-26", "2026-03-03", "2026-03-03", "2026-03-05", "2026-03-06", "2026-03-06", "2026-03-06", "2026-03-11", "2026-03-11", "2026-03-11", "2026-03-12", "2026-03-12", "2026-03-13", "2026-03-13", "2026-03-16", "2026-03-16", "2026-03-17", "2026-03-17"],
+        datasets: [{
+          label: '累计收益 (元)',
+          data: [1200.0, 2000.0, 1700.0, 1800.0, 3960.0, 2760.0, 5360.0, 5760.0, 4910.0, 4830.0, 4730.0, 4650.0, 4200.0, 3880.0, 3160.0, 2080.0, 1360.0, 1840.0, 760.0, 280.0, -80.0, -240.0, -880.0, 3320.0, 2770.0, 4370.0, 4370.0, 5570.0, 4620.0, 3820.0, 4520.0, 4280.0, 5480.0, 4830.0, 5070.0, 9870.0, 10170.0, 9570.0, 10770.0, 10280.0, 9980.0, 9490.0, 8890.0, 8230.0, 4230.0, 3230.0, 9730.0, 9310.0, 13310.0, 12710.0, 11860.0, 11260.0, 10210.0, 10090.0, 9340.0, 8540.0, 6140.0, 4990.0, 12490.0, 15690.0, 16290.0, 18040.0, 17440.0, 17090.0, 16450.0, 20650.0, 20490.0, 19290.0, 21090.0, 20390.0, 19480.0, 19200.0, 18780.0, 19130.0, 18850.0, 18210.0, 17930.0, 18490.0, 17940.0, 17190.0, 16470.0, 16950.0, 16000.0, 15760.0, 22360.0, 21910.0, 21590.0, 22590.0, 22030.0, 22030.0, 24230.0, 24710.0, 24710.0, 24390.0, 25990.0, 25140.0, 24340.0, 26420.0, 28820.0, 29220.0, 28770.0, 29570.0, 28920.0, 27720.0, 26920.0, 26370.0, 25970.0, 29090.0, 28690.0, 27640.0, 29320.0, 28720.0, 28240.0, 27040.0, 26960.0, 25960.0, 25310.0, 24910.0, 24560.0, 24210.0, 25410.0, 25170.0, 24680.0, 24120.0, 27000.0, 29940.0, 30640.0, 30320.0, 32420.0, 32180.0, 31830.0, 32230.0, 31670.0, 33170.0, 31970.0, 30710.0, 30160.0, 29670.0, 30440.0, 30840.0, 30840.0, 30560.0, 29560.0, 29160.0, 29160.0, 28920.0, 29720.0, 29270.0, 28520.0, 28160.0, 29160.0, 28710.0, 28150.0, 27270.0, 28470.0, 28200.0, 27480.0, 28280.0, 27530.0, 26980.0, 27250.0, 28530.0, 29130.0, 28480.0, 29110.0, 28310.0, 27460.0, 27260.0, 28560.0, 28160.0, 27910.0, 27110.0, 26110.0, 28910.0, 28510.0, 29310.0, 29490.0, 29400.0, 28650.0, 27850.0, 27400.0, 26680.0, 30360.0, 29960.0, 28920.0, 27920.0, 28520.0, 28320.0, 28920.0, 27970.0, 29320.0, 28680.0, 28500.0, 28230.0, 30950.0, 30710.0, 31910.0, 31310.0, 33610.0, 33370.0, 35260.0, 34630.0, 34140.0, 33820.0, 33370.0, 32170.0, 32490.0, 33790.0, 33150.0, 32800.0, 37600.0, 37200.0, 40240.0, 38800.0, 38590.0, 38950.0, 38180.0, 37280.0, 36240.0, 36540.0, 36620.0],
+          borderColor: '#1890ff',
+          backgroundColor: 'rgba(24, 144, 255, 0.1)',
+          fill: true,
+          tension: 0.1,
+          pointRadius: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => '累计：' + ctx.parsed.y.toFixed(0) + '元'
+            }
+          }
+        },
+        scales: {
+          y: { grid: { color: '#f0f0f0' } },
+          x: { grid: { display: false }, ticks: { maxTicksLimit: 20 } }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+# 敏感文件
+cookies.json
+*.env
+
+# 依赖
+node_modules/
+
+# 临时文件
+*.tmp
+*.log

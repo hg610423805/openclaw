@@ -1,0 +1,2541 @@
+{
+  "trades": [
+    {
+      "date": "2025-04-22",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": 1200.0
+    },
+    {
+      "date": "2025-04-23",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": 800.0
+    },
+    {
+      "date": "2025-04-23",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -300.0
+    },
+    {
+      "date": "2025-04-24",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": 100.0
+    },
+    {
+      "date": "2025-04-24",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": 2160.0
+    },
+    {
+      "date": "2025-04-25",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -1200.0
+    },
+    {
+      "date": "2025-04-29",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": 2600.0
+    },
+    {
+      "date": "2025-04-29",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": 400.0
+    },
+    {
+      "date": "2025-04-30",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -850.0
+    },
+    {
+      "date": "2025-04-30",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": -80.0
+    },
+    {
+      "date": "2025-05-06",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -100.0
+    },
+    {
+      "date": "2025-05-06",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": -80.0
+    },
+    {
+      "date": "2025-05-07",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -450.0
+    },
+    {
+      "date": "2025-05-07",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": -320.0
+    },
+    {
+      "date": "2025-05-09",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 9,
+      "pnl": -720.0
+    },
+    {
+      "date": "2025-05-12",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 9,
+      "pnl": -1080.0
+    },
+    {
+      "date": "2025-05-13",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 9,
+      "pnl": -720.0
+    },
+    {
+      "date": "2025-05-13",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": 480.0
+    },
+    {
+      "date": "2025-05-14",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 9,
+      "pnl": -1080.0
+    },
+    {
+      "date": "2025-05-14",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": -480.0
+    },
+    {
+      "date": "2025-05-15",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 9,
+      "pnl": -360.0
+    },
+    {
+      "date": "2025-05-15",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": -160.0
+    },
+    {
+      "date": "2025-05-19",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": -640.0
+    },
+    {
+      "date": "2025-05-23",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": 4200.0
+    },
+    {
+      "date": "2025-05-26",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -550.0
+    },
+    {
+      "date": "2025-05-28",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": 1600.0
+    },
+    {
+      "date": "2025-05-29",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": 0.0
+    },
+    {
+      "date": "2025-05-29",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": 1200.0
+    },
+    {
+      "date": "2025-05-30",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -950.0
+    },
+    {
+      "date": "2025-06-03",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -800.0
+    },
+    {
+      "date": "2025-06-03",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": 700.0
+    },
+    {
+      "date": "2025-06-03",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": -240.0
+    },
+    {
+      "date": "2025-06-04",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": 1200.0
+    },
+    {
+      "date": "2025-06-04",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -650.0
+    },
+    {
+      "date": "2025-06-04",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": 240.0
+    },
+    {
+      "date": "2025-06-05",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": 4800.0
+    },
+    {
+      "date": "2025-06-05",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": 300.0
+    },
+    {
+      "date": "2025-06-11",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -600.0
+    },
+    {
+      "date": "2025-06-12",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": 1200.0
+    },
+    {
+      "date": "2025-06-13",
+      "product": "鸡蛋主连",
+      "direction": "LONG",
+      "lots": 7,
+      "pnl": -490.0
+    },
+    {
+      "date": "2025-06-16",
+      "product": "鸡蛋主连",
+      "direction": "LONG",
+      "lots": 6,
+      "pnl": -300.0
+    },
+    {
+      "date": "2025-06-17",
+      "product": "鸡蛋主连",
+      "direction": "LONG",
+      "lots": 7,
+      "pnl": -490.0
+    },
+    {
+      "date": "2025-06-18",
+      "product": "鸡蛋主连",
+      "direction": "LONG",
+      "lots": 6,
+      "pnl": -600.0
+    },
+    {
+      "date": "2025-06-20",
+      "product": "鸡蛋主连",
+      "direction": "LONG",
+      "lots": 6,
+      "pnl": -660.0
+    },
+    {
+      "date": "2025-06-26",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -4000.0
+    },
+    {
+      "date": "2025-06-27",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -1000.0
+    },
+    {
+      "date": "2025-07-02",
+      "product": "硅铁主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": 6500.0
+    },
+    {
+      "date": "2025-07-04",
+      "product": "鸡蛋主连",
+      "direction": "LONG",
+      "lots": 6,
+      "pnl": -420.0
+    },
+    {
+      "date": "2025-07-10",
+      "product": "硅铁主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": 4000.0
+    },
+    {
+      "date": "2025-07-11",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -600.0
+    },
+    {
+      "date": "2025-07-15",
+      "product": "硅铁主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -850.0
+    },
+    {
+      "date": "2025-07-18",
+      "product": "鸡蛋主连",
+      "direction": "LONG",
+      "lots": 6,
+      "pnl": -600.0
+    },
+    {
+      "date": "2025-07-21",
+      "product": "硅铁主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -1050.0
+    },
+    {
+      "date": "2025-07-21",
+      "product": "鸡蛋主连",
+      "direction": "LONG",
+      "lots": 6,
+      "pnl": -120.0
+    },
+    {
+      "date": "2025-07-22",
+      "product": "硅铁主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -750.0
+    },
+    {
+      "date": "2025-07-24",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -800.0
+    },
+    {
+      "date": "2025-07-25",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -2400.0
+    },
+    {
+      "date": "2025-07-25",
+      "product": "硅铁主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -1150.0
+    },
+    {
+      "date": "2025-07-29",
+      "product": "硅铁主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": 7500.0
+    },
+    {
+      "date": "2025-07-31",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": 3200.0
+    },
+    {
+      "date": "2025-08-01",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": 600.0
+    },
+    {
+      "date": "2025-08-04",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 7,
+      "pnl": 1750.0
+    },
+    {
+      "date": "2025-08-05",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -600.0
+    },
+    {
+      "date": "2025-08-11",
+      "product": "硅铁主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -350.0
+    },
+    {
+      "date": "2025-08-11",
+      "product": "豆粕主连",
+      "direction": "LONG",
+      "lots": 8,
+      "pnl": -640.0
+    },
+    {
+      "date": "2025-08-11",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 7,
+      "pnl": 4200.0
+    },
+    {
+      "date": "2025-08-12",
+      "product": "豆粕主连",
+      "direction": "LONG",
+      "lots": 8,
+      "pnl": -160.0
+    },
+    {
+      "date": "2025-08-13",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -1200.0
+    },
+    {
+      "date": "2025-08-14",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": 1800.0
+    },
+    {
+      "date": "2025-08-14",
+      "product": "豆粕主连",
+      "direction": "LONG",
+      "lots": 7,
+      "pnl": -700.0
+    },
+    {
+      "date": "2025-08-14",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 7,
+      "pnl": -910.0
+    },
+    {
+      "date": "2025-08-15",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 7,
+      "pnl": -280.0
+    },
+    {
+      "date": "2025-08-18",
+      "product": "豆粕主连",
+      "direction": "LONG",
+      "lots": 7,
+      "pnl": -420.0
+    },
+    {
+      "date": "2025-08-18",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 7,
+      "pnl": 350.0
+    },
+    {
+      "date": "2025-08-19",
+      "product": "豆粕主连",
+      "direction": "LONG",
+      "lots": 7,
+      "pnl": -280.0
+    },
+    {
+      "date": "2025-08-19",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": -640.0
+    },
+    {
+      "date": "2025-08-20",
+      "product": "豆粕主连",
+      "direction": "LONG",
+      "lots": 7,
+      "pnl": -280.0
+    },
+    {
+      "date": "2025-08-21",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": 560.0
+    },
+    {
+      "date": "2025-08-22",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -550.0
+    },
+    {
+      "date": "2025-08-25",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -750.0
+    },
+    {
+      "date": "2025-08-25",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": -720.0
+    },
+    {
+      "date": "2025-08-28",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": 480.0
+    },
+    {
+      "date": "2025-09-01",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -950.0
+    },
+    {
+      "date": "2025-09-02",
+      "product": "豆粕主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": -240.0
+    },
+    {
+      "date": "2025-09-03",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": 6600.0
+    },
+    {
+      "date": "2025-09-03",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -450.0
+    },
+    {
+      "date": "2025-09-03",
+      "product": "豆粕主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": -320.0
+    },
+    {
+      "date": "2025-09-09",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": 1000.0
+    },
+    {
+      "date": "2025-09-15",
+      "product": "豆粕主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": -560.0
+    },
+    {
+      "date": "2025-09-16",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": 0.0
+    },
+    {
+      "date": "2025-09-17",
+      "product": "硅铁主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": 2200.0
+    },
+    {
+      "date": "2025-09-17",
+      "product": "豆粕主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": 480.0
+    },
+    {
+      "date": "2025-09-18",
+      "product": "硅铁主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": 0.0
+    },
+    {
+      "date": "2025-09-18",
+      "product": "豆粕主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": -320.0
+    },
+    {
+      "date": "2025-09-19",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": 1600.0
+    },
+    {
+      "date": "2025-09-19",
+      "product": "硅铁主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -850.0
+    },
+    {
+      "date": "2025-09-23",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -800.0
+    },
+    {
+      "date": "2025-09-23",
+      "product": "豆粕主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": 2080.0
+    },
+    {
+      "date": "2025-09-25",
+      "product": "硅铁主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": 2400.0
+    },
+    {
+      "date": "2025-09-26",
+      "product": "豆粕主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": 400.0
+    },
+    {
+      "date": "2025-09-30",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -450.0
+    },
+    {
+      "date": "2025-10-09",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": 800.0
+    },
+    {
+      "date": "2025-10-09",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -650.0
+    },
+    {
+      "date": "2025-10-09",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": -1200.0
+    },
+    {
+      "date": "2025-10-10",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -800.0
+    },
+    {
+      "date": "2025-10-10",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -550.0
+    },
+    {
+      "date": "2025-10-10",
+      "product": "豆粕主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": -400.0
+    },
+    {
+      "date": "2025-10-10",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": 3120.0
+    },
+    {
+      "date": "2025-10-14",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -400.0
+    },
+    {
+      "date": "2025-10-14",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -1050.0
+    },
+    {
+      "date": "2025-10-14",
+      "product": "豆粕主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": 1680.0
+    },
+    {
+      "date": "2025-10-15",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -600.0
+    },
+    {
+      "date": "2025-10-16",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": -480.0
+    },
+    {
+      "date": "2025-10-17",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -1200.0
+    },
+    {
+      "date": "2025-10-17",
+      "product": "豆粕主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": -80.0
+    },
+    {
+      "date": "2025-10-20",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -1000.0
+    },
+    {
+      "date": "2025-10-20",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -650.0
+    },
+    {
+      "date": "2025-10-21",
+      "product": "豆粕主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": -400.0
+    },
+    {
+      "date": "2025-10-29",
+      "product": "鸡蛋主连",
+      "direction": "LONG",
+      "lots": 7,
+      "pnl": -350.0
+    },
+    {
+      "date": "2025-10-30",
+      "product": "鸡蛋主连",
+      "direction": "LONG",
+      "lots": 7,
+      "pnl": -350.0
+    },
+    {
+      "date": "2025-10-31",
+      "product": "豆粕主连",
+      "direction": "LONG",
+      "lots": 8,
+      "pnl": 1200.0
+    },
+    {
+      "date": "2025-11-03",
+      "product": "豆粕主连",
+      "direction": "LONG",
+      "lots": 8,
+      "pnl": -240.0
+    },
+    {
+      "date": "2025-11-03",
+      "product": "鸡蛋主连",
+      "direction": "LONG",
+      "lots": 7,
+      "pnl": -490.0
+    },
+    {
+      "date": "2025-11-04",
+      "product": "鸡蛋主连",
+      "direction": "LONG",
+      "lots": 7,
+      "pnl": -560.0
+    },
+    {
+      "date": "2025-11-05",
+      "product": "豆粕主连",
+      "direction": "LONG",
+      "lots": 8,
+      "pnl": 2880.0
+    },
+    {
+      "date": "2025-11-05",
+      "product": "鸡蛋主连",
+      "direction": "LONG",
+      "lots": 7,
+      "pnl": 2940.0
+    },
+    {
+      "date": "2025-11-06",
+      "product": "硅铁主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": 700.0
+    },
+    {
+      "date": "2025-11-07",
+      "product": "豆粕主连",
+      "direction": "LONG",
+      "lots": 8,
+      "pnl": -320.0
+    },
+    {
+      "date": "2025-11-10",
+      "product": "硅铁主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": 2100.0
+    },
+    {
+      "date": "2025-11-10",
+      "product": "豆粕主连",
+      "direction": "LONG",
+      "lots": 8,
+      "pnl": -240.0
+    },
+    {
+      "date": "2025-11-12",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -350.0
+    },
+    {
+      "date": "2025-11-13",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": 400.0
+    },
+    {
+      "date": "2025-11-14",
+      "product": "豆粕主连",
+      "direction": "LONG",
+      "lots": 8,
+      "pnl": -560.0
+    },
+    {
+      "date": "2025-11-18",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": 1500.0
+    },
+    {
+      "date": "2025-11-20",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -1200.0
+    },
+    {
+      "date": "2025-11-20",
+      "product": "鸡蛋主连",
+      "direction": "LONG",
+      "lots": 7,
+      "pnl": -1260.0
+    },
+    {
+      "date": "2025-11-21",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -550.0
+    },
+    {
+      "date": "2025-11-24",
+      "product": "鸡蛋主连",
+      "direction": "LONG",
+      "lots": 7,
+      "pnl": -490.0
+    },
+    {
+      "date": "2025-11-26",
+      "product": "鸡蛋主连",
+      "direction": "LONG",
+      "lots": 7,
+      "pnl": 770.0
+    },
+    {
+      "date": "2025-12-02",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": 400.0
+    },
+    {
+      "date": "2025-12-02",
+      "product": "豆粕主连",
+      "direction": "LONG",
+      "lots": 8,
+      "pnl": 0.0
+    },
+    {
+      "date": "2025-12-02",
+      "product": "鸡蛋主连",
+      "direction": "LONG",
+      "lots": 7,
+      "pnl": -280.0
+    },
+    {
+      "date": "2025-12-03",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -1000.0
+    },
+    {
+      "date": "2025-12-03",
+      "product": "豆粕主连",
+      "direction": "LONG",
+      "lots": 8,
+      "pnl": -400.0
+    },
+    {
+      "date": "2025-12-04",
+      "product": "豆粕主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": 0.0
+    },
+    {
+      "date": "2025-12-05",
+      "product": "豆粕主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": -240.0
+    },
+    {
+      "date": "2025-12-08",
+      "product": "豆粕主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": 800.0
+    },
+    {
+      "date": "2025-12-09",
+      "product": "豆粕主连",
+      "direction": "SHORT",
+      "lots": 9,
+      "pnl": -450.0
+    },
+    {
+      "date": "2025-12-10",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -750.0
+    },
+    {
+      "date": "2025-12-10",
+      "product": "豆粕主连",
+      "direction": "SHORT",
+      "lots": 9,
+      "pnl": -360.0
+    },
+    {
+      "date": "2025-12-11",
+      "product": "尿素主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": 1000.0
+    },
+    {
+      "date": "2025-12-11",
+      "product": "豆粕主连",
+      "direction": "SHORT",
+      "lots": 9,
+      "pnl": -450.0
+    },
+    {
+      "date": "2025-12-12",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": -560.0
+    },
+    {
+      "date": "2025-12-16",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": -880.0
+    },
+    {
+      "date": "2025-12-17",
+      "product": "硅铁主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": 1200.0
+    },
+    {
+      "date": "2025-12-17",
+      "product": "豆粕主连",
+      "direction": "SHORT",
+      "lots": 9,
+      "pnl": -270.0
+    },
+    {
+      "date": "2025-12-17",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": -720.0
+    },
+    {
+      "date": "2025-12-18",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": 800.0
+    },
+    {
+      "date": "2025-12-18",
+      "product": "硅铁主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -750.0
+    },
+    {
+      "date": "2025-12-19",
+      "product": "硅铁主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -550.0
+    },
+    {
+      "date": "2025-12-19",
+      "product": "豆粕主连",
+      "direction": "SHORT",
+      "lots": 9,
+      "pnl": 270.0
+    },
+    {
+      "date": "2025-12-19",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": 1280.0
+    },
+    {
+      "date": "2025-12-24",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": 600.0
+    },
+    {
+      "date": "2025-12-24",
+      "product": "硅铁主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -650.0
+    },
+    {
+      "date": "2025-12-24",
+      "product": "豆粕主连",
+      "direction": "SHORT",
+      "lots": 9,
+      "pnl": 630.0
+    },
+    {
+      "date": "2025-12-25",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -800.0
+    },
+    {
+      "date": "2025-12-25",
+      "product": "硅铁主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -850.0
+    },
+    {
+      "date": "2025-12-29",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -200.0
+    },
+    {
+      "date": "2025-12-29",
+      "product": "硅铁主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": 1300.0
+    },
+    {
+      "date": "2025-12-30",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -400.0
+    },
+    {
+      "date": "2025-12-30",
+      "product": "硅铁主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -250.0
+    },
+    {
+      "date": "2025-12-31",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -800.0
+    },
+    {
+      "date": "2026-01-05",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -1000.0
+    },
+    {
+      "date": "2026-01-06",
+      "product": "硅铁主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": 2800.0
+    },
+    {
+      "date": "2026-01-09",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -400.0
+    },
+    {
+      "date": "2026-01-14",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": 800.0
+    },
+    {
+      "date": "2026-01-15",
+      "product": "豆粕主连",
+      "direction": "SHORT",
+      "lots": 9,
+      "pnl": 180.0
+    },
+    {
+      "date": "2026-01-16",
+      "product": "豆粕主连",
+      "direction": "SHORT",
+      "lots": 9,
+      "pnl": -90.0
+    },
+    {
+      "date": "2026-01-20",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": -750.0
+    },
+    {
+      "date": "2026-01-20",
+      "product": "鸡蛋主连",
+      "direction": "LONG",
+      "lots": 8,
+      "pnl": -800.0
+    },
+    {
+      "date": "2026-01-21",
+      "product": "豆粕主连",
+      "direction": "SHORT",
+      "lots": 9,
+      "pnl": -450.0
+    },
+    {
+      "date": "2026-01-21",
+      "product": "鸡蛋主连",
+      "direction": "LONG",
+      "lots": 8,
+      "pnl": -720.0
+    },
+    {
+      "date": "2026-01-22",
+      "product": "鸡蛋主连",
+      "direction": "LONG",
+      "lots": 8,
+      "pnl": 3680.0
+    },
+    {
+      "date": "2026-01-26",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -400.0
+    },
+    {
+      "date": "2026-01-26",
+      "product": "鸡蛋主连",
+      "direction": "LONG",
+      "lots": 8,
+      "pnl": -1040.0
+    },
+    {
+      "date": "2026-01-27",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -1000.0
+    },
+    {
+      "date": "2026-01-28",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": 600.0
+    },
+    {
+      "date": "2026-01-29",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -200.0
+    },
+    {
+      "date": "2026-01-29",
+      "product": "硅铁主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": 600.0
+    },
+    {
+      "date": "2026-02-02",
+      "product": "硅铁主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -950.0
+    },
+    {
+      "date": "2026-02-03",
+      "product": "豆粕主连",
+      "direction": "SHORT",
+      "lots": 9,
+      "pnl": 1350.0
+    },
+    {
+      "date": "2026-02-03",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": -640.0
+    },
+    {
+      "date": "2026-02-04",
+      "product": "豆粕主连",
+      "direction": "SHORT",
+      "lots": 9,
+      "pnl": -180.0
+    },
+    {
+      "date": "2026-02-05",
+      "product": "豆粕主连",
+      "direction": "SHORT",
+      "lots": 9,
+      "pnl": -270.0
+    },
+    {
+      "date": "2026-02-05",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": 2720.0
+    },
+    {
+      "date": "2026-02-06",
+      "product": "鸡蛋主连",
+      "direction": "SHORT",
+      "lots": 8,
+      "pnl": -240.0
+    },
+    {
+      "date": "2026-02-11",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": 1200.0
+    },
+    {
+      "date": "2026-02-12",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -600.0
+    },
+    {
+      "date": "2026-02-12",
+      "product": "硅铁主连",
+      "direction": "SHORT",
+      "lots": 10,
+      "pnl": 2300.0
+    },
+    {
+      "date": "2026-02-13",
+      "product": "豆粕主连",
+      "direction": "LONG",
+      "lots": 8,
+      "pnl": -240.0
+    },
+    {
+      "date": "2026-02-13",
+      "product": "鸡蛋主连",
+      "direction": "LONG",
+      "lots": 7,
+      "pnl": 1890.0
+    },
+    {
+      "date": "2026-02-24",
+      "product": "鸡蛋主连",
+      "direction": "LONG",
+      "lots": 7,
+      "pnl": -630.0
+    },
+    {
+      "date": "2026-02-25",
+      "product": "鸡蛋主连",
+      "direction": "LONG",
+      "lots": 7,
+      "pnl": -490.0
+    },
+    {
+      "date": "2026-02-26",
+      "product": "豆粕主连",
+      "direction": "LONG",
+      "lots": 8,
+      "pnl": -320.0
+    },
+    {
+      "date": "2026-03-03",
+      "product": "硅铁主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -450.0
+    },
+    {
+      "date": "2026-03-03",
+      "product": "豆粕主连",
+      "direction": "LONG",
+      "lots": 8,
+      "pnl": -1200.0
+    },
+    {
+      "date": "2026-03-05",
+      "product": "豆粕主连",
+      "direction": "LONG",
+      "lots": 8,
+      "pnl": 320.0
+    },
+    {
+      "date": "2026-03-06",
+      "product": "硅铁主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": 1300.0
+    },
+    {
+      "date": "2026-03-06",
+      "product": "豆粕主连",
+      "direction": "LONG",
+      "lots": 8,
+      "pnl": -640.0
+    },
+    {
+      "date": "2026-03-06",
+      "product": "鸡蛋主连",
+      "direction": "LONG",
+      "lots": 7,
+      "pnl": -350.0
+    },
+    {
+      "date": "2026-03-11",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": 4800.0
+    },
+    {
+      "date": "2026-03-11",
+      "product": "硅铁主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": -400.0
+    },
+    {
+      "date": "2026-03-11",
+      "product": "豆粕主连",
+      "direction": "LONG",
+      "lots": 8,
+      "pnl": 3040.0
+    },
+    {
+      "date": "2026-03-12",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 9,
+      "pnl": -1440.0
+    },
+    {
+      "date": "2026-03-12",
+      "product": "鸡蛋主连",
+      "direction": "LONG",
+      "lots": 7,
+      "pnl": -210.0
+    },
+    {
+      "date": "2026-03-13",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 9,
+      "pnl": 360.0
+    },
+    {
+      "date": "2026-03-13",
+      "product": "豆粕主连",
+      "direction": "LONG",
+      "lots": 7,
+      "pnl": -770.0
+    },
+    {
+      "date": "2026-03-16",
+      "product": "尿素主连",
+      "direction": "LONG",
+      "lots": 9,
+      "pnl": -900.0
+    },
+    {
+      "date": "2026-03-16",
+      "product": "豆粕主连",
+      "direction": "LONG",
+      "lots": 8,
+      "pnl": -1040.0
+    },
+    {
+      "date": "2026-03-17",
+      "product": "硅铁主连",
+      "direction": "LONG",
+      "lots": 10,
+      "pnl": 300.0
+    },
+    {
+      "date": "2026-03-17",
+      "product": "豆粕主连",
+      "direction": "LONG",
+      "lots": 8,
+      "pnl": 80.0
+    }
+  ],
+  "monthly": {
+    "2025-04": {
+      "total": 4830.0,
+      "trades": 10,
+      "wins": 6,
+      "losses": 4
+    },
+    "2025-05": {
+      "total": -210.0,
+      "trades": 19,
+      "wins": 4,
+      "losses": 14
+    },
+    "2025-06": {
+      "total": -1390.0,
+      "trades": 17,
+      "wins": 6,
+      "losses": 11
+    },
+    "2025-07": {
+      "total": 12460.0,
+      "trades": 14,
+      "wins": 4,
+      "losses": 10
+    },
+    "2025-08": {
+      "total": 1260.0,
+      "trades": 22,
+      "wins": 7,
+      "losses": 15
+    },
+    "2025-09": {
+      "total": 11820.0,
+      "trades": 19,
+      "wins": 8,
+      "losses": 9
+    },
+    "2025-10": {
+      "total": -3360.0,
+      "trades": 20,
+      "wins": 4,
+      "losses": 16
+    },
+    "2025-11": {
+      "total": 5030.0,
+      "trades": 18,
+      "wins": 7,
+      "losses": 11
+    },
+    "2025-12": {
+      "total": -3330.0,
+      "trades": 33,
+      "wins": 10,
+      "losses": 21
+    },
+    "2026-01": {
+      "total": 1810.0,
+      "trades": 17,
+      "wins": 6,
+      "losses": 11
+    },
+    "2026-02": {
+      "total": 4900.0,
+      "trades": 15,
+      "wins": 5,
+      "losses": 10
+    },
+    "2026-03": {
+      "total": 2800.0,
+      "trades": 17,
+      "wins": 7,
+      "losses": 10
+    }
+  },
+  "byProduct": {
+    "硅铁主连": {
+      "total": 22650.0,
+      "trades": 57,
+      "wins": 22,
+      "losses": 34
+    },
+    "尿素主连": {
+      "total": 6460.0,
+      "trades": 60,
+      "wins": 23,
+      "losses": 35
+    },
+    "鸡蛋主连": {
+      "total": 5650.0,
+      "trades": 55,
+      "wins": 15,
+      "losses": 40
+    },
+    "豆粕主连": {
+      "total": 1860.0,
+      "trades": 49,
+      "wins": 14,
+      "losses": 33
+    }
+  },
+  "cumulative": [
+    {
+      "date": "2025-04-22",
+      "cumulative": 1200.0
+    },
+    {
+      "date": "2025-04-23",
+      "cumulative": 2000.0
+    },
+    {
+      "date": "2025-04-23",
+      "cumulative": 1700.0
+    },
+    {
+      "date": "2025-04-24",
+      "cumulative": 1800.0
+    },
+    {
+      "date": "2025-04-24",
+      "cumulative": 3960.0
+    },
+    {
+      "date": "2025-04-25",
+      "cumulative": 2760.0
+    },
+    {
+      "date": "2025-04-29",
+      "cumulative": 5360.0
+    },
+    {
+      "date": "2025-04-29",
+      "cumulative": 5760.0
+    },
+    {
+      "date": "2025-04-30",
+      "cumulative": 4910.0
+    },
+    {
+      "date": "2025-04-30",
+      "cumulative": 4830.0
+    },
+    {
+      "date": "2025-05-06",
+      "cumulative": 4730.0
+    },
+    {
+      "date": "2025-05-06",
+      "cumulative": 4650.0
+    },
+    {
+      "date": "2025-05-07",
+      "cumulative": 4200.0
+    },
+    {
+      "date": "2025-05-07",
+      "cumulative": 3880.0
+    },
+    {
+      "date": "2025-05-09",
+      "cumulative": 3160.0
+    },
+    {
+      "date": "2025-05-12",
+      "cumulative": 2080.0
+    },
+    {
+      "date": "2025-05-13",
+      "cumulative": 1360.0
+    },
+    {
+      "date": "2025-05-13",
+      "cumulative": 1840.0
+    },
+    {
+      "date": "2025-05-14",
+      "cumulative": 760.0
+    },
+    {
+      "date": "2025-05-14",
+      "cumulative": 280.0
+    },
+    {
+      "date": "2025-05-15",
+      "cumulative": -80.0
+    },
+    {
+      "date": "2025-05-15",
+      "cumulative": -240.0
+    },
+    {
+      "date": "2025-05-19",
+      "cumulative": -880.0
+    },
+    {
+      "date": "2025-05-23",
+      "cumulative": 3320.0
+    },
+    {
+      "date": "2025-05-26",
+      "cumulative": 2770.0
+    },
+    {
+      "date": "2025-05-28",
+      "cumulative": 4370.0
+    },
+    {
+      "date": "2025-05-29",
+      "cumulative": 4370.0
+    },
+    {
+      "date": "2025-05-29",
+      "cumulative": 5570.0
+    },
+    {
+      "date": "2025-05-30",
+      "cumulative": 4620.0
+    },
+    {
+      "date": "2025-06-03",
+      "cumulative": 3820.0
+    },
+    {
+      "date": "2025-06-03",
+      "cumulative": 4520.0
+    },
+    {
+      "date": "2025-06-03",
+      "cumulative": 4280.0
+    },
+    {
+      "date": "2025-06-04",
+      "cumulative": 5480.0
+    },
+    {
+      "date": "2025-06-04",
+      "cumulative": 4830.0
+    },
+    {
+      "date": "2025-06-04",
+      "cumulative": 5070.0
+    },
+    {
+      "date": "2025-06-05",
+      "cumulative": 9870.0
+    },
+    {
+      "date": "2025-06-05",
+      "cumulative": 10170.0
+    },
+    {
+      "date": "2025-06-11",
+      "cumulative": 9570.0
+    },
+    {
+      "date": "2025-06-12",
+      "cumulative": 10770.0
+    },
+    {
+      "date": "2025-06-13",
+      "cumulative": 10280.0
+    },
+    {
+      "date": "2025-06-16",
+      "cumulative": 9980.0
+    },
+    {
+      "date": "2025-06-17",
+      "cumulative": 9490.0
+    },
+    {
+      "date": "2025-06-18",
+      "cumulative": 8890.0
+    },
+    {
+      "date": "2025-06-20",
+      "cumulative": 8230.0
+    },
+    {
+      "date": "2025-06-26",
+      "cumulative": 4230.0
+    },
+    {
+      "date": "2025-06-27",
+      "cumulative": 3230.0
+    },
+    {
+      "date": "2025-07-02",
+      "cumulative": 9730.0
+    },
+    {
+      "date": "2025-07-04",
+      "cumulative": 9310.0
+    },
+    {
+      "date": "2025-07-10",
+      "cumulative": 13310.0
+    },
+    {
+      "date": "2025-07-11",
+      "cumulative": 12710.0
+    },
+    {
+      "date": "2025-07-15",
+      "cumulative": 11860.0
+    },
+    {
+      "date": "2025-07-18",
+      "cumulative": 11260.0
+    },
+    {
+      "date": "2025-07-21",
+      "cumulative": 10210.0
+    },
+    {
+      "date": "2025-07-21",
+      "cumulative": 10090.0
+    },
+    {
+      "date": "2025-07-22",
+      "cumulative": 9340.0
+    },
+    {
+      "date": "2025-07-24",
+      "cumulative": 8540.0
+    },
+    {
+      "date": "2025-07-25",
+      "cumulative": 6140.0
+    },
+    {
+      "date": "2025-07-25",
+      "cumulative": 4990.0
+    },
+    {
+      "date": "2025-07-29",
+      "cumulative": 12490.0
+    },
+    {
+      "date": "2025-07-31",
+      "cumulative": 15690.0
+    },
+    {
+      "date": "2025-08-01",
+      "cumulative": 16290.0
+    },
+    {
+      "date": "2025-08-04",
+      "cumulative": 18040.0
+    },
+    {
+      "date": "2025-08-05",
+      "cumulative": 17440.0
+    },
+    {
+      "date": "2025-08-11",
+      "cumulative": 17090.0
+    },
+    {
+      "date": "2025-08-11",
+      "cumulative": 16450.0
+    },
+    {
+      "date": "2025-08-11",
+      "cumulative": 20650.0
+    },
+    {
+      "date": "2025-08-12",
+      "cumulative": 20490.0
+    },
+    {
+      "date": "2025-08-13",
+      "cumulative": 19290.0
+    },
+    {
+      "date": "2025-08-14",
+      "cumulative": 21090.0
+    },
+    {
+      "date": "2025-08-14",
+      "cumulative": 20390.0
+    },
+    {
+      "date": "2025-08-14",
+      "cumulative": 19480.0
+    },
+    {
+      "date": "2025-08-15",
+      "cumulative": 19200.0
+    },
+    {
+      "date": "2025-08-18",
+      "cumulative": 18780.0
+    },
+    {
+      "date": "2025-08-18",
+      "cumulative": 19130.0
+    },
+    {
+      "date": "2025-08-19",
+      "cumulative": 18850.0
+    },
+    {
+      "date": "2025-08-19",
+      "cumulative": 18210.0
+    },
+    {
+      "date": "2025-08-20",
+      "cumulative": 17930.0
+    },
+    {
+      "date": "2025-08-21",
+      "cumulative": 18490.0
+    },
+    {
+      "date": "2025-08-22",
+      "cumulative": 17940.0
+    },
+    {
+      "date": "2025-08-25",
+      "cumulative": 17190.0
+    },
+    {
+      "date": "2025-08-25",
+      "cumulative": 16470.0
+    },
+    {
+      "date": "2025-08-28",
+      "cumulative": 16950.0
+    },
+    {
+      "date": "2025-09-01",
+      "cumulative": 16000.0
+    },
+    {
+      "date": "2025-09-02",
+      "cumulative": 15760.0
+    },
+    {
+      "date": "2025-09-03",
+      "cumulative": 22360.0
+    },
+    {
+      "date": "2025-09-03",
+      "cumulative": 21910.0
+    },
+    {
+      "date": "2025-09-03",
+      "cumulative": 21590.0
+    },
+    {
+      "date": "2025-09-09",
+      "cumulative": 22590.0
+    },
+    {
+      "date": "2025-09-15",
+      "cumulative": 22030.0
+    },
+    {
+      "date": "2025-09-16",
+      "cumulative": 22030.0
+    },
+    {
+      "date": "2025-09-17",
+      "cumulative": 24230.0
+    },
+    {
+      "date": "2025-09-17",
+      "cumulative": 24710.0
+    },
+    {
+      "date": "2025-09-18",
+      "cumulative": 24710.0
+    },
+    {
+      "date": "2025-09-18",
+      "cumulative": 24390.0
+    },
+    {
+      "date": "2025-09-19",
+      "cumulative": 25990.0
+    },
+    {
+      "date": "2025-09-19",
+      "cumulative": 25140.0
+    },
+    {
+      "date": "2025-09-23",
+      "cumulative": 24340.0
+    },
+    {
+      "date": "2025-09-23",
+      "cumulative": 26420.0
+    },
+    {
+      "date": "2025-09-25",
+      "cumulative": 28820.0
+    },
+    {
+      "date": "2025-09-26",
+      "cumulative": 29220.0
+    },
+    {
+      "date": "2025-09-30",
+      "cumulative": 28770.0
+    },
+    {
+      "date": "2025-10-09",
+      "cumulative": 29570.0
+    },
+    {
+      "date": "2025-10-09",
+      "cumulative": 28920.0
+    },
+    {
+      "date": "2025-10-09",
+      "cumulative": 27720.0
+    },
+    {
+      "date": "2025-10-10",
+      "cumulative": 26920.0
+    },
+    {
+      "date": "2025-10-10",
+      "cumulative": 26370.0
+    },
+    {
+      "date": "2025-10-10",
+      "cumulative": 25970.0
+    },
+    {
+      "date": "2025-10-10",
+      "cumulative": 29090.0
+    },
+    {
+      "date": "2025-10-14",
+      "cumulative": 28690.0
+    },
+    {
+      "date": "2025-10-14",
+      "cumulative": 27640.0
+    },
+    {
+      "date": "2025-10-14",
+      "cumulative": 29320.0
+    },
+    {
+      "date": "2025-10-15",
+      "cumulative": 28720.0
+    },
+    {
+      "date": "2025-10-16",
+      "cumulative": 28240.0
+    },
+    {
+      "date": "2025-10-17",
+      "cumulative": 27040.0
+    },
+    {
+      "date": "2025-10-17",
+      "cumulative": 26960.0
+    },
+    {
+      "date": "2025-10-20",
+      "cumulative": 25960.0
+    },
+    {
+      "date": "2025-10-20",
+      "cumulative": 25310.0
+    },
+    {
+      "date": "2025-10-21",
+      "cumulative": 24910.0
+    },
+    {
+      "date": "2025-10-29",
+      "cumulative": 24560.0
+    },
+    {
+      "date": "2025-10-30",
+      "cumulative": 24210.0
+    },
+    {
+      "date": "2025-10-31",
+      "cumulative": 25410.0
+    },
+    {
+      "date": "2025-11-03",
+      "cumulative": 25170.0
+    },
+    {
+      "date": "2025-11-03",
+      "cumulative": 24680.0
+    },
+    {
+      "date": "2025-11-04",
+      "cumulative": 24120.0
+    },
+    {
+      "date": "2025-11-05",
+      "cumulative": 27000.0
+    },
+    {
+      "date": "2025-11-05",
+      "cumulative": 29940.0
+    },
+    {
+      "date": "2025-11-06",
+      "cumulative": 30640.0
+    },
+    {
+      "date": "2025-11-07",
+      "cumulative": 30320.0
+    },
+    {
+      "date": "2025-11-10",
+      "cumulative": 32420.0
+    },
+    {
+      "date": "2025-11-10",
+      "cumulative": 32180.0
+    },
+    {
+      "date": "2025-11-12",
+      "cumulative": 31830.0
+    },
+    {
+      "date": "2025-11-13",
+      "cumulative": 32230.0
+    },
+    {
+      "date": "2025-11-14",
+      "cumulative": 31670.0
+    },
+    {
+      "date": "2025-11-18",
+      "cumulative": 33170.0
+    },
+    {
+      "date": "2025-11-20",
+      "cumulative": 31970.0
+    },
+    {
+      "date": "2025-11-20",
+      "cumulative": 30710.0
+    },
+    {
+      "date": "2025-11-21",
+      "cumulative": 30160.0
+    },
+    {
+      "date": "2025-11-24",
+      "cumulative": 29670.0
+    },
+    {
+      "date": "2025-11-26",
+      "cumulative": 30440.0
+    },
+    {
+      "date": "2025-12-02",
+      "cumulative": 30840.0
+    },
+    {
+      "date": "2025-12-02",
+      "cumulative": 30840.0
+    },
+    {
+      "date": "2025-12-02",
+      "cumulative": 30560.0
+    },
+    {
+      "date": "2025-12-03",
+      "cumulative": 29560.0
+    },
+    {
+      "date": "2025-12-03",
+      "cumulative": 29160.0
+    },
+    {
+      "date": "2025-12-04",
+      "cumulative": 29160.0
+    },
+    {
+      "date": "2025-12-05",
+      "cumulative": 28920.0
+    },
+    {
+      "date": "2025-12-08",
+      "cumulative": 29720.0
+    },
+    {
+      "date": "2025-12-09",
+      "cumulative": 29270.0
+    },
+    {
+      "date": "2025-12-10",
+      "cumulative": 28520.0
+    },
+    {
+      "date": "2025-12-10",
+      "cumulative": 28160.0
+    },
+    {
+      "date": "2025-12-11",
+      "cumulative": 29160.0
+    },
+    {
+      "date": "2025-12-11",
+      "cumulative": 28710.0
+    },
+    {
+      "date": "2025-12-12",
+      "cumulative": 28150.0
+    },
+    {
+      "date": "2025-12-16",
+      "cumulative": 27270.0
+    },
+    {
+      "date": "2025-12-17",
+      "cumulative": 28470.0
+    },
+    {
+      "date": "2025-12-17",
+      "cumulative": 28200.0
+    },
+    {
+      "date": "2025-12-17",
+      "cumulative": 27480.0
+    },
+    {
+      "date": "2025-12-18",
+      "cumulative": 28280.0
+    },
+    {
+      "date": "2025-12-18",
+      "cumulative": 27530.0
+    },
+    {
+      "date": "2025-12-19",
+      "cumulative": 26980.0
+    },
+    {
+      "date": "2025-12-19",
+      "cumulative": 27250.0
+    },
+    {
+      "date": "2025-12-19",
+      "cumulative": 28530.0
+    },
+    {
+      "date": "2025-12-24",
+      "cumulative": 29130.0
+    },
+    {
+      "date": "2025-12-24",
+      "cumulative": 28480.0
+    },
+    {
+      "date": "2025-12-24",
+      "cumulative": 29110.0
+    },
+    {
+      "date": "2025-12-25",
+      "cumulative": 28310.0
+    },
+    {
+      "date": "2025-12-25",
+      "cumulative": 27460.0
+    },
+    {
+      "date": "2025-12-29",
+      "cumulative": 27260.0
+    },
+    {
+      "date": "2025-12-29",
+      "cumulative": 28560.0
+    },
+    {
+      "date": "2025-12-30",
+      "cumulative": 28160.0
+    },
+    {
+      "date": "2025-12-30",
+      "cumulative": 27910.0
+    },
+    {
+      "date": "2025-12-31",
+      "cumulative": 27110.0
+    },
+    {
+      "date": "2026-01-05",
+      "cumulative": 26110.0
+    },
+    {
+      "date": "2026-01-06",
+      "cumulative": 28910.0
+    },
+    {
+      "date": "2026-01-09",
+      "cumulative": 28510.0
+    },
+    {
+      "date": "2026-01-14",
+      "cumulative": 29310.0
+    },
+    {
+      "date": "2026-01-15",
+      "cumulative": 29490.0
+    },
+    {
+      "date": "2026-01-16",
+      "cumulative": 29400.0
+    },
+    {
+      "date": "2026-01-20",
+      "cumulative": 28650.0
+    },
+    {
+      "date": "2026-01-20",
+      "cumulative": 27850.0
+    },
+    {
+      "date": "2026-01-21",
+      "cumulative": 27400.0
+    },
+    {
+      "date": "2026-01-21",
+      "cumulative": 26680.0
+    },
+    {
+      "date": "2026-01-22",
+      "cumulative": 30360.0
+    },
+    {
+      "date": "2026-01-26",
+      "cumulative": 29960.0
+    },
+    {
+      "date": "2026-01-26",
+      "cumulative": 28920.0
+    },
+    {
+      "date": "2026-01-27",
+      "cumulative": 27920.0
+    },
+    {
+      "date": "2026-01-28",
+      "cumulative": 28520.0
+    },
+    {
+      "date": "2026-01-29",
+      "cumulative": 28320.0
+    },
+    {
+      "date": "2026-01-29",
+      "cumulative": 28920.0
+    },
+    {
+      "date": "2026-02-02",
+      "cumulative": 27970.0
+    },
+    {
+      "date": "2026-02-03",
+      "cumulative": 29320.0
+    },
+    {
+      "date": "2026-02-03",
+      "cumulative": 28680.0
+    },
+    {
+      "date": "2026-02-04",
+      "cumulative": 28500.0
+    },
+    {
+      "date": "2026-02-05",
+      "cumulative": 28230.0
+    },
+    {
+      "date": "2026-02-05",
+      "cumulative": 30950.0
+    },
+    {
+      "date": "2026-02-06",
+      "cumulative": 30710.0
+    },
+    {
+      "date": "2026-02-11",
+      "cumulative": 31910.0
+    },
+    {
+      "date": "2026-02-12",
+      "cumulative": 31310.0
+    },
+    {
+      "date": "2026-02-12",
+      "cumulative": 33610.0
+    },
+    {
+      "date": "2026-02-13",
+      "cumulative": 33370.0
+    },
+    {
+      "date": "2026-02-13",
+      "cumulative": 35260.0
+    },
+    {
+      "date": "2026-02-24",
+      "cumulative": 34630.0
+    },
+    {
+      "date": "2026-02-25",
+      "cumulative": 34140.0
+    },
+    {
+      "date": "2026-02-26",
+      "cumulative": 33820.0
+    },
+    {
+      "date": "2026-03-03",
+      "cumulative": 33370.0
+    },
+    {
+      "date": "2026-03-03",
+      "cumulative": 32170.0
+    },
+    {
+      "date": "2026-03-05",
+      "cumulative": 32490.0
+    },
+    {
+      "date": "2026-03-06",
+      "cumulative": 33790.0
+    },
+    {
+      "date": "2026-03-06",
+      "cumulative": 33150.0
+    },
+    {
+      "date": "2026-03-06",
+      "cumulative": 32800.0
+    },
+    {
+      "date": "2026-03-11",
+      "cumulative": 37600.0
+    },
+    {
+      "date": "2026-03-11",
+      "cumulative": 37200.0
+    },
+    {
+      "date": "2026-03-11",
+      "cumulative": 40240.0
+    },
+    {
+      "date": "2026-03-12",
+      "cumulative": 38800.0
+    },
+    {
+      "date": "2026-03-12",
+      "cumulative": 38590.0
+    },
+    {
+      "date": "2026-03-13",
+      "cumulative": 38950.0
+    },
+    {
+      "date": "2026-03-13",
+      "cumulative": 38180.0
+    },
+    {
+      "date": "2026-03-16",
+      "cumulative": 37280.0
+    },
+    {
+      "date": "2026-03-16",
+      "cumulative": 36240.0
+    },
+    {
+      "date": "2026-03-17",
+      "cumulative": 36540.0
+    },
+    {
+      "date": "2026-03-17",
+      "cumulative": 36620.0
+    }
+  ],
+  "summary": {
+    "totalPnl": 36620.0,
+    "winRate": 33.5
+  }
+}

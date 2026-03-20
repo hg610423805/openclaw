@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交易明细 - 回测报告</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', Arial, sans-serif; background: #f0f2f5; padding: 20px; }
+        .container { max-width: 1600px; margin: 0 auto; }
+        h1 { text-align: center; color: #2c3e50; margin-bottom: 10px; }
+        .subtitle { text-align: center; color: #7f8c8d; margin-bottom: 30px; }
+        
+        /* 筛选器 */
+        .filters { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .filter-group { display: flex; gap: 15px; flex-wrap: wrap; align-items: center; }
+        .filter-group label { font-weight: 600; color: #555; }
+        .filter-group select, .filter-group input { padding: 8px 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; }
+        .filter-group button { background: #3498db; color: white; border: none; padding: 8px 20px; border-radius: 5px; cursor: pointer; }
+        .filter-group button:hover { background: #2980b9; }
+        .filter-group button.reset { background: #95a5a6; }
+        
+        /* 表格 */
+        .table-container { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 20px; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; min-width: 1200px; }
+        th { background: #34495e; color: white; padding: 15px 10px; text-align: left; font-weight: 600; position: sticky; top: 0; white-space: nowrap; }
+        td { padding: 12px 10px; border-bottom: 1px solid #ecf0f1; font-size: 13px; white-space: nowrap; }
+        tr:hover { background: #f8f9fa; }
+        .win { color: #e74c3c; font-weight: 600; }
+        .loss { color: #27ae60; font-weight: 600; }
+        .neutral { color: #95a5a6; }
+        .long { background: #e8f6f3; }
+        .short { background: #fef9e7; }
+        
+        /* 统计卡片 */
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 20px; }
+        .stat-card { background: white; padding: 15px; border-radius: 8px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .stat-card h4 { color: #7f8c8d; font-size: 13px; margin-bottom: 8px; }
+        .stat-card .num { font-size: 24px; font-weight: bold; color: #2c3e50; }
+        
+        /* 导出按钮 */
+        .export-btn { background: #27ae60; color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-size: 14px; margin-bottom: 20px; }
+        .export-btn:hover { background: #229954; }
+        
+        /* 分页 */
+        .pagination { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+        .pagination button { padding: 8px 15px; border: 1px solid #ddd; background: white; border-radius: 5px; cursor: pointer; }
+        .pagination button.active { background: #3498db; color: white; border-color: #3498db; }
+        .pagination button:disabled { opacity: 0.5; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📜 交易明细清单</h1>
+        <p class="subtitle">回测周期：2025-03-19 ~ 2026-03-19 | 共 113 笔交易</p>
+        
+        <div class="stats" id="statsContainer"></div>
+        
+        <div class="filters">
+            <div class="filter-group">
+                <label>品种:</label>
+                <select id="varietyFilter">
+                    <option value="all">全部</option>
+                    <option value="硅铁">硅铁主连</option>
+                    <option value="鸡蛋">鸡蛋主连</option>
+                    <option value="尿素">尿素主连</option>
+                    <option value="豆粕">豆粕主连</option>
+                </select>
+                
+                <label>方向:</label>
+                <select id="sideFilter">
+                    <option value="all">全部</option>
+                    <option value="LONG">做多</option>
+                    <option value="SHORT">做空</option>
+                </select>
+                
+                <label>结果:</label>
+                <select id="resultFilter">
+                    <option value="all">全部</option>
+                    <option value="win">盈利</option>
+                    <option value="loss">亏损</option>
+                    <option value="zero">平手</option>
+                </select>
+                
+                <label>出场:</label>
+                <select id="exitFilter">
+                    <option value="all">全部</option>
+                    <option value="止盈">止盈</option>
+                    <option value="止损">止损</option>
+                    <option value="强平">强平</option>
+                </select>
+                
+                <button onclick="applyFilters()">🔍 筛选</button>
+                <button class="reset" onclick="resetFilters()">🔄 重置</button>
+            </div>
+        </div>
+        
+        <button class="export-btn" onclick="exportToCSV()">📥 导出 CSV (Excel 可打开)</button>
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>日期</th>
+                        <th>入场时间</th>
+                        <th>出场时间</th>
+                        <th>品种</th>
+                        <th>方向</th>
+                        <th>入场价</th>
+                        <th>出场价</th>
+                        <th>手数</th>
+                        <th>出场方式</th>
+                        <th>盈亏 (元)</th>
+                    </tr>
+                </thead>
+                <tbody id="tradeTable"></tbody>
+            </table>
+        </div>
+        
+        <div class="pagination" id="pagination"></div>
+    </div>
+
+    <script>
+        const allTrades = [
+            {date:"2025-09-30", entryTime:"09:35", exitTime:"09:35", variety:"硅铁", side:"SHORT", entry:5468, exit:5481, reason:"止损", lots:10, pnl:-1300},
+            {date:"2025-10-09", entryTime:"09:45", exitTime:"14:20", variety:"尿素", side:"SHORT", entry:1613, exit:1609, reason:"止盈", lots:10, pnl:800},
+            {date:"2025-10-09", entryTime:"09:35", exitTime:"09:35", variety:"硅铁", side:"SHORT", entry:5468, exit:5481, reason:"止损", lots:10, pnl:-1300},
+            {date:"2025-10-09", entryTime:"09:45", exitTime:"13:35", variety:"鸡蛋", side:"SHORT", entry:2851, exit:2866, reason:"止损", lots:8, pnl:-1200},
+            {date:"2025-10-10", entryTime:"09:35", exitTime:"10:30", variety:"尿素", side:"SHORT", entry:1598, exit:1602, reason:"止损", lots:10, pnl:-800},
+            {date:"2025-10-10", entryTime:"10:40", exitTime:"10:40", variety:"硅铁", side:"SHORT", entry:5452, exit:5463, reason:"止损", lots:10, pnl:-1100},
+            {date:"2025-10-10", entryTime:"10:00", exitTime:"14:55", variety:"鸡蛋", side:"SHORT", entry:2845, exit:2806, reason:"强平", lots:8, pnl:3120},
+            {date:"2025-10-14", entryTime:"09:45", exitTime:"09:45", variety:"尿素", side:"SHORT", entry:1601, exit:1603, reason:"止损", lots:10, pnl:-400},
+            {date:"2025-10-14", entryTime:"10:00", exitTime:"10:30", variety:"硅铁", side:"SHORT", entry:5356, exit:5377, reason:"止损", lots:10, pnl:-2100},
+            {date:"2025-10-15", entryTime:"11:25", exitTime:"13:35", variety:"尿素", side:"SHORT", entry:1599, exit:1602, reason:"止损", lots:10, pnl:-600},
+            {date:"2025-10-15", entryTime:"11:30", exitTime:"13:35", variety:"硅铁", side:"SHORT", entry:5374, exit:5389, reason:"止损", lots:10, pnl:-1500},
+            {date:"2025-10-16", entryTime:"11:15", exitTime:"11:25", variety:"鸡蛋", side:"SHORT", entry:2826, exit:2832, reason:"止损", lots:8, pnl:-480},
+            {date:"2025-10-17", entryTime:"10:10", exitTime:"10:30", variety:"尿素", side:"SHORT", entry:1592, exit:1598, reason:"止损", lots:10, pnl:-1200},
+            {date:"2025-10-20", entryTime:"09:45", exitTime:"09:50", variety:"尿素", side:"SHORT", entry:1603, exit:1608, reason:"止损", lots:10, pnl:-1000},
+            {date:"2025-10-20", entryTime:"09:40", exitTime:"10:05", variety:"硅铁", side:"SHORT", entry:5438, exit:5451, reason:"止损", lots:10, pnl:-1300},
+            {date:"2025-10-29", entryTime:"09:45", exitTime:"10:45", variety:"鸡蛋", side:"LONG", entry:3152, exit:3147, reason:"止损", lots:7, pnl:-350},
+            {date:"2025-10-30", entryTime:"11:20", exitTime:"14:20", variety:"鸡蛋", side:"LONG", entry:3161, exit:3156, reason:"止损", lots:7, pnl:-350},
+            {date:"2025-11-03", entryTime:"09:45", exitTime:"10:30", variety:"鸡蛋", side:"LONG", entry:3153, exit:3146, reason:"止损", lots:7, pnl:-490},
+            {date:"2025-11-04", entryTime:"10:05", exitTime:"10:10", variety:"鸡蛋", side:"LONG", entry:3171, exit:3163, reason:"止损", lots:7, pnl:-560},
+            {date:"2025-11-05", entryTime:"10:10", exitTime:"14:55", variety:"鸡蛋", side:"LONG", entry:3175, exit:3217, reason:"强平", lots:7, pnl:2940},
+            {date:"2025-11-06", entryTime:"11:20", exitTime:"14:55", variety:"硅铁", side:"LONG", entry:5572, exit:5586, reason:"强平", lots:10, pnl:1400},
+            {date:"2025-11-10", entryTime:"10:55", exitTime:"14:55", variety:"硅铁", side:"LONG", entry:5546, exit:5588, reason:"强平", lots:10, pnl:4200},
+            {date:"2025-11-12", entryTime:"09:35", exitTime:"09:40", variety:"硅铁", side:"SHORT", entry:5488, exit:5495, reason:"止损", lots:10, pnl:-700},
+            {date:"2025-11-13", entryTime:"10:05", exitTime:"14:20", variety:"尿素", side:"LONG", entry:1655, exit:1657, reason:"止盈", lots:10, pnl:400},
+            {date:"2025-11-17", entryTime:"11:30", exitTime:"14:50", variety:"尿素", side:"LONG", entry:1663, exit:1661, reason:"止损", lots:10, pnl:-400},
+            {date:"2025-11-18", entryTime:"10:15", exitTime:"14:35", variety:"硅铁", side:"SHORT", entry:5496, exit:5464, reason:"止盈", lots:10, pnl:3200},
+            {date:"2025-11-20", entryTime:"11:15", exitTime:"14:40", variety:"尿素", side:"LONG", entry:1670, exit:1664, reason:"止损", lots:10, pnl:-1200},
+            {date:"2025-11-20", entryTime:"09:45", exitTime:"10:40", variety:"鸡蛋", side:"LONG", entry:3212, exit:3194, reason:"止损", lots:7, pnl:-1260},
+            {date:"2025-11-21", entryTime:"09:50", exitTime:"09:50", variety:"硅铁", side:"SHORT", entry:5422, exit:5433, reason:"止损", lots:10, pnl:-1100},
+            {date:"2025-11-24", entryTime:"10:15", exitTime:"10:30", variety:"鸡蛋", side:"LONG", entry:3223, exit:3217, reason:"止损", lots:7, pnl:-420},
+            {date:"2025-11-26", entryTime:"10:40", exitTime:"14:55", variety:"鸡蛋", side:"LONG", entry:3214, exit:3225, reason:"止盈", lots:7, pnl:770},
+            {date:"2025-12-02", entryTime:"09:40", exitTime:"11:15", variety:"尿素", side:"LONG", entry:1681, exit:1683, reason:"止盈", lots:10, pnl:400},
+            {date:"2025-12-02", entryTime:"10:45", exitTime:"14:20", variety:"豆粕", side:"LONG", entry:3041, exit:3041, reason:"止损", lots:8, pnl:0},
+            {date:"2025-12-02", entryTime:"09:55", exitTime:"11:00", variety:"鸡蛋", side:"LONG", entry:3220, exit:3216, reason:"止损", lots:7, pnl:-280},
+            {date:"2025-12-03", entryTime:"09:55", exitTime:"10:40", variety:"尿素", side:"LONG", entry:1692, exit:1687, reason:"止损", lots:10, pnl:-1000},
+            {date:"2025-12-03", entryTime:"09:35", exitTime:"09:35", variety:"豆粕", side:"LONG", entry:3044, exit:3039, reason:"止损", lots:8, pnl:-400},
+            {date:"2025-12-04", entryTime:"10:10", exitTime:"11:20", variety:"豆粕", side:"SHORT", entry:2823, exit:2823, reason:"止损", lots:8, pnl:0},
+            {date:"2025-12-05", entryTime:"09:55", exitTime:"09:55", variety:"豆粕", side:"SHORT", entry:2825, exit:2828, reason:"止损", lots:8, pnl:-240},
+            {date:"2025-12-08", entryTime:"09:40", exitTime:"14:35", variety:"豆粕", side:"SHORT", entry:2787, exit:2777, reason:"止盈", lots:8, pnl:800},
+            {date:"2025-12-09", entryTime:"09:45", exitTime:"09:50", variety:"豆粕", side:"SHORT", entry:2755, exit:2760, reason:"止损", lots:9, pnl:-450},
+            {date:"2025-12-10", entryTime:"10:10", exitTime:"10:30", variety:"硅铁", side:"SHORT", entry:5442, exit:5457, reason:"止损", lots:10, pnl:-1500},
+            {date:"2025-12-10", entryTime:"09:55", exitTime:"10:40", variety:"豆粕", side:"SHORT", entry:2742, exit:2746, reason:"止损", lots:9, pnl:-360},
+            {date:"2025-12-11", entryTime:"11:25", exitTime:"11:25", variety:"尿素", side:"SHORT", entry:1643, exit:1646, reason:"止损", lots:10, pnl:-600},
+            {date:"2025-12-11", entryTime:"11:15", exitTime:"13:40", variety:"豆粕", side:"SHORT", entry:2752, exit:2757, reason:"止损", lots:9, pnl:-450},
+            {date:"2025-12-12", entryTime:"09:35", exitTime:"09:40", variety:"鸡蛋", side:"SHORT", entry:3069, exit:3076, reason:"止损", lots:8, pnl:-560},
+            {date:"2025-12-16", entryTime:"09:35", exitTime:"10:05", variety:"鸡蛋", side:"SHORT", entry:3109, exit:3120, reason:"止损", lots:8, pnl:-880},
+            {date:"2025-12-17", entryTime:"10:05", exitTime:"13:30", variety:"硅铁", side:"LONG", entry:5514, exit:5538, reason:"止盈", lots:10, pnl:2400},
+            {date:"2025-12-17", entryTime:"09:50", exitTime:"10:55", variety:"豆粕", side:"SHORT", entry:2763, exit:2766, reason:"止损", lots:9, pnl:-270},
+            {date:"2025-12-17", entryTime:"09:35", exitTime:"09:55", variety:"鸡蛋", side:"SHORT", entry:3083, exit:3092, reason:"止损", lots:8, pnl:-720},
+            {date:"2025-12-18", entryTime:"09:50", exitTime:"13:45", variety:"尿素", side:"LONG", entry:1706, exit:1710, reason:"止盈", lots:10, pnl:800},
+            {date:"2025-12-18", entryTime:"10:05", exitTime:"10:05", variety:"硅铁", side:"LONG", entry:5612, exit:5597, reason:"止损", lots:10, pnl:-1500},
+            {date:"2025-12-19", entryTime:"09:50", exitTime:"09:50", variety:"硅铁", side:"LONG", entry:5644, exit:5633, reason:"止损", lots:10, pnl:-1100},
+            {date:"2025-12-19", entryTime:"09:35", exitTime:"14:05", variety:"豆粕", side:"SHORT", entry:2735, exit:2732, reason:"止盈", lots:9, pnl:270},
+            {date:"2025-12-19", entryTime:"11:05", exitTime:"14:55", variety:"鸡蛋", side:"SHORT", entry:2902, exit:2886, reason:"强平", lots:8, pnl:1280},
+            {date:"2025-12-24", entryTime:"09:35", exitTime:"10:50", variety:"尿素", side:"LONG", entry:1729, exit:1732, reason:"止盈", lots:10, pnl:600},
+            {date:"2025-12-24", entryTime:"10:05", exitTime:"10:30", variety:"硅铁", side:"LONG", entry:5658, exit:5645, reason:"止损", lots:10, pnl:-1300},
+            {date:"2025-12-24", entryTime:"09:55", exitTime:"13:30", variety:"豆粕", side:"SHORT", entry:2744, exit:2737, reason:"止盈", lots:9, pnl:630},
+            {date:"2025-12-25", entryTime:"10:10", exitTime:"11:20", variety:"尿素", side:"LONG", entry:1740, exit:1736, reason:"止损", lots:10, pnl:-800},
+            {date:"2025-12-25", entryTime:"09:45", exitTime:"09:50", variety:"硅铁", side:"LONG", entry:5670, exit:5653, reason:"止损", lots:10, pnl:-1700},
+            {date:"2025-12-29", entryTime:"10:55", exitTime:"13:45", variety:"尿素", side:"LONG", entry:1737, exit:1736, reason:"止损", lots:10, pnl:-200},
+            {date:"2025-12-29", entryTime:"09:50", exitTime:"14:05", variety:"硅铁", side:"LONG", entry:5690, exit:5716, reason:"止盈", lots:10, pnl:2600},
+            {date:"2025-12-30", entryTime:"10:45", exitTime:"13:30", variety:"尿素", side:"LONG", entry:1752, exit:1750, reason:"止损", lots:10, pnl:-400},
+            {date:"2025-12-30", entryTime:"10:50", exitTime:"13:45", variety:"硅铁", side:"LONG", entry:5742, exit:5737, reason:"止损", lots:10, pnl:-500},
+            {date:"2025-12-31", entryTime:"09:35", exitTime:"09:45", variety:"尿素", side:"LONG", entry:1747, exit:1743, reason:"止损", lots:10, pnl:-800},
+            {date:"2026-01-05", entryTime:"10:40", exitTime:"11:20", variety:"尿素", side:"LONG", entry:1772, exit:1767, reason:"止损", lots:10, pnl:-1000},
+            {date:"2026-01-06", entryTime:"11:15", exitTime:"14:55", variety:"硅铁", side:"LONG", entry:5720, exit:5776, reason:"强平", lots:10, pnl:5600},
+            {date:"2026-01-09", entryTime:"09:35", exitTime:"10:45", variety:"尿素", side:"LONG", entry:1784, exit:1782, reason:"止损", lots:10, pnl:-400},
+            {date:"2026-01-14", entryTime:"10:15", exitTime:"13:50", variety:"尿素", side:"LONG", entry:1791, exit:1797, reason:"止盈", lots:10, pnl:1200},
+            {date:"2026-01-15", entryTime:"09:40", exitTime:"13:35", variety:"豆粕", side:"SHORT", entry:2749, exit:2747, reason:"止盈", lots:9, pnl:180},
+            {date:"2026-01-16", entryTime:"10:00", exitTime:"11:15", variety:"豆粕", side:"SHORT", entry:2733, exit:2734, reason:"止损", lots:9, pnl:-90},
+            {date:"2026-01-20", entryTime:"10:00", exitTime:"10:55", variety:"硅铁", side:"SHORT", entry:5506, exit:5521, reason:"止损", lots:10, pnl:-1500},
+            {date:"2026-01-20", entryTime:"10:40", exitTime:"10:50", variety:"鸡蛋", side:"LONG", entry:3039, exit:3029, reason:"止损", lots:8, pnl:-800},
+            {date:"2026-01-21", entryTime:"10:05", exitTime:"11:00", variety:"豆粕", side:"SHORT", entry:2719, exit:2724, reason:"止损", lots:9, pnl:-450},
+            {date:"2026-01-21", entryTime:"10:10", exitTime:"10:45", variety:"鸡蛋", side:"LONG", entry:3055, exit:3046, reason:"止损", lots:8, pnl:-720},
+            {date:"2026-01-22", entryTime:"10:00", exitTime:"14:55", variety:"鸡蛋", side:"LONG", entry:3049, exit:3095, reason:"强平", lots:8, pnl:3680},
+            {date:"2026-01-26", entryTime:"10:35", exitTime:"14:05", variety:"尿素", side:"LONG", entry:1796, exit:1794, reason:"止损", lots:10, pnl:-400},
+            {date:"2026-01-26", entryTime:"10:35", exitTime:"11:00", variety:"鸡蛋", side:"LONG", entry:3094, exit:3081, reason:"止损", lots:8, pnl:-1040},
+            {date:"2026-01-27", entryTime:"10:40", exitTime:"11:15", variety:"尿素", side:"LONG", entry:1792, exit:1787, reason:"止损", lots:10, pnl:-1000},
+            {date:"2026-01-28", entryTime:"09:35", exitTime:"11:15", variety:"尿素", side:"LONG", entry:1813, exit:1816, reason:"止盈", lots:10, pnl:600},
+            {date:"2026-01-29", entryTime:"10:05", exitTime:"13:30", variety:"尿素", side:"LONG", entry:1818, exit:1817, reason:"止损", lots:10, pnl:-200},
+            {date:"2026-01-29", entryTime:"09:45", exitTime:"13:45", variety:"硅铁", side:"LONG", entry:5704, exit:5716, reason:"止盈", lots:10, pnl:1200},
+            {date:"2026-02-02", entryTime:"09:40", exitTime:"10:10", variety:"硅铁", side:"LONG", entry:5690, exit:5671, reason:"止损", lots:10, pnl:-1900},
+            {date:"2026-02-03", entryTime:"09:35", exitTime:"14:50", variety:"豆粕", side:"SHORT", entry:2743, exit:2728, reason:"止盈", lots:9, pnl:1350},
+            {date:"2026-02-03", entryTime:"10:05", exitTime:"10:35", variety:"鸡蛋", side:"SHORT", entry:2958, exit:2966, reason:"止损", lots:8, pnl:-640},
+            {date:"2026-02-04", entryTime:"10:15", exitTime:"10:40", variety:"豆粕", side:"SHORT", entry:2719, exit:2722, reason:"止损", lots:9, pnl:-270},
+            {date:"2026-02-05", entryTime:"11:00", exitTime:"13:30", variety:"豆粕", side:"SHORT", entry:2725, exit:2728, reason:"止损", lots:9, pnl:-270},
+            {date:"2026-02-05", entryTime:"10:50", exitTime:"14:55", variety:"鸡蛋", side:"SHORT", entry:2925, exit:2891, reason:"强平", lots:8, pnl:2720},
+            {date:"2026-02-06", entryTime:"09:45", exitTime:"09:45", variety:"鸡蛋", side:"SHORT", entry:2894, exit:2897, reason:"止损", lots:8, pnl:-240},
+            {date:"2026-02-11", entryTime:"10:45", exitTime:"14:55", variety:"尿素", side:"LONG", entry:1791, exit:1797, reason:"止盈", lots:10, pnl:1200},
+            {date:"2026-02-12", entryTime:"09:35", exitTime:"10:55", variety:"尿素", side:"LONG", entry:1825, exit:1822, reason:"止损", lots:10, pnl:-600},
+            {date:"2026-02-12", entryTime:"10:45", exitTime:"14:55", variety:"硅铁", side:"SHORT", entry:5546, exit:5500, reason:"强平", lots:10, pnl:4600},
+            {date:"2026-02-13", entryTime:"10:35", exitTime:"10:55", variety:"豆粕", side:"LONG", entry:2803, exit:2800, reason:"止损", lots:8, pnl:-240},
+            {date:"2026-02-13", entryTime:"10:45", exitTime:"14:45", variety:"鸡蛋", side:"LONG", entry:3222, exit:3249, reason:"止盈", lots:7, pnl:1890},
+            {date:"2026-02-24", entryTime:"09:45", exitTime:"10:30", variety:"鸡蛋", side:"LONG", entry:3271, exit:3262, reason:"止损", lots:7, pnl:-630},
+            {date:"2026-02-25", entryTime:"10:05", exitTime:"10:35", variety:"鸡蛋", side:"LONG", entry:3269, exit:3262, reason:"止损", lots:7, pnl:-490},
+            {date:"2026-02-26", entryTime:"09:45", exitTime:"09:45", variety:"豆粕", side:"LONG", entry:2841, exit:2837, reason:"止损", lots:8, pnl:-320},
+            {date:"2026-03-03", entryTime:"10:55", exitTime:"10:55", variety:"硅铁", side:"LONG", entry:5776, exit:5767, reason:"止损", lots:10, pnl:-900},
+            {date:"2026-03-03", entryTime:"10:35", exitTime:"14:20", variety:"豆粕", side:"LONG", entry:2863, exit:2848, reason:"止损", lots:8, pnl:-1200},
+            {date:"2026-03-05", entryTime:"09:40", exitTime:"13:55", variety:"豆粕", side:"LONG", entry:2837, exit:2841, reason:"止盈", lots:8, pnl:320},
+            {date:"2026-03-06", entryTime:"10:55", exitTime:"14:55", variety:"硅铁", side:"LONG", entry:5842, exit:5868, reason:"强平", lots:10, pnl:2600},
+            {date:"2026-03-06", entryTime:"09:40", exitTime:"10:00", variety:"豆粕", side:"LONG", entry:2913, exit:2905, reason:"止损", lots:8, pnl:-640},
+            {date:"2026-03-06", entryTime:"10:55", exitTime:"13:30", variety:"鸡蛋", side:"LONG", entry:3389, exit:3384, reason:"止损", lots:7, pnl:-350},
+            {date:"2026-03-11", entryTime:"10:05", exitTime:"14:55", variety:"尿素", side:"LONG", entry:1848, exit:1872, reason:"止盈", lots:10, pnl:4800},
+            {date:"2026-03-11", entryTime:"09:40", exitTime:"14:30", variety:"硅铁", side:"LONG", entry:5888, exit:5880, reason:"止损", lots:10, pnl:-800},
+            {date:"2026-03-11", entryTime:"10:45", exitTime:"14:55", variety:"豆粕", side:"LONG", entry:3030, exit:3068, reason:"强平", lots:8, pnl:3040},
+            {date:"2026-03-12", entryTime:"10:40", exitTime:"10:40", variety:"尿素", side:"LONG", entry:1920, exit:1912, reason:"止损", lots:9, pnl:-1440},
+            {date:"2026-03-12", entryTime:"09:40", exitTime:"10:45", variety:"鸡蛋", side:"LONG", entry:3457, exit:3454, reason:"止损", lots:7, pnl:-210},
+            {date:"2026-03-13", entryTime:"09:35", exitTime:"11:20", variety:"尿素", side:"LONG", entry:1894, exit:1896, reason:"止盈", lots:9, pnl:360},
+            {date:"2026-03-13", entryTime:"09:40", exitTime:"10:30", variety:"豆粕", side:"LONG", entry:3147, exit:3136, reason:"止损", lots:7, pnl:-770},
+            {date:"2026-03-16", entryTime:"09:35", exitTime:"09:35", variety:"尿素", side:"LONG", entry:1927, exit:1922, reason:"止损", lots:9, pnl:-900},
+            {date:"2026-03-16", entryTime:"11:25", exitTime:"13:55", variety:"豆粕", side:"LONG", entry:3079, exit:3066, reason:"止损", lots:8, pnl:-1040},
+            {date:"2026-03-17", entryTime:"09:35", exitTime:"11:00", variety:"硅铁", side:"LONG", entry:5924, exit:5930, reason:"止盈", lots:10, pnl:600},
+            {date:"2026-03-17", entryTime:"09:50", exitTime:"11:15", variety:"豆粕", side:"LONG", entry:3042, exit:3043, reason:"止盈", lots:8, pnl:80}
+        ];
+
+        let filteredTrades = [...allTrades];
+        let currentPage = 1;
+        const pageSize = 40;
+
+        function updateStats(trades) {
+            const totalPnl = trades.reduce((sum, t) => sum + t.pnl, 0);
+            const wins = trades.filter(t => t.pnl > 0).length;
+            const losses = trades.filter(t => t.pnl < 0).length;
+            const winRate = trades.length > 0 ? ((wins / trades.length) * 100).toFixed(1) : 0;
+            const avgWin = wins > 0 ? (trades.filter(t => t.pnl > 0).reduce((s, t) => s + t.pnl, 0) / wins).toFixed(0) : 0;
+            const avgLoss = losses > 0 ? (Math.abs(trades.filter(t => t.pnl < 0).reduce((s, t) => s + t.pnl, 0)) / losses).toFixed(0) : 0;
+
+            document.getElementById('statsContainer').innerHTML = `
+                <div class="stat-card"><h4>总交易</h4><div class="num">${trades.length}</div></div>
+                <div class="stat-card"><h4>总盈亏</h4><div class="num" style="color:${totalPnl>=0?'#e74c3c':'#27ae60'}">${totalPnl>=0?'+':''}${totalPnl.toLocaleString()}</div></div>
+                <div class="stat-card"><h4>盈利</h4><div class="num" style="color:#e74c3c">${wins}</div></div>
+                <div class="stat-card"><h4>亏损</h4><div class="num" style="color:#27ae60">${losses}</div></div>
+                <div class="stat-card"><h4>胜率</h4><div class="num">${winRate}%</div></div>
+                <div class="stat-card"><h4>平均盈利</h4><div class="num" style="color:#e74c3c">+${avgWin}</div></div>
+                <div class="stat-card"><h4>平均亏损</h4><div class="num" style="color:#27ae60">-${avgLoss}</div></div>
+                <div class="stat-card"><h4>盈亏比</h4><div class="num">${(avgWin/avgLoss||0).toFixed(2)}</div></div>
+            `;
+        }
+
+        function renderTable() {
+            const start = (currentPage - 1) * pageSize;
+            const end = start + pageSize;
+            const pageTrades = filteredTrades.slice(start, end);
+            
+            document.getElementById('tradeTable').innerHTML = pageTrades.map(t => `
+                <tr class="${t.side.toLowerCase()}">
+                    <td>${t.date}</td>
+                    <td>${t.entryTime}</td>
+                    <td>${t.exitTime}</td>
+                    <td>${t.variety}</td>
+                    <td><span style="padding:3px 8px;border-radius:3px;font-size:12px;">${t.side==='LONG'?'做多':'做空'}</span></td>
+                    <td>${t.entry}</td>
+                    <td>${t.exit}</td>
+                    <td>${t.lots}</td>
+                    <td>${t.reason}</td>
+                    <td class="${t.pnl>0?'win':t.pnl<0?'loss':'neutral'}">${t.pnl>0?'+':''}${t.pnl.toLocaleString()}</td>
+                </tr>
+            `).join('');
+
+            // 分页
+            const totalPages = Math.ceil(filteredTrades.length / pageSize);
+            let paginationHtml = '';
+            for (let i = 1; i <= totalPages; i++) {
+                paginationHtml += `<button class="${i===currentPage?'active':''}" onclick="goToPage(${i})">${i}</button>`;
+            }
+            document.getElementById('pagination').innerHTML = paginationHtml;
+        }
+
+        function goToPage(page) {
+            currentPage = page;
+            renderTable();
+        }
+
+        function applyFilters() {
+            const variety = document.getElementById('varietyFilter').value;
+            const side = document.getElementById('sideFilter').value;
+            const result = document.getElementById('resultFilter').value;
+            const exit = document.getElementById('exitFilter').value;
+
+            filteredTrades = allTrades.filter(t => {
+                if (variety !== 'all' && t.variety !== variety) return false;
+                if (side !== 'all' && t.side !== side) return false;
+                if (result === 'win' && t.pnl <= 0) return false;
+                if (result === 'loss' && t.pnl >= 0) return false;
+                if (result === 'zero' && t.pnl !== 0) return false;
+                if (exit !== 'all' && t.reason !== exit) return false;
+                return true;
+            });
+
+            currentPage = 1;
+            updateStats(filteredTrades);
+            renderTable();
+        }
+
+        function resetFilters() {
+            document.getElementById('varietyFilter').value = 'all';
+            document.getElementById('sideFilter').value = 'all';
+            document.getElementById('resultFilter').value = 'all';
+            document.getElementById('exitFilter').value = 'all';
+            filteredTrades = [...allTrades];
+            currentPage = 1;
+            updateStats(filteredTrades);
+            renderTable();
+        }
+
+        function exportToCSV() {
+            const headers = ['日期', '入场时间', '出场时间', '品种', '方向', '入场价', '出场价', '手数', '出场方式', '盈亏 (元)'];
+            const rows = filteredTrades.map(t => [
+                t.date, t.entryTime, t.exitTime, t.variety, t.side==='LONG'?'做多':'做空', t.entry, t.exit, t.lots, t.reason, t.pnl
+            ]);
+            const csv = [headers, ...rows].map(row => row.join(',')).join('\n');
+            const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = '交易明细_' + new Date().toISOString().split('T')[0] + '.csv';
+            link.click();
+        }
+
+        // 初始化
+        updateStats(allTrades);
+        renderTable();
+    </script>
+</body>
+</html>

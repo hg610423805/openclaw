@@ -1,0 +1,15 @@
+{
+  "name": "xiaohongshu-poster",
+  "version": "1.0.0",
+  "description": "小红书自动发布技能 for OpenClaw",
+  "main": "scripts/post.js",
+  "scripts": {
+    "post": "node scripts/post.js",
+    "interactive": "node scripts/post.js --interactive"
+  },
+  "dependencies": {
+    "playwright": "^1.40.0"
+  },
+  "author": "咕噜",
+  "license": "MIT"
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>睡眠音乐</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            font-family: "Microsoft YaHei", sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px rgba(255,255,255,0.3);
+        }
+        .player {
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        audio {
+            width: 400px;
+            height: 50px;
+        }
+        .info {
+            margin-top: 20px;
+            text-align: center;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <h1>🌙 睡眠音乐</h1>
+    <div class="player">
+        <audio controls autoplay loop>
+            <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=relaxing-mountains-rivers-streams-running-water-18178.mp3" type="audio/mpeg">
+            您的浏览器不支持音频播放
+        </audio>
+        <div class="info">
+            <p>正在播放：山间溪流流水声</p>
+            <p>已设置为循环播放，晚安爸爸 🐱</p>
+        </div>
+    </div>
+    <script>
+        // 尝试自动播放
+        document.addEventListener('DOMContentLoaded', function() {
+            var audio = document.querySelector('audio');
+            audio.volume = 0.5;
+            audio.play().catch(function(e) {
+                console.log('自动播放被阻止，请点击播放按钮');
+            });
+        });
+    </script>
+</body>
+</html>

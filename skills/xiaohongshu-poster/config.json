@@ -1,0 +1,16 @@
+{
+  "account": {
+    "name": "默认账号",
+    "cookiePath": "./cookies.json"
+  },
+  "defaults": {
+    "addTags": true,
+    "confirmBeforePost": true,
+    "maxImages": 9,
+    "postInterval": 300
+  },
+  "browser": {
+    "headless": false,
+    "timeout": 60000
+  }
+}

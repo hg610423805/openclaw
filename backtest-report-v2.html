@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多品种回测分析报告</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, 'Microsoft YaHei', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); color: white; padding: 30px; text-align: center; }
+        .header h1 { font-size: 28px; margin-bottom: 10px; }
+        .header p { opacity: 0.8; font-size: 14px; }
+        .content { padding: 30px; }
+        
+        /* 总结卡片 */
+        .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 30px; }
+        .card { background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 20px; border-radius: 10px; text-align: center; border-left: 4px solid #3498db; }
+        .card.profit { border-left-color: #e74c3c; }
+        .card.loss { border-left-color: #27ae60; }
+        .card h4 { color: #7f8c8d; font-size: 13px; margin-bottom: 10px; text-transform: uppercase; }
+        .card .num { font-size: 32px; font-weight: bold; color: #2c3e50; }
+        .card .num.pos { color: #e74c3c; }
+        .card .num.neg { color: #27ae60; }
+        
+        /* 品种对比表 */
+        .section-title { font-size: 20px; color: #2c3e50; margin: 30px 0 15px 0; padding-left: 15px; border-left: 4px solid #3498db; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+        th { background: #34495e; color: white; padding: 15px; text-align: left; font-weight: 600; }
+        td { padding: 12px 15px; border-bottom: 1px solid #ecf0f1; }
+        tr:hover { background: #f8f9fa; }
+        .profit-pos { color: #e74c3c; font-weight: bold; }
+        .profit-neg { color: #27ae60; font-weight: bold; }
+        
+        /* 条形图 */
+        .bar-chart { margin: 20px 0; }
+        .bar-item { margin-bottom: 15px; }
+        .bar-label { display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 14px; }
+        .bar-bg { background: #ecf0f1; height: 30px; border-radius: 15px; overflow: hidden; }
+        .bar-fill { height: 100%; border-radius: 15px; display: flex; align-items: center; padding-left: 10px; color: white; font-weight: bold; font-size: 13px; transition: width 0.5s; }
+        .bar-fill.green { background: linear-gradient(90deg, #27ae60, #2ecc71); }
+        .bar-fill.red { background: linear-gradient(90deg, #e74c3c, #ff6b6b); }
+        .bar-fill.blue { background: linear-gradient(90deg, #3498db, #5dade2); }
+        
+        /* 饼图模拟 */
+        .pie-container { display: flex; justify-content: space-around; flex-wrap: wrap; margin: 20px 0; }
+        .pie-legend { display: flex; flex-direction: column; gap: 10px; }
+        .legend-item { display: flex; align-items: center; gap: 10px; }
+        .legend-color { width: 20px; height: 20px; border-radius: 4px; }
+        .legend-color.green { background: #27ae60; }
+        .legend-color.red { background: #e74c3c; }
+        .legend-color.blue { background: #3498db; }
+        .pie-visual { width: 200px; height: 200px; border-radius: 50%; background: conic-gradient(#27ae60 0deg 77deg, #e74c3c 77deg 302deg, #3498db 302deg 360deg); }
+        
+        /* 洞察区域 */
+        .insights { background: linear-gradient(135deg, #fef9e7 0%, #fcf3cf 100%); padding: 25px; border-radius: 10px; margin-top: 30px; }
+        .insights h3 { color: #d68910; margin-bottom: 15px; font-size: 18px; }
+        .insight-item { background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; border-left: 4px solid #f39c12; }
+        .insight-item strong { color: #e67e22; }
+        
+        /* 每日明细折叠 */
+        .detail-toggle { background: #3498db; color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-size: 14px; margin-top: 20px; }
+        .detail-toggle:hover { background: #2980b9; }
+        .detail-content { display: none; margin-top: 20px; max-height: 400px; overflow-y: auto; background: #f8f9fa; padding: 15px; border-radius: 8px; }
+        .detail-content.show { display: block; }
+        .trade-row { font-family: monospace; font-size: 12px; padding: 5px 0; border-bottom: 1px dashed #ddd; }
+        .trade-row.no-trade { color: #95a5a6; }
+        .trade-row.win { color: #27ae60; }
+        .trade-row.loss { color: #e74c3c; }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .summary { grid-template-columns: repeat(2, 1fr); }
+            th, td { padding: 8px; font-size: 13px; }
+            .card .num { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 多品种期货回测报告</h1>
+            <p>回测周期：2025-03-19 ~ 2026-03-19 | 初始资金：100,000 元 | 仓位：20%-30%</p>
+        </div>
+        
+        <div class="content">
+            <!-- 核心指标 -->
+            <div class="summary">
+                <div class="card profit">
+                    <h4>总盈亏</h4>
+                    <div class="num pos">+4,460 元</div>
+                </div>
+                <div class="card">
+                    <h4>总交易</h4>
+                    <div class="num">113 笔</div>
+                </div>
+                <div class="card">
+                    <h4>平均胜率</h4>
+                    <div class="num neg">30.9%</div>
+                </div>
+                <div class="card">
+                    <h4>收益率</h4>
+                    <div class="num pos">+4.46%</div>
+                </div>
+            </div>
+
+            <!-- 品种对比表格 -->
+            <h2 class="section-title">📋 品种表现对比</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>品种</th>
+                        <th>交易次数</th>
+                        <th>累计盈亏</th>
+                        <th>胜率</th>
+                        <th>平均手数</th>
+                        <th>出场分布</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>🥇 硅铁主连</strong></td>
+                        <td>28</td>
+                        <td class="profit-pos">+5,700 元</td>
+                        <td>35.7%</td>
+                        <td>10.0</td>
+                        <td>止盈 5 / 止损 18 / 强平 5</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🥈 鸡蛋主连</strong></td>
+                        <td>28</td>
+                        <td class="profit-pos">+3,730 元</td>
+                        <td>25.0%</td>
+                        <td>7.5</td>
+                        <td>止盈 2 / 止损 21 / 强平 5</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🥉 豆粕主连</strong></td>
+                        <td>26</td>
+                        <td class="profit-neg">-790 元</td>
+                        <td>30.8%</td>
+                        <td>8.4</td>
+                        <td>止盈 7 / 止损 18 / 强平 1</td>
+                    </tr>
+                    <tr>
+                        <td><strong>❌ 尿素主连</strong></td>
+                        <td>31</td>
+                        <td class="profit-neg">-4,180 元</td>
+                        <td>32.3%</td>
+                        <td>9.9</td>
+                        <td>止盈 10 / 止损 21 / 强平 0</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 盈亏条形图 -->
+            <h2 class="section-title">💰 品种盈亏可视化</h2>
+            <div class="bar-chart">
+                <div class="bar-item">
+                    <div class="bar-label"><span>硅铁主连</span><span>+5,700 元</span></div>
+                    <div class="bar-bg"><div class="bar-fill green" style="width: 100%;">+5,700</div></div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label"><span>鸡蛋主连</span><span>+3,730 元</span></div>
+                    <div class="bar-bg"><div class="bar-fill green" style="width: 65%;">+3,730</div></div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label"><span>豆粕主连</span><span>-790 元</span></div>
+                    <div class="bar-bg"><div class="bar-fill red" style="width: 14%;">-790</div></div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label"><span>尿素主连</span><span>-4,180 元</span></div>
+                    <div class="bar-bg"><div class="bar-fill red" style="width: 73%;">-4,180</div></div>
+                </div>
+            </div>
+
+            <!-- 出场方式统计 -->
+            <h2 class="section-title">🎯 出场方式统计</h2>
+            <div class="pie-container">
+                <div class="pie-visual"></div>
+                <div class="pie-legend">
+                    <div class="legend-item"><div class="legend-color green"></div><span>止盈：24 笔 (21.2%)</span></div>
+                    <div class="legend-item"><div class="legend-color red"></div><span>止损：78 笔 (69.0%)</span></div>
+                    <div class="legend-item"><div class="legend-color blue"></div><span>强平：11 笔 (9.7%)</span></div>
+                </div>
+            </div>
+
+            <!-- 关键洞察 -->
+            <div class="insights">
+                <h3>💡 咕噜的分析建议</h3>
+                <div class="insight-item">
+                    <strong>🏆 硅铁是明星品种</strong><br>
+                    盈利 +5,700 元，胜率 35.7% 双第一。建议：增加硅铁仓位权重至 30%-35%，重点关注其趋势行情。
+                </div>
+                <div class="insight-item">
+                    <strong>🥚 鸡蛋盈亏比优秀</strong><br>
+                    胜率仅 25% 但盈利 +3,730 元，典型"小亏大赚"。5 笔强平贡献约 +9,000 元，说明趋势持仓策略有效。建议：保持当前策略，可优化移动止损让利润继续奔跑。
+                </div>
+                <div class="insight-item">
+                    <strong>⚠️ 尿素需要调整</strong><br>
+                    亏损 -4,180 元，虽然止盈 10 笔最多，但止损 21 笔。建议：暂停尿素交易或重新优化入场信号，或降低仓位至 10%-15%。
+                </div>
+                <div class="insight-item">
+                    <strong>📉 止损比例过高</strong><br>
+                    止损 78 笔 vs 止盈 24 笔 = 3.25:1。这是趋势策略的正常特征，但可优化：①放宽初始止损 ②改进入场时机 ③使用分批建仓。
+                </div>
+                <div class="insight-item">
+                    <strong>🚀 强平=利润</strong><br>
+                    11 笔强平中，鸡蛋 4 笔强平盈利约 +9,700 元，硅铁 5 笔强平盈利约 +8,200 元。证明收盘平仓策略能抓住大趋势。建议：不要过早止盈，让盈利单充分发展。
+                </div>
+            </div>
+
+            <button class="detail-toggle" onclick="toggleDetail()">📜 查看每日交易明细</button>
+            <div class="detail-content" id="detailContent">
+                <!-- 明细会由 JS 动态填充 -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const trades = [
+            {date:"2025-09-30", variety:"硅铁", side:"SHORT", entry:"5468", exit:"5481", reason:"止损", lots:10, pnl:-1300},
+            {date:"2025-10-09", variety:"尿素", side:"SHORT", entry:"1613", exit:"1609", reason:"止盈", lots:10, pnl:800},
+            {date:"2025-10-09", variety:"硅铁", side:"SHORT", entry:"5468", exit:"5481", reason:"止损", lots:10, pnl:-1300},
+            {date:"2025-10-09", variety:"鸡蛋", side:"SHORT", entry:"2851", exit:"2866", reason:"止损", lots:8, pnl:-1200},
+            {date:"2025-10-10", variety:"尿素", side:"SHORT", entry:"1598", exit:"1602", reason:"止损", lots:10, pnl:-800},
+            {date:"2025-10-10", variety:"硅铁", side:"SHORT", entry:"5452", exit:"5463", reason:"止损", lots:10, pnl:-1100},
+            {date:"2025-10-10", variety:"鸡蛋", side:"SHORT", entry:"2845", exit:"2806", reason:"强平", lots:8, pnl:3120},
+            {date:"2025-10-14", variety:"尿素", side:"SHORT", entry:"1601", exit:"1603", reason:"止损", lots:10, pnl:-400},
+            {date:"2025-10-14", variety:"硅铁", side:"SHORT", entry:"5356", exit:"5377", reason:"止损", lots:10, pnl:-2100},
+            {date:"2025-10-15", variety:"尿素", side:"SHORT", entry:"1599", exit:"1602", reason:"止损", lots:10, pnl:-600},
+            {date:"2025-10-15", variety:"硅铁", side:"SHORT", entry:"5374", exit:"5389", reason:"止损", lots:10, pnl:-1500},
+            {date:"2025-10-16", variety:"鸡蛋", side:"SHORT", entry:"2826", exit:"2832", reason:"止损", lots:8, pnl:-480},
+            {date:"2025-10-17", variety:"尿素", side:"SHORT", entry:"1592", exit:"1598", reason:"止损", lots:10, pnl:-1200},
+            {date:"2025-10-20", variety:"尿素", side:"SHORT", entry:"1603", exit:"1608", reason:"止损", lots:10, pnl:-1000},
+            {date:"2025-10-20", variety:"硅铁", side:"SHORT", entry:"5438", exit:"5451", reason:"止损", lots:10, pnl:-1300},
+            {date:"2025-10-29", variety:"鸡蛋", side:"LONG", entry:"3152", exit:"3147", reason:"止损", lots:7, pnl:-350},
+            {date:"2025-10-30", variety:"鸡蛋", side:"LONG", entry:"3161", exit:"3156", reason:"止损", lots:7, pnl:-350},
+            {date:"2025-11-03", variety:"鸡蛋", side:"LONG", entry:"3153", exit:"3146", reason:"止损", lots:7, pnl:-490},
+            {date:"2025-11-04", variety:"鸡蛋", side:"LONG", entry:"3171", exit:"3163", reason:"止损", lots:7, pnl:-560},
+            {date:"2025-11-05", variety:"鸡蛋", side:"LONG", entry:"3175", exit:"3217", reason:"强平", lots:7, pnl:2940},
+            {date:"2025-11-06", variety:"硅铁", side:"LONG", entry:"5572", exit:"5586", reason:"强平", lots:10, pnl:1400},
+            {date:"2025-11-10", variety:"硅铁", side:"LONG", entry:"5546", exit:"5588", reason:"强平", lots:10, pnl:4200},
+            {date:"2025-11-12", variety:"硅铁", side:"SHORT", entry:"5488", exit:"5495", reason:"止损", lots:10, pnl:-700},
+            {date:"2025-11-13", variety:"尿素", side:"LONG", entry:"1655", exit:"1657", reason:"止盈", lots:10, pnl:400},
+            {date:"2025-11-17", variety:"尿素", side:"LONG", entry:"1663", exit:"1661", reason:"止损", lots:10, pnl:-400},
+            {date:"2025-11-18", variety:"硅铁", side:"SHORT", entry:"5496", exit:"5464", reason:"止盈", lots:10, pnl:3200},
+            {date:"2025-11-20", variety:"尿素", side:"LONG", entry:"1670", exit:"1664", reason:"止损", lots:10, pnl:-1200},
+            {date:"2025-11-20", variety:"鸡蛋", side:"LONG", entry:"3212", exit:"3194", reason:"止损", lots:7, pnl:-1260},
+            {date:"2025-11-21", variety:"硅铁", side:"SHORT", entry:"5422", exit:"5433", reason:"止损", lots:10, pnl:-1100},
+            {date:"2025-11-24", variety:"鸡蛋", side:"LONG", entry:"3223", exit:"3217", reason:"止损", lots:7, pnl:-420},
+            {date:"2025-11-26", variety:"鸡蛋", side:"LONG", entry:"3214", exit:"3225", reason:"止盈", lots:7, pnl:770},
+            {date:"2025-12-02", variety:"尿素", side:"LONG", entry:"1681", exit:"1683", reason:"止盈", lots:10, pnl:400},
+            {date:"2025-12-02", variety:"豆粕", side:"LONG", entry:"3041", exit:"3041", reason:"止损", lots:8, pnl:0},
+            {date:"2025-12-02", variety:"鸡蛋", side:"LONG", entry:"3220", exit:"3216", reason:"止损", lots:7, pnl:-280},
+            {date:"2025-12-03", variety:"尿素", side:"LONG", entry:"1692", exit:"1687", reason:"止损", lots:10, pnl:-1000},
+            {date:"2025-12-03", variety:"豆粕", side:"LONG", entry:"3044", exit:"3039", reason:"止损", lots:8, pnl:-400},
+            {date:"2025-12-04", variety:"豆粕", side:"SHORT", entry:"2823", exit:"2823", reason:"止损", lots:8, pnl:0},
+            {date:"2025-12-05", variety:"豆粕", side:"SHORT", entry:"2825", exit:"2828", reason:"止损", lots:8, pnl:-240},
+            {date:"2025-12-08", variety:"豆粕", side:"SHORT", entry:"2787", exit:"2777", reason:"止盈", lots:8, pnl:800},
+            {date:"2025-12-09", variety:"豆粕", side:"SHORT", entry:"2755", exit:"2760", reason:"止损", lots:9, pnl:-450},
+            {date:"2025-12-10", variety:"硅铁", side:"SHORT", entry:"5442", exit:"5457", reason:"止损", lots:10, pnl:-1500},
+            {date:"2025-12-10", variety:"豆粕", side:"SHORT", entry:"2742", exit:"2746", reason:"止损", lots:9, pnl:-360},
+            {date:"2025-12-11", variety:"尿素", side:"SHORT", entry:"1643", exit:"1646", reason:"止损", lots:10, pnl:-600},
+            {date:"2025-12-11", variety:"豆粕", side:"SHORT", entry:"2752", exit:"2757", reason:"止损", lots:9, pnl:-450},
+            {date:"2025-12-12", variety:"鸡蛋", side:"SHORT", entry:"3069", exit:"3076", reason:"止损", lots:8, pnl:-560},
+            {date:"2025-12-16", variety:"鸡蛋", side:"SHORT", entry:"3109", exit:"3120", reason:"止损", lots:8, pnl:-880},
+            {date:"2025-12-17", variety:"硅铁", side:"LONG", entry:"5514", exit:"5538", reason:"止盈", lots:10, pnl:2400},
+            {date:"2025-12-17", variety:"豆粕", side:"SHORT", entry:"2763", exit:"2766", reason:"止损", lots:9, pnl:-270},
+            {date:"2025-12-17", variety:"鸡蛋", side:"SHORT", entry:"3083", exit:"3092", reason:"止损", lots:8, pnl:-720},
+            {date:"2025-12-18", variety:"尿素", side:"LONG", entry:"1706", exit:"1710", reason:"止盈", lots:10, pnl:800},
+            {date:"2025-12-18", variety:"硅铁", side:"LONG", entry:"5612", exit:"5597", reason:"止损", lots:10, pnl:-1500},
+            {date:"2025-12-19", variety:"硅铁", side:"LONG", entry:"5644", exit:"5633", reason:"止损", lots:10, pnl:-1100},
+            {date:"2025-12-19", variety:"豆粕", side:"SHORT", entry:"2735", exit:"2732", reason:"止盈", lots:9, pnl:270},
+            {date:"2025-12-19", variety:"鸡蛋", side:"SHORT", entry:"2902", exit:"2886", reason:"强平", lots:8, pnl:1280},
+            {date:"2025-12-24", variety:"尿素", side:"LONG", entry:"1729", exit:"1732", reason:"止盈", lots:10, pnl:600},
+            {date:"2025-12-24", variety:"硅铁", side:"LONG", entry:"5658", exit:"5645", reason:"止损", lots:10, pnl:-1300},
+            {date:"2025-12-24", variety:"豆粕", side:"SHORT", entry:"2744", exit:"2737", reason:"止盈", lots:9, pnl:630},
+            {date:"2025-12-25", variety:"尿素", side:"LONG", entry:"1740", exit:"1736", reason:"止损", lots:10, pnl:-800},
+            {date:"2025-12-25", variety:"硅铁", side:"LONG", entry:"5670", exit:"5653", reason:"止损", lots:10, pnl:-1700},
+            {date:"2025-12-29", variety:"尿素", side:"LONG", entry:"1737", exit:"1736", reason:"止损", lots:10, pnl:-200},
+            {date:"2025-12-29", variety:"硅铁", side:"LONG", entry:"5690", exit:"5716", reason:"止盈", lots:10, pnl:2600},
+            {date:"2025-12-30", variety:"尿素", side:"LONG", entry:"1752", exit:"1750", reason:"止损", lots:10, pnl:-400},
+            {date:"2025-12-30", variety:"硅铁", side:"LONG", entry:"5742", exit:"5737", reason:"止损", lots:10, pnl:-500},
+            {date:"2025-12-31", variety:"尿素", side:"LONG", entry:"1747", exit:"1743", reason:"止损", lots:10, pnl:-800},
+            {date:"2026-01-05", variety:"尿素", side:"LONG", entry:"1772", exit:"1767", reason:"止损", lots:10, pnl:-1000},
+            {date:"2026-01-06", variety:"硅铁", side:"LONG", entry:"5720", exit:"5776", reason:"强平", lots:10, pnl:5600},
+            {date:"2026-01-09", variety:"尿素", side:"LONG", entry:"1784", exit:"1782", reason:"止损", lots:10, pnl:-400},
+            {date:"2026-01-14", variety:"尿素", side:"LONG", entry:"1791", exit:"1797", reason:"止盈", lots:10, pnl:1200},
+            {date:"2026-01-15", variety:"豆粕", side:"SHORT", entry:"2749", exit:"2747", reason:"止盈", lots:9, pnl:180},
+            {date:"2026-01-16", variety:"豆粕", side:"SHORT", entry:"2733", exit:"2734", reason:"止损", lots:9, pnl:-90},
+            {date:"2026-01-20", variety:"硅铁", side:"SHORT", entry:"5506", exit:"5521", reason:"止损", lots:10, pnl:-1500},
+            {date:"2026-01-20", variety:"鸡蛋", side:"LONG", entry:"3039", exit:"3029", reason:"止损", lots:8, pnl:-800},
+            {date:"2026-01-21", variety:"豆粕", side:"SHORT", entry:"2719", exit:"2724", reason:"止损", lots:9, pnl:-450},
+            {date:"2026-01-21", variety:"鸡蛋", side:"LONG", entry:"3055", exit:"3046", reason:"止损", lots:8, pnl:-720},
+            {date:"2026-01-22", variety:"鸡蛋", side:"LONG", entry:"3049", exit:"3095", reason:"强平", lots:8, pnl:3680},
+            {date:"2026-01-26", variety:"尿素", side:"LONG", entry:"1796", exit:"1794", reason:"止损", lots:10, pnl:-400},
+            {date:"2026-01-26", variety:"鸡蛋", side:"LONG", entry:"3094", exit:"3081", reason:"止损", lots:8, pnl:-1040},
+            {date:"2026-01-27", variety:"尿素", side:"LONG", entry:"1792", exit:"1787", reason:"止损", lots:10, pnl:-1000},
+            {date:"2026-01-28", variety:"尿素", side:"LONG", entry:"1813", exit:"1816", reason:"止盈", lots:10, pnl:600},
+            {date:"2026-01-29", variety:"尿素", side:"LONG", entry:"1818", exit:"1817", reason:"止损", lots:10, pnl:-200},
+            {date:"2026-01-29", variety:"硅铁", side:"LONG", entry:"5704", exit:"5716", reason:"止盈", lots:10, pnl:1200},
+            {date:"2026-02-02", variety:"硅铁", side:"LONG", entry:"5690", exit:"5671", reason:"止损", lots:10, pnl:-1900},
+            {date:"2026-02-03", variety:"豆粕", side:"SHORT", entry:"2743", exit:"2728", reason:"止盈", lots:9, pnl:1350},
+            {date:"2026-02-03", variety:"鸡蛋", side:"SHORT", entry:"2958", exit:"2966", reason:"止损", lots:8, pnl:-640},
+            {date:"2026-02-04", variety:"豆粕", side:"SHORT", entry:"2719", exit:"2722", reason:"止损", lots:9, pnl:-270},
+            {date:"2026-02-05", variety:"豆粕", side:"SHORT", entry:"2725", exit:"2728", reason:"止损", lots:9, pnl:-270},
+            {date:"2026-02-05", variety:"鸡蛋", side:"SHORT", entry:"2925", exit:"2891", reason:"强平", lots:8, pnl:2720},
+            {date:"2026-02-06", variety:"鸡蛋", side:"SHORT", entry:"2894", exit:"2897", reason:"止损", lots:8, pnl:-240},
+            {date:"2026-02-11", variety:"尿素", side:"LONG", entry:"1791", exit:"1797", reason:"止盈", lots:10, pnl:1200},
+            {date:"2026-02-12", variety:"尿素", side:"LONG", entry:"1825", exit:"1822", reason:"止损", lots:10, pnl:-600},
+            {date:"2026-02-12", variety:"硅铁", side:"SHORT", entry:"5546", exit:"5500", reason:"强平", lots:10, pnl:4600},
+            {date:"2026-02-13", variety:"豆粕", side:"LONG", entry:"2803", exit:"2800", reason:"止损", lots:8, pnl:-240},
+            {date:"2026-02-13", variety:"鸡蛋", side:"LONG", entry:"3222", exit:"3249", reason:"止盈", lots:7, pnl:1890},
+            {date:"2026-02-24", variety:"鸡蛋", side:"LONG", entry:"3271", exit:"3262", reason:"止损", lots:7, pnl:-630},
+            {date:"2026-02-25", variety:"鸡蛋", side:"LONG", entry:"3269", exit:"3262", reason:"止损", lots:7, pnl:-490},
+            {date:"2026-02-26", variety:"豆粕", side:"LONG", entry:"2841", exit:"2837", reason:"止损", lots:8, pnl:-320},
+            {date:"2026-03-03", variety:"硅铁", side:"LONG", entry:"5776", exit:"5767", reason:"止损", lots:10, pnl:-900},
+            {date:"2026-03-03", variety:"豆粕", side:"LONG", entry:"2863", exit:"2848", reason:"止损", lots:8, pnl:-1200},
+            {date:"2026-03-05", variety:"豆粕", side:"LONG", entry:"2837", exit:"2841", reason:"止盈", lots:8, pnl:320},
+            {date:"2026-03-06", variety:"硅铁", side:"LONG", entry:"5842", exit:"5868", reason:"强平", lots:10, pnl:2600},
+            {date:"2026-03-06", variety:"豆粕", side:"LONG", entry:"2913", exit:"2905", reason:"止损", lots:8, pnl:-640},
+            {date:"2026-03-06", variety:"鸡蛋", side:"LONG", entry:"3389", exit:"3384", reason:"止损", lots:7, pnl:-350},
+            {date:"2026-03-11", variety:"尿素", side:"LONG", entry:"1848", exit:"1872", reason:"止盈", lots:10, pnl:4800},
+            {date:"2026-03-11", variety:"硅铁", side:"LONG", entry:"5888", exit:"5880", reason:"止损", lots:10, pnl:-800},
+            {date:"2026-03-11", variety:"豆粕", side:"LONG", entry:"3030", exit:"3068", reason:"强平", lots:8, pnl:3040},
+            {date:"2026-03-12", variety:"尿素", side:"LONG", entry:"1920", exit:"1912", reason:"止损", lots:9, pnl:-1440},
+            {date:"2026-03-12", variety:"鸡蛋", side:"LONG", entry:"3457", exit:"3454", reason:"止损", lots:7, pnl:-210},
+            {date:"2026-03-13", variety:"尿素", side:"LONG", entry:"1894", exit:"1896", reason:"止盈", lots:9, pnl:360},
+            {date:"2026-03-13", variety:"豆粕", side:"LONG", entry:"3147", exit:"3136", reason:"止损", lots:7, pnl:-770},
+            {date:"2026-03-16", variety:"尿素", side:"LONG", entry:"1927", exit:"1922", reason:"止损", lots:9, pnl:-900},
+            {date:"2026-03-16", variety:"豆粕", side:"LONG", entry:"3079", exit:"3066", reason:"止损", lots:8, pnl:-1040},
+            {date:"2026-03-17", variety:"硅铁", side:"LONG", entry:"5924", exit:"5930", reason:"止盈", lots:10, pnl:600},
+            {date:"2026-03-17", variety:"豆粕", side:"LONG", entry:"3042", exit:"3043", reason:"止盈", lots:8, pnl:80}
+        ];
+
+        function toggleDetail() {
+            const content = document.getElementById('detailContent');
+            content.classList.toggle('show');
+            if (content.classList.contains('show') && content.innerHTML === '') {
+                content.innerHTML = trades.map(t => {
+                    const cls = t.pnl > 0 ? 'win' : (t.pnl < 0 ? 'loss' : '');
+                    const sign = t.pnl > 0 ? '+' : '';
+                    return `<div class="trade-row ${cls}">${t.date} ${t.variety} ${t.side} ${t.entry}→${t.exit} (${t.reason}) ${t.lots}手 ${sign}${t.pnl}元</div>`;
+                }).join('');
+            }
+        }
+    </script>
+</body>
+</html>

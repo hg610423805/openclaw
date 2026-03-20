@@ -1,0 +1,51 @@
+{
+  "schedule": {
+    "enabled": true,
+    "time": "08:00",
+    "timezone": "Asia/Shanghai"
+  },
+  "news_sources": {
+    "futures": [
+      {
+        "name": "东方财富期货",
+        "url": "http://app.finance.eastmoney.com/rss.aspx",
+        "type": "rss",
+        "keywords": ["锰硅", "硅锰", "合金", "锰矿", "铁合金"]
+      },
+      {
+        "name": "新浪财经期货",
+        "url": "https://finance.sina.com.cn/future/",
+        "type": "web",
+        "keywords": ["锰硅", "期货", "钢铁"]
+      }
+    ],
+    "stocks": [
+      {
+        "name": "财联社",
+        "url": "https://www.cls.cn/telegraph",
+        "type": "web",
+        "sectors": {
+          "算力": ["算力", "AI", "芯片", "数据中心", "云计算"],
+          "电力": ["电力", "电网", "特高压", "发电"],
+          "储能电池": ["储能", "电池", "锂电", "钠电", "氢能"],
+          "机器人": ["机器人", "自动化", "伺服", "减速器"],
+          "商业航天": ["航天", "卫星", "火箭", "太空"]
+        }
+      }
+    ]
+  },
+  "analysis": {
+    "impact_levels": {
+      "minor": 0.5,
+      "moderate": 1.5,
+      "major": 3.0,
+      "critical": 5.0
+    },
+    "time_horizons": ["短期", "中期", "长期"]
+  },
+  "output": {
+    "file": "daily_report.txt",
+    "feishu_webhook": "",
+    "include_risk_warning": true
+  }
+}
