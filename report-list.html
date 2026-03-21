@@ -122,7 +122,13 @@
     <script>
         // 获取 URL 参数
         const urlParams = new URLSearchParams(window.location.search);
-        const type = urlParams.get('type') || 'daily';
+        let type = urlParams.get('type');
+        if (!type) {
+            // 从 URL 路径推断类型
+            const url = window.location.href;
+            if (url.includes('type=trading')) type = 'trading';
+            else type = 'daily';
+        }
         
         // 设置页面标题
         const titles = {
