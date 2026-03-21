@@ -3,139 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>报告中心 - 咕噜自动报告系统</title>
+    <title>咕噜财经 - 智能投资助手</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px 20px 100px 20px; min-height: 100vh; }
-        .container { max-width: 900px; margin: 0 auto; }
-        .header { background: white; border-radius: 12px; padding: 30px; margin-bottom: 20px; text-align: center; }
-        .header h1 { color: #1a1a1a; margin-bottom: 10px; }
-        .header p { color: #666; }
-        .report-list { background: white; border-radius: 12px; padding: 20px; }
-        .report-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #eee; transition: background 0.3s ease; }
-        .report-item:hover { background: #f5f7ff; }
-        .report-item:last-child { border-bottom: none; }
-        .report-info { flex: 1; }
-        .report-title { font-weight: 600; color: #333; margin-bottom: 5px; }
-        .report-desc { font-size: 13px; color: #888; }
-        .report-date { color: #999; font-size: 13px; }
-        .report-link { color: #667eea; text-decoration: none; font-weight: 500; padding: 8px 16px; background: #f0f4ff; border-radius: 6px; transition: all 0.3s ease; }
-        .report-link:hover { background: #667eea; color: white; }
-        .footer { text-align: center; color: rgba(255,255,255,0.8); margin-top: 20px; font-size: 13px; }
-        .badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 11px; margin-left: 8px; }
-        .badge-new { background: #f5576c; color: white; }
-        .badge-report { background: #667eea; color: white; }
-        .badge-daily { background: #11998e; color: white; }
-        .section-title { font-size: 16px; color: #667eea; margin: 20px 0 10px; padding-bottom: 8px; border-bottom: 2px solid #e0e0e0; }
-        
-        /* 固定底部导航栏 */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
-            padding: 15px 20px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            z-index: 1000;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px 20px 40px 20px;
         }
-        
-        .nav-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
+        .container { max-width: 600px; margin: 0 auto; }
+        .header {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        .header h1 {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        .header .subtitle { color: #666; font-size: 1rem; }
+        .header .emoji { font-size: 3rem; margin-bottom: 15px; }
+        .latest-report {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .latest-report .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .latest-report h2 { color: #333; font-size: 1.5rem; margin-bottom: 10px; }
+        .latest-report .date { color: #888; font-size: 1rem; margin-bottom: 20px; }
+        .latest-report .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 14px 40px;
             border-radius: 12px;
             text-decoration: none;
             font-weight: 600;
             font-size: 1rem;
-            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.4);
         }
-        
-        .nav-btn.daily {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .app-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            text-decoration: none;
+            color: inherit;
+        }
+        .app-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(0,0,0,0.15); }
+        .app-card .icon { font-size: 3rem; margin-bottom: 15px; }
+        .app-card .title { font-size: 1.1rem; font-weight: 600; color: #333; margin-bottom: 8px; }
+        .app-card .desc { font-size: 0.85rem; color: #888; line-height: 1.5; }
+        .app-card .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            margin-top: 10px;
         }
-        
-        .nav-btn.backtest {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-        
-        .nav-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-        }
-        
-        @media (max-width: 600px) {
-            .bottom-nav {
-                flex-direction: column;
-                gap: 10px;
-            }
-            .nav-btn {
-                width: 100%;
-                justify-content: center;
-            }
+        .footer {
+            text-align: center;
+            color: rgba(255,255,255,0.9);
+            padding: 30px 20px 0 20px;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>📊 报告中心</h1>
-            <p>咕噜自动报告系统 - 所有历史报告</p>
+            <div class="emoji">🐱</div>
+            <h1>咕噜财经</h1>
+            <div class="subtitle">智能投资助手 · 让投资更简单</div>
         </div>
-        
-        <div class="report-list">
-            <div class="section-title">📰 财经日报</div>
-            
-            <div class="report-item">
-                <div class="report-info">
-                    <div class="report-title">📈 财经日报 - 2026 年 3 月 21 日 <span class="badge badge-new">NEW</span></div>
-                    <div class="report-desc">霍尔木兹局势、算力板块、储能电池、期货/A 股推荐标的</div>
-                    <div class="report-date">2026 年 03 月 21 日 08:20</div>
-                </div>
-                <a href="reports/daily-report-2026-03-21.html" class="report-link" target="_blank">查看报告 →</a>
-            </div>
-            
-            <div class="section-title">📊 分析报告</div>
-            
-            <div class="report-item">
-                <div class="report-info">
-                    <div class="report-title">EXPMA 策略回测报告（硅铁&锰硅）<span class="badge badge-new">NEW</span></div>
-                    <div class="report-desc">EXPMA 双向策略 1 年回测，含交易明细和总结分析</div>
-                    <div class="report-date">2026 年 03 月 22 日 00:48</div>
-                </div>
-                <a href="reports/backtest-report.html" class="report-link" target="_blank">查看报告 →</a>
-            </div>
-            
-            <div class="report-item">
-                <div class="report-info">
-                    <div class="report-title">期货回测分析报告 <span class="badge badge-report">分析</span></div>
-                    <div class="report-desc">多品种回测分析（2025-03-19 至 2026-03-19）</div>
-                    <div class="report-date">2026 年 03 月 20 日 23:03</div>
-                </div>
-                <a href="reports/report-期货回测分析 -2026-03-20-2303.html" class="report-link" target="_blank">查看报告 →</a>
-            </div>
+        <div class="latest-report">
+            <span class="badge">🔥 最新</span>
+            <h2>财经日报</h2>
+            <div class="date">2026 年 3 月 21 日</div>
+            <a href="https://htmlpreview.github.io/?https://github.com/hg610423805/openclaw/blob/main/daily-report-2026-03-21.html" class="btn">立即查看</a>
         </div>
-        
+        <div class="app-grid">
+            <a href="https://htmlpreview.github.io/?https://github.com/hg610423805/openclaw/blob/main/report-list.html?type=daily" class="app-card">
+                <div class="icon">📰</div>
+                <div class="title">财经日报</div>
+                <div class="desc">每日热点新闻 + 投资策略</div>
+                <div class="badge">每日 8:00 更新</div>
+            </a>
+            <a href="https://htmlpreview.github.io/?https://github.com/hg610423805/openclaw/blob/main/report-list.html?type=trading" class="app-card">
+                <div class="icon">📊</div>
+                <div class="title">交易回测</div>
+                <div class="desc">期货交易数据分析报告</div>
+                <div class="badge">实时更新</div>
+            </a>
+        </div>
         <div class="footer">
-            <p>Generated by 咕噜 Auto Report 🤖</p>
-            <p>共 3 份报告 | 每日早上 8:00 更新财经日报</p>
+            <p>🤖 由 咕噜 自动生成</p>
+            <p>数据来源：东方财富 · 财联社 · 同花顺 · 金十数据</p>
+            <p style="margin-top: 15px; font-size: 0.8rem; opacity: 0.7;">⚠️ 投资有风险 · 决策需谨慎</p>
         </div>
     </div>
-    
-    <!-- 固定底部导航栏 -->
-    <nav class="bottom-nav">
-        <a href="reports/daily-report-2026-03-21.html" class="nav-btn daily" target="_blank">
-            📰 财经日报
-        </a>
-        <a href="reports/backtest-report.html" class="nav-btn backtest" target="_blank">
-            📊 回测报告
-        </a>
-    </nav>
 </body>
 </html>
