@@ -10,7 +10,7 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px;
+            padding: 20px 20px 100px 20px;
         }
         .container { max-width: 600px; margin: 0 auto; }
         
@@ -32,6 +32,49 @@
         }
         .header .subtitle { color: #666; font-size: 1rem; }
         .header .emoji { font-size: 3rem; margin-bottom: 15px; }
+        
+        /* Latest Report Card */
+        .latest-report {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .latest-report .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .latest-report h2 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .latest-report .date {
+            color: #888;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+        .latest-report .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 14px 40px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.4);
+            transition: transform 0.3s;
+        }
+        .latest-report .btn:hover { transform: translateY(-2px); }
         
         /* App Grid */
         .app-grid {
@@ -55,21 +98,9 @@
             transform: translateY(-5px);
             box-shadow: 0 12px 40px rgba(0,0,0,0.15);
         }
-        .app-card .icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-        }
-        .app-card .title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 8px;
-        }
-        .app-card .desc {
-            font-size: 0.85rem;
-            color: #888;
-            line-height: 1.5;
-        }
+        .app-card .icon { font-size: 3rem; margin-bottom: 15px; }
+        .app-card .title { font-size: 1.1rem; font-weight: 600; color: #333; margin-bottom: 8px; }
+        .app-card .desc { font-size: 0.85rem; color: #888; line-height: 1.5; }
         .app-card .badge {
             display: inline-block;
             background: linear-gradient(135deg, #667eea, #764ba2);
@@ -80,65 +111,45 @@
             margin-top: 10px;
         }
         
-        /* Quick Links */
-        .quick-links {
-            background: rgba(255,255,255,0.95);
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-        }
-        .quick-links h2 {
-            font-size: 1.2rem;
-            color: #333;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .quick-links h2 .icon { font-size: 1.5rem; }
-        .link-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .link-item {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 12px;
-            text-decoration: none;
-            color: inherit;
-            transition: background 0.3s;
-        }
-        .link-item:hover { background: #e9ecef; }
-        .link-item .icon {
-            font-size: 1.5rem;
-            margin-right: 15px;
-        }
-        .link-item .text { flex: 1; }
-        .link-item .title {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 4px;
-        }
-        .link-item .desc {
-            font-size: 0.85rem;
-            color: #888;
-        }
-        .link-item .arrow {
-            font-size: 1.2rem;
-            color: #ccc;
-        }
-        
         /* Footer */
         .footer {
             text-align: center;
             color: rgba(255,255,255,0.9);
-            padding: 25px 20px;
+            padding: 20px;
             font-size: 0.9rem;
         }
-        .footer a { color: white; text-decoration: underline; }
+        
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 10px 20px;
+            display: flex;
+            gap: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            z-index: 1000;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #666;
+            padding: 8px 15px;
+            border-radius: 12px;
+            transition: background 0.3s;
+        }
+        .nav-item:hover { background: #f0f0f0; }
+        .nav-item .icon { font-size: 1.5rem; margin-bottom: 4px; }
+        .nav-item .text { font-size: 0.8rem; font-weight: 500; }
+        .nav-item.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -150,90 +161,56 @@
             <div class="subtitle">智能投资助手 · 让投资更简单</div>
         </div>
         
+        <!-- Latest Report -->
+        <div class="latest-report">
+            <span class="badge">🔥 最新</span>
+            <h2>财经日报</h2>
+            <div class="date">2026 年 3 月 21 日</div>
+            <a href="daily-report-2026-03-21.html" class="btn">立即查看</a>
+        </div>
+        
         <!-- App Grid -->
         <div class="app-grid">
-            <a href="daily-report-2026-03-21.html" class="app-card">
+            <a href="report-list.html?type=daily" class="app-card">
                 <div class="icon">📰</div>
                 <div class="title">财经日报</div>
                 <div class="desc">每日热点新闻 + 投资策略</div>
                 <div class="badge">每日 8:00 更新</div>
             </a>
             
-            <a href="trading_report_full.html" class="app-card">
+            <a href="report-list.html?type=trading" class="app-card">
                 <div class="icon">📊</div>
                 <div class="title">交易回测</div>
                 <div class="desc">期货交易数据分析报告</div>
                 <div class="badge">实时更新</div>
             </a>
-            
-            <a href="#" class="app-card">
-                <div class="icon">📈</div>
-                <div class="title">实时行情</div>
-                <div class="desc">期货 + A 股实时数据</div>
-                <div class="badge">开发中</div>
-            </a>
-            
-            <a href="#" class="app-card">
-                <div class="icon">🤖</div>
-                <div class="title">AI 投顾</div>
-                <div class="desc">智能策略建议</div>
-                <div class="badge">开发中</div>
-            </a>
-        </div>
-        
-        <!-- Quick Links -->
-        <div class="quick-links">
-            <h2>
-                <span class="icon">⚡</span>
-                快速访问
-            </h2>
-            <div class="link-list">
-                <a href="daily-report-2026-03-21.html" class="link-item">
-                    <span class="icon">📅</span>
-                    <div class="text">
-                        <div class="title">今日财经日报</div>
-                        <div class="desc">2026 年 3 月 21 日</div>
-                    </div>
-                    <span class="arrow">→</span>
-                </a>
-                
-                <a href="reports/" class="link-item">
-                    <span class="icon">📁</span>
-                    <div class="text">
-                        <div class="title">历史日报</div>
-                        <div class="desc">查看往期财经日报</div>
-                    </div>
-                    <span class="arrow">→</span>
-                </a>
-                
-                <a href="trading_report_full.html" class="link-item">
-                    <span class="icon">📊</span>
-                    <div class="text">
-                        <div class="title">交易回测报告</div>
-                        <div class="desc">硅铁/尿素/鸡蛋/豆粕</div>
-                    </div>
-                    <span class="arrow">→</span>
-                </a>
-                
-                <a href="https://github.com/hg610423805/openclaw" class="link-item">
-                    <span class="icon">💻</span>
-                    <div class="text">
-                        <div class="title">GitHub 仓库</div>
-                        <div class="desc">查看源代码</div>
-                    </div>
-                    <span class="arrow">→</span>
-                </a>
-            </div>
         </div>
         
         <!-- Footer -->
         <div class="footer">
             <p>🤖 由 咕噜 自动生成</p>
             <p>数据来源：东方财富 · 财联社 · 新浪财经</p>
-            <p style="margin-top: 15px; font-size: 0.8rem; opacity: 0.7;">
-                投资有风险 · 决策需谨慎
-            </p>
         </div>
     </div>
+    
+    <!-- Bottom Nav -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item active">
+            <span class="icon">🏠</span>
+            <span class="text">首页</span>
+        </a>
+        <a href="report-list.html?type=daily" class="nav-item">
+            <span class="icon">📰</span>
+            <span class="text">日报</span>
+        </a>
+        <a href="report-list.html?type=trading" class="nav-item">
+            <span class="icon">📊</span>
+            <span class="text">回测</span>
+        </a>
+        <a href="#" class="nav-item">
+            <span class="icon">⚙️</span>
+            <span class="text">设置</span>
+        </a>
+    </nav>
 </body>
 </html>
