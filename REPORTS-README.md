@@ -84,10 +84,12 @@ https://hg610423805.github.io/openclaw/reports/report-{名称}-{日期}.html
 
 **环境变量：**
 ```
-GITHUB_TOKEN=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
+GITHUB_TOKEN=<你的 GitHub Personal Access Token>
 GITHUB_USERNAME=hg610423805
 GITHUB_REPO=openclaw
 ```
+
+> ⚠️ **注意**：请勿将真实的 GITHUB_TOKEN 提交到仓库！使用本地环境变量或配置文件存储。
 
 ---
 
