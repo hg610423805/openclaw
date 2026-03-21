@@ -6,7 +6,7 @@
     <title>报告中心 - 咕噜自动报告系统</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; min-height: 100vh; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px 20px 100px 20px; min-height: 100vh; }
         .container { max-width: 900px; margin: 0 auto; }
         .header { background: white; border-radius: 12px; padding: 30px; margin-bottom: 20px; text-align: center; }
         .header h1 { color: #1a1a1a; margin-bottom: 10px; }
@@ -27,6 +27,59 @@
         .badge-report { background: #667eea; color: white; }
         .badge-daily { background: #11998e; color: white; }
         .section-title { font-size: 16px; color: #667eea; margin: 20px 0 10px; padding-bottom: 8px; border-bottom: 2px solid #e0e0e0; }
+        
+        /* 固定底部导航栏 */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn.daily {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+        }
+        
+        .nav-btn.backtest {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+        
+        @media (max-width: 600px) {
+            .bottom-nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .nav-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -45,7 +98,7 @@
                     <div class="report-desc">霍尔木兹局势、算力板块、储能电池、期货/A 股推荐标的</div>
                     <div class="report-date">2026 年 03 月 21 日 08:20</div>
                 </div>
-                <a href="reports/daily-report-2026-03-21.html" class="report-link">查看报告 →</a>
+                <a href="reports/daily-report-2026-03-21.html" class="report-link" target="_blank">查看报告 →</a>
             </div>
             
             <div class="section-title">📊 分析报告</div>
@@ -56,7 +109,7 @@
                     <div class="report-desc">多品种回测分析（2025-03-19 至 2026-03-19）</div>
                     <div class="report-date">2026 年 03 月 20 日 23:03</div>
                 </div>
-                <a href="reports/report-期货回测分析 -2026-03-20-2303.html" class="report-link">查看报告 →</a>
+                <a href="reports/report-期货回测分析 -2026-03-20-2303.html" class="report-link" target="_blank">查看报告 →</a>
             </div>
         </div>
         
@@ -65,5 +118,15 @@
             <p>共 2 份报告 | 每日早上 8:00 更新财经日报</p>
         </div>
     </div>
+    
+    <!-- 固定底部导航栏 -->
+    <nav class="bottom-nav">
+        <a href="reports/daily-report-2026-03-21.html" class="nav-btn daily" target="_blank">
+            📰 财经日报
+        </a>
+        <a href="reports/report-期货回测分析 -2026-03-20-2303.html" class="nav-btn backtest" target="_blank">
+            📊 回测报告
+        </a>
+    </nav>
 </body>
 </html>
