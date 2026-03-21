@@ -7,10 +7,10 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px 20px 100px 20px;
+            padding: 20px 20px 40px 20px;
         }
         .container { max-width: 600px; margin: 0 auto; }
         
@@ -61,7 +61,7 @@
         }
         .report-item:last-child { margin-bottom: 0; }
         .report-item .date {
-            width: 100px;
+            width: 110px;
             font-weight: 600;
             color: #667eea;
             font-size: 0.95rem;
@@ -89,36 +89,12 @@
             margin-left: 10px;
         }
         
-        /* Bottom Nav */
-        .bottom-nav {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255,255,255,0.95);
-            border-radius: 20px;
-            padding: 10px 20px;
-            display: flex;
-            gap: 30px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-            z-index: 1000;
-        }
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: #666;
-            padding: 8px 15px;
-            border-radius: 12px;
-            transition: background 0.3s;
-        }
-        .nav-item:hover { background: #f0f0f0; }
-        .nav-item .icon { font-size: 1.5rem; margin-bottom: 4px; }
-        .nav-item .text { font-size: 0.8rem; font-weight: 500; }
-        .nav-item.active {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: rgba(255,255,255,0.9);
+            padding: 30px 20px 0 20px;
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -136,27 +112,12 @@
         <div class="report-list" id="reportList">
             <!-- 将由 JS 动态生成 -->
         </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>🤖 咕噜财经</p>
+        </div>
     </div>
-    
-    <!-- Bottom Nav -->
-    <nav class="bottom-nav">
-        <a href="index.html" class="nav-item">
-            <span class="icon">🏠</span>
-            <span class="text">首页</span>
-        </a>
-        <a href="report-list.html?type=daily" class="nav-item active">
-            <span class="icon">📰</span>
-            <span class="text">日报</span>
-        </a>
-        <a href="report-list.html?type=trading" class="nav-item">
-            <span class="icon">📊</span>
-            <span class="text">回测</span>
-        </a>
-        <a href="#" class="nav-item">
-            <span class="icon">⚙️</span>
-            <span class="text">设置</span>
-        </a>
-    </nav>
     
     <script>
         // 获取 URL 参数
@@ -172,44 +133,63 @@
         
         // 生成报告列表数据
         function generateReports() {
-            const reports = [];
-            const today = new Date();
+            const today = new Date('2026-03-21'); // 当前日期
             
             if (type === 'daily') {
-                // 财经日报 - 最近 30 天
+                // 财经日报 - 只生成 3 月 21 日及以后的报告
+                const reports = [];
+                const startDate = new Date('2026-03-21');
+                
                 for (let i = 0; i < 30; i++) {
                     const date = new Date(today);
                     date.setDate(date.getDate() - i);
+                    
+                    // 只显示 3 月 21 日及以后的报告
+                    if (date < startDate) continue;
+                    
                     const dateStr = date.toISOString().split('T')[0];
                     const isToday = i === 0;
-                    const isWeekend = date.getDay() === 0 || date.getDay() === 6;
                     
                     reports.push({
                         date: dateStr,
-                        title: isToday ? '今日财经日报' : `财经日报 (${dateStr})`,
-                        desc: isWeekend ? '休市日' : '每日热点 + 策略 + 标的推荐',
+                        title: isToday ? '今日财经日报' : `财经日报`,
+                        desc: '每日热点 + 策略 + 标的推荐',
                         badge: isToday ? '最新' : null,
                         link: `daily-report-${dateStr}.html`
                     });
                 }
+                
+                return reports;
             } else {
                 // 交易回测报告
-                reports.push({
-                    date: '2026-03-20',
-                    title: '期货交易回测分析',
-                    desc: '硅铁/尿素/鸡蛋/豆粕 - 221 笔交易',
-                    badge: '最新',
-                    link: 'trading_report_full.html'
-                });
+                return [
+                    {
+                        date: '2026-03-20',
+                        title: '期货交易回测分析',
+                        desc: '硅铁/尿素/鸡蛋/豆粕 - 221 笔交易 | +36,620 元',
+                        badge: '最新',
+                        link: 'trading_report_full.html'
+                    },
+                    {
+                        date: '2026-03-15',
+                        title: '期货交易回测分析',
+                        desc: '历史回测报告',
+                        badge: null,
+                        link: 'trading_report_full.html'
+                    }
+                ];
             }
-            
-            return reports;
         }
         
         // 渲染报告列表
         function renderReports() {
             const listEl = document.getElementById('reportList');
             const reports = generateReports();
+            
+            if (reports.length === 0) {
+                listEl.innerHTML = '<div style="text-align: center; padding: 40px; color: #888;">暂无报告</div>';
+                return;
+            }
             
             listEl.innerHTML = reports.map(report => `
                 <a href="${report.link}" class="report-item">

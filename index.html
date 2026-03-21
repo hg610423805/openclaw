@@ -7,10 +7,10 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px 20px 100px 20px;
+            padding: 20px 20px 40px 20px;
         }
         .container { max-width: 600px; margin: 0 auto; }
         
@@ -33,7 +33,7 @@
         .header .subtitle { color: #666; font-size: 1rem; }
         .header .emoji { font-size: 3rem; margin-bottom: 15px; }
         
-        /* Latest Report Card */
+        /* Latest Report */
         .latest-report {
             background: rgba(255,255,255,0.95);
             border-radius: 20px;
@@ -81,7 +81,6 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
-            margin-bottom: 25px;
         }
         .app-card {
             background: rgba(255,255,255,0.95);
@@ -115,40 +114,8 @@
         .footer {
             text-align: center;
             color: rgba(255,255,255,0.9);
-            padding: 20px;
+            padding: 30px 20px 0 20px;
             font-size: 0.9rem;
-        }
-        
-        /* Bottom Nav */
-        .bottom-nav {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255,255,255,0.95);
-            border-radius: 20px;
-            padding: 10px 20px;
-            display: flex;
-            gap: 30px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-            z-index: 1000;
-        }
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: #666;
-            padding: 8px 15px;
-            border-radius: 12px;
-            transition: background 0.3s;
-        }
-        .nav-item:hover { background: #f0f0f0; }
-        .nav-item .icon { font-size: 1.5rem; margin-bottom: 4px; }
-        .nav-item .text { font-size: 0.8rem; font-weight: 500; }
-        .nav-item.active {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
         }
     </style>
 </head>
@@ -189,28 +156,11 @@
         <!-- Footer -->
         <div class="footer">
             <p>🤖 由 咕噜 自动生成</p>
-            <p>数据来源：东方财富 · 财联社 · 新浪财经</p>
+            <p>数据来源：东方财富 · 财联社 · 同花顺 · 金十数据</p>
+            <p style="margin-top: 15px; font-size: 0.8rem; opacity: 0.7;">
+                ⚠️ 投资有风险 · 决策需谨慎
+            </p>
         </div>
     </div>
-    
-    <!-- Bottom Nav -->
-    <nav class="bottom-nav">
-        <a href="index.html" class="nav-item active">
-            <span class="icon">🏠</span>
-            <span class="text">首页</span>
-        </a>
-        <a href="report-list.html?type=daily" class="nav-item">
-            <span class="icon">📰</span>
-            <span class="text">日报</span>
-        </a>
-        <a href="report-list.html?type=trading" class="nav-item">
-            <span class="icon">📊</span>
-            <span class="text">回测</span>
-        </a>
-        <a href="#" class="nav-item">
-            <span class="icon">⚙️</span>
-            <span class="text">设置</span>
-        </a>
-    </nav>
 </body>
 </html>
