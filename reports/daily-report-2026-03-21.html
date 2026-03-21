@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>咕噜的财经日报 - 2026 年 3 月 21 日</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* 左侧边栏 - 时间筛选器 */
+        .sidebar {
+            width: 280px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .date-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .date-btn {
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .date-btn:hover {
+            border-color: #667eea;
+            background: #f5f7ff;
+            transform: translateX(5px);
+        }
+        
+        .date-btn.active {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .date-btn .date {
+            font-weight: bold;
+            display: block;
+        }
+        
+        .date-btn .desc {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 4px;
+        }
+        
+        .date-btn.active .desc {
+            color: rgba(255,255,255,0.8);
+        }
+        
+        /* 主内容区 */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 30px;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .header .subtitle {
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        .header .date-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+        
+        /* 重要性分类卡片 */
+        .importance-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+        
+        .section-title.critical {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .section-title.important {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .section-title.normal {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        
+        .news-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border-left: 4px solid #667eea;
+            transition: transform 0.3s ease;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+        }
+        
+        .news-card.critical {
+            border-left-color: #f5576c;
+        }
+        
+        .news-card.important {
+            border-left-color: #4facfe;
+        }
+        
+        .news-card.normal {
+            border-left-color: #43e97b;
+        }
+        
+        .news-title {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .news-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+        }
+        
+        .news-meta span {
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .news-impact {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .news-impact.positive {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .news-impact.negative {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .news-impact.neutral {
+            background: #e2e3e5;
+            color: #383d41;
+        }
+        
+        .news-content {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .news-source {
+            font-size: 0.85rem;
+            color: #888;
+            font-style: italic;
+        }
+        
+        /* 推荐标的卡片 */
+        .recommendation-section {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .recommendation-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .stock-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .stock-table th,
+        .stock-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .stock-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .stock-table tr:hover {
+            background: #f5f7ff;
+        }
+        
+        .stock-code {
+            font-family: 'Courier New', monospace;
+            background: #f0f0f0;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .recommendation-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .recommendation-tag.buy {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .recommendation-tag.hold {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .recommendation-tag.avoid {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                box-shadow: none;
+                border-bottom: 2px solid #e0e0e0;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding: 15px;
+            }
+            
+            .date-selector {
+                flex-direction: row;
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+            
+            .date-btn {
+                min-width: 150px;
+            }
+            
+            .stock-table {
+                font-size: 0.85rem;
+            }
+            
+            .stock-table th,
+            .stock-table td {
+                padding: 10px 8px;
+            }
+        }
+        
+        /* 加载动画 */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 50px;
+            color: white;
+        }
+        
+        .loading.active {
+            display: block;
+        }
+        
+        /* 页脚 */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 左侧边栏 - 时间筛选器 -->
+        <aside class="sidebar">
+            <h2>📅 选择日期</h2>
+            <div class="date-selector" id="dateSelector">
+                <button class="date-btn active" data-date="2026-03-21">
+                    <span class="date">2026-03-21</span>
+                    <span class="desc">今天</span>
+                </button>
+                <button class="date-btn" data-date="2026-03-20">
+                    <span class="date">2026-03-20</span>
+                    <span class="desc">昨天</span>
+                </button>
+                <button class="date-btn" data-date="2026-03-19">
+                    <span class="date">2026-03-19</span>
+                    <span class="desc">前天</span>
+                </button>
+            </div>
+            
+            <div style="margin-top: 30px; padding: 20px; background: #f5f7ff; border-radius: 10px;">
+                <h3 style="color: #667eea; margin-bottom: 10px; font-size: 1rem;">📊 数据说明</h3>
+                <p style="font-size: 0.85rem; color: #666; line-height: 1.6;">
+                    本页面展示咕噜每日财经消息汇总，按重要性分类，包含期货及 A 股板块分析。
+                </p>
+            </div>
+        </aside>
+        
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 头部 -->
+            <header class="header">
+                <h1>🐱 咕噜的财经日报</h1>
+                <p class="subtitle">专业 · 及时 · 实用</p>
+                <span class="date-badge">📆 2026 年 3 月 21 日 星期六</span>
+            </header>
+            
+            <!-- 重大消息（红色） -->
+            <section class="importance-section">
+                <div class="section-title critical">
+                    🔴 重大消息（可能引发市场大幅波动）
+                </div>
+                
+                <article class="news-card critical">
+                    <h3 class="news-title">⚠️ 霍尔木兹海峡局势紧张，全球能源供应受冲击</h3>
+                    <div class="news-meta">
+                        <span>🕐 3 月 20 日 19:31</span>
+                        <span class="news-impact negative">利空能源进口国</span>
+                    </div>
+                    <p class="news-content">
+                        特朗普据报考虑占领或封锁哈尔克岛，伊朗战火烧向关键石油运输通道。
+                        欧洲天然气期货一度飙升 35%，原油价格徘徊于 100 美元/桶上方。
+                        六国发表联合声明准备采取措施保障霍尔木兹海峡安全。
+                    </p>
+                    <p class="news-source">📰 来源：东方财富、财联社</p>
+                </article>
+                
+                <article class="news-card critical">
+                    <h3 class="news-title">🛢️ 美财长：或解除伊朗海上石油制裁，可供两周</h3>
+                    <div class="news-meta">
+                        <span>🕐 3 月 20 日</span>
+                        <span class="news-impact positive">短期利好油市</span>
+                    </div>
+                    <p class="news-content">
+                        美国财政部长贝森特表示，美国可能在未来数日内解除对海上伊朗石油的制裁。
+                        这批石油储量约为 1.4 亿桶，相当于 10 天到两周的供应量，有助于抑制油价。
+                    </p>
+                    <p class="news-source">📰 来源：财联社</p>
+                </article>
+            </section>
+            
+            <!-- 重要消息（蓝色） -->
+            <section class="importance-section">
+                <div class="section-title important">
+                    🔵 重要消息（板块级影响）
+                </div>
+                
+                <article class="news-card important">
+                    <h3 class="news-title">💻 算力板块：OpenClaw 芯片研讨会今日举行，华为 23 日发布会</h3>
+                    <div class="news-meta">
+                        <span>🕐 3 月 21 日 -23 日</span>
+                        <span class="news-impact positive">利好算力产业链</span>
+                    </div>
+                    <p class="news-content">
+                        面向 OpenClaw 应用的芯片设计研讨会于 3 月 21 日举行。
+                        诚迈科技 3 月 22 日将发布面向企业的 OpenClaw AI 解决方案。
+                        华为将于 3 月 23 日 14:30 举行春季全场景新品发布会。
+                        谷歌将于 3 月 23 日推出 Gemini Advantage。
+                    </p>
+                    <p class="news-source">📰 来源：财联社</p>
+                </article>
+                
+                <article class="news-card important">
+                    <h3 class="news-title">🔋 储能电池：碳酸锂期货跌破 15 万元/吨，储能大会 23 日召开</h3>
+                    <div class="news-meta">
+                        <span>🕐 3 月 19 日 -23 日</span>
+                        <span class="news-impact negative">短期利空，中期关注</span>
+                    </div>
+                    <p class="news-content">
+                        碳酸锂期货主力合约下跌 6.37%，至 142600 元/吨，年内再次跌破 15 万元/吨关口。
+                        2026 年第十六届中国国际储能大会将于 3 月 23-26 日举办。
+                        新能源汽车 1-2 月销量 171 万辆，同比下滑 6.9%。
+                    </p>
+                    <p class="news-source">📰 来源：期货日报</p>
+                </article>
+                
+                <article class="news-card important">
+                    <h3 class="news-title">📈 商品期货：焦煤主力合约日内大涨 6%，焦炭涨 4%</h3>
+                    <div class="news-meta">
+                        <span>🕐 3 月 20 日</span>
+                        <span class="news-impact positive">利好黑色系</span>
+                    </div>
+                    <p class="news-content">
+                        焦煤主力合约日内大涨 6.00%，现报 1232.00 元/吨。
+                        焦炭主力合约日内涨幅扩大至 4%，现报 1796 元/吨。
+                        商品期货综合指数下跌 2.93%，日内资金净流出。
+                    </p>
+                    <p class="news-source">📰 来源：东方财富</p>
+                </article>
+            </section>
+            
+            <!-- 一般消息（绿色） -->
+            <section class="importance-section">
+                <div class="section-title normal">
+                    🟢 一般消息（常规资讯）
+                </div>
+                
+                <article class="news-card normal">
+                    <h3 class="news-title">🏦 央行：LPR 连续 10 个月保持不变</h3>
+                    <div class="news-meta">
+                        <span>🕐 3 月 20 日</span>
+                        <span class="news-impact neutral">中性</span>
+                    </div>
+                    <p class="news-content">
+                        1 年期 LPR 为 3.00%，5 年期以上 LPR 为 3.50%。
+                        中国人民银行党委召开扩大会议，研究部署落实全国两会精神。
+                    </p>
+                    <p class="news-source">📰 来源：东方财富</p>
+                </article>
+                
+                <article class="news-card normal">
+                    <h3 class="news-title">🇺🇸 美联储：维持利率不变，年内或降息一次</h3>
+                    <div class="news-meta">
+                        <span>🕐 3 月 19 日</span>
+                        <span class="news-impact neutral">中性偏鸽</span>
+                    </div>
+                    <p class="news-content">
+                        美联储联邦公开市场委员会 (FOMC) 将联邦基金利率目标区间维持在 3.5% 至 3.75% 不变。
+                        点阵图显示年内还会降息一次。
+                    </p>
+                    <p class="news-source">📰 来源：东方财富</p>
+                </article>
+                
+                <article class="news-card normal">
+                    <h3 class="news-title">🤝 商务部：继续发挥好中美经贸磋商机制作用</h3>
+                    <div class="news-meta">
+                        <span>🕐 3 月 19 日</span>
+                        <span class="news-impact positive">利好外贸</span>
+                    </div>
+                    <p class="news-content">
+                        双方围绕关税安排、促进双边贸易投资等议题进行了坦诚深入、建设性的交流磋商。
+                        同意研究建立拓展经贸合作的工作机制。
+                    </p>
+                    <p class="news-source">📰 来源：东方财富</p>
+                </article>
+            </section>
+            
+            <!-- 推荐标的 -->
+            <section class="recommendation-section">
+                <h2>🎯 今日推荐标的</h2>
+                
+                <h3 style="color: #667eea; margin: 20px 0 10px; font-size: 1.2rem;">📊 期货推荐</h3>
+                <table class="stock-table">
+                    <thead>
+                        <tr>
+                            <th>品种</th>
+                            <th>合约</th>
+                            <th>建议</th>
+                            <th>逻辑</th>
+                            <th>目标位</th>
+                            <th>止损位</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>焦煤</strong></td>
+                            <td><span class="stock-code">JM2605</span></td>
+                            <td><span class="recommendation-tag buy">逢低做多</span></td>
+                            <td>日内大涨 6%，资金流入明显，短期趋势强劲</td>
+                            <td>1280 元/吨</td>
+                            <td>1180 元/吨</td>
+                        </tr>
+                        <tr>
+                            <td><strong>硅锰</strong></td>
+                            <td><span class="stock-code">SM2605</span></td>
+                            <td><span class="recommendation-tag hold">观望</span></td>
+                            <td>无专项消息，等待方向明确</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3 style="color: #667eea; margin: 30px 0 10px; font-size: 1.2rem;">📈 A 股推荐</h3>
+                <table class="stock-table">
+                    <thead>
+                        <tr>
+                            <th>股票</th>
+                            <th>代码</th>
+                            <th>板块</th>
+                            <th>建议</th>
+                            <th>推荐逻辑</th>
+                            <th>预期涨幅</th>
+                            <th>风险</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>中科曙光</strong></td>
+                            <td><span class="stock-code">603019</span></td>
+                            <td>算力</td>
+                            <td><span class="recommendation-tag buy">强烈推荐</span></td>
+                            <td>OpenClaw 芯片研讨会直接受益，AI 服务器龙头</td>
+                            <td>+5~8%</td>
+                            <td>大盘波动</td>
+                        </tr>
+                        <tr>
+                            <td><strong>寒武纪</strong></td>
+                            <td><span class="stock-code">688256</span></td>
+                            <td>算力</td>
+                            <td><span class="recommendation-tag buy">推荐</span></td>
+                            <td>AI 芯片龙头，华为发布会催化</td>
+                            <td>+8~12%</td>
+                            <td>估值偏高</td>
+                        </tr>
+                        <tr>
+                            <td><strong>诚迈科技</strong></td>
+                            <td><span class="stock-code">300598</span></td>
+                            <td>算力</td>
+                            <td><span class="recommendation-tag buy">推荐</span></td>
+                            <td>3 月 22 日发布 OpenClaw AI 解决方案</td>
+                            <td>+6~10%</td>
+                            <td>消息兑现</td>
+                        </tr>
+                        <tr>
+                            <td><strong>宁德时代</strong></td>
+                            <td><span class="stock-code">300750</span></td>
+                            <td>储能电池</td>
+                            <td><span class="recommendation-tag hold">观望</span></td>
+                            <td>碳酸锂价格承压，等待储能大会催化</td>
+                            <td>-</td>
+                            <td>原材料下跌</td>
+                        </tr>
+                        <tr>
+                            <td><strong>中国卫通</strong></td>
+                            <td><span class="stock-code">601698</span></td>
+                            <td>商业航天</td>
+                            <td><span class="recommendation-tag buy">逢低布局</span></td>
+                            <td>博鳌论坛政策预期，航天强国战略</td>
+                            <td>+4~7%</td>
+                            <td>政策不及预期</td>
+                        </tr>
+                        <tr>
+                            <td><strong>埃斯顿</strong></td>
+                            <td><span class="stock-code">002747</span></td>
+                            <td>机器人</td>
+                            <td><span class="recommendation-tag buy">提前布局</span></td>
+                            <td>4 月 17 日人形机器人大会预期</td>
+                            <td>+5~9%</td>
+                            <td>提前兑现</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <!-- 操作建议汇总 -->
+            <section class="recommendation-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                <h2 style="color: white;">📋 今日操作建议汇总</h2>
+                <table class="stock-table" style="margin-top: 15px;">
+                    <thead>
+                        <tr>
+                            <th style="background: rgba(255,255,255,0.2);">品种/板块</th>
+                            <th style="background: rgba(255,255,255,0.2);">建议</th>
+                            <th style="background: rgba(255,255,255,0.2);">理由</th>
+                        </tr>
+                    </thead>
+                    <tbody style="color: white;">
+                        <tr>
+                            <td>焦煤期货</td>
+                            <td>✅ 逢低做多</td>
+                            <td>资金流入明显，趋势强劲</td>
+                        </tr>
+                        <tr>
+                            <td>硅锰期货</td>
+                            <td>⏸️ 观望</td>
+                            <td>无专项消息，等待方向</td>
+                        </tr>
+                        <tr>
+                            <td>算力板块</td>
+                            <td>✅ 逢低布局</td>
+                            <td>AI 产业催化剂密集</td>
+                        </tr>
+                        <tr>
+                            <td>储能电池</td>
+                            <td>⏸️ 短期谨慎</td>
+                            <td>碳酸锂价格承压</td>
+                        </tr>
+                        <tr>
+                            <td>机器人</td>
+                            <td>✅ 提前布局</td>
+                            <td>4 月会议预期</td>
+                        </tr>
+                        <tr>
+                            <td>商业航天</td>
+                            <td>✅ 关注</td>
+                            <td>论坛期间政策催化</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <p>🐱 咕噜财经日报 | 数据截止时间：2026 年 3 月 21 日 08:20（Asia/Shanghai）</p>
+        <p style="margin-top: 10px;">⚠️ 以上分析仅供参考，不构成投资建议。市场有风险，投资需谨慎。</p>
+    </footer>
+    
+    <script>
+        // 日期选择器功能
+        document.querySelectorAll('.date-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // 移除所有 active 类
+                document.querySelectorAll('.date-btn').forEach(b => b.classList.remove('active'));
+                // 添加 active 类到当前按钮
+                this.classList.add('active');
+                
+                const date = this.dataset.date;
+                // 这里可以添加加载不同日期数据的逻辑
+                console.log('切换到日期:', date);
+                
+                // 显示加载提示（实际使用时可以添加 AJAX 加载）
+                alert(`📅 切换到 ${date} 的数据\n\n（演示版本仅展示今日数据，完整版本将加载历史数据）`);
+            });
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
