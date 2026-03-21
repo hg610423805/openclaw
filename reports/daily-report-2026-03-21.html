@@ -1,375 +1,47 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>财经日报 - 2026-03-21</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 15px 15px 80px 15px;
-        }
-        .container { max-width: 600px; margin: 0 auto; }
-        
-        .header {
-            background: white;
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        .header h1 { color: #667eea; font-size: 1.8rem; margin-bottom: 10px; }
-        .header .date { color: #888; font-size: 0.95rem; }
-        .header .back {
-            display: inline-block;
-            margin-top: 10px;
-            color: #667eea;
-            text-decoration: none;
-            padding: 8px 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-        }
-        
-        /* 胜率追踪 */
-        .tracking-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 15px;
-        }
-        .tracking-card {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border-radius: 14px;
-            padding: 18px;
-        }
-        .tracking-title { font-size: 0.85rem; opacity: 0.9; margin-bottom: 8px; }
-        .tracking-gain, .tracking-rate { font-size: 1.8rem; font-weight: 700; margin-bottom: 8px; }
-        .tracking-rate.good { color: #4ade80; }
-        .tracking-rate.bad { color: #fbbf24; }
-        .tracking-detail { font-size: 0.8rem; opacity: 0.8; }
-        .stock-tag {
-            display: inline-block;
-            background: rgba(255,255,255,0.2);
-            padding: 3px 8px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            margin-right: 6px;
-            margin-top: 6px;
-        }
-        
-        /* 板块 */
-        .section {
-            background: white;
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 15px;
-        }
-        .section h2 {
-            color: #333;
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid #667eea;
-        }
-        
-        .news-item {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 14px;
-            margin-bottom: 10px;
-        }
-        .news-item:last-child { margin-bottom: 0; }
-        .news-title { font-weight: 600; color: #333; margin-bottom: 8px; font-size: 0.95rem; }
-        .news-meta { display: flex; gap: 10px; align-items: center; }
-        .news-meta .time { color: #888; font-size: 0.8rem; }
-        .news-meta .impact {
-            background: #fff3cd;
-            color: #856404;
-            padding: 2px 8px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-        }
-        
-        .rec-card {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border-radius: 12px;
-            padding: 16px;
-            margin-top: 15px;
-        }
-        .rec-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-        .rec-header .badge {
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            background: rgba(255,255,255,0.3);
-        }
-        .rec-target { font-size: 0.85rem; opacity: 0.9; }
-        
-        .sector { margin-bottom: 20px; }
-        .sector:last-child { margin-bottom: 0; }
-        .sector h3 {
-            color: #667eea;
-            font-size: 1.1rem;
-            margin: 15px 0 12px 0;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #eee;
-        }
-        .sector:first-child h3 { margin-top: 0; }
-        
-        .stock-rec {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 14px;
-            margin-top: 12px;
-        }
-        .rec-title { font-size: 0.9rem; color: #667eea; font-weight: 600; margin-bottom: 10px; }
-        .stock-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 0;
-        }
-        .stock-item:not(:last-child) { border-bottom: 1px solid #e0e0e0; }
-        .stock-code {
-            background: #667eea;
-            color: white;
-            padding: 3px 8px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        .stock-name { font-weight: 500; color: #333; }
-        
-        .footer {
-            text-align: center;
-            color: rgba(255,255,255,0.8);
-            padding: 20px;
-            font-size: 0.85rem;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>📰 财经日报</h1>
-            <div class="date">2026-03-21</div>
-            <a href="index.html" class="back">← 返回主页</a>
-        </div>
-        
-        
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>财经日报 - 2026-03-21</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;padding:15px 15px 80px}.container{max-width:600px;margin:0 auto}.header{background:white;border-radius:16px;padding:20px;margin-bottom:15px;text-align:center}.header h1{color:#667eea;font-size:1.8rem;margin-bottom:10px}.header .date{color:#888;font-size:0.95rem}.header .back{display:inline-block;margin-top:10px;color:#667eea;text-decoration:none;padding:8px 20px;background:#f8f9fa;border-radius:10px}.tracking-section{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:15px}.tracking-card{background:linear-gradient(135deg,#667eea,#764ba2);color:white;border-radius:14px;padding:18px}.tracking-title{font-size:0.85rem;opacity:0.9;margin-bottom:8px}.tracking-gain,.tracking-rate{font-size:1.6rem;font-weight:700}.tracking-rate.good{color:#4ade80}.section{background:white;border-radius:16px;padding:20px;margin-bottom:15px}.section h2{color:#333;font-size:1.3rem;margin-bottom:15px;padding-bottom:12px;border-bottom:2px solid #667eea}.news-item{background:#f8f9fa;border-radius:10px;padding:14px;margin-bottom:10px}.news-title{font-weight:600;color:#333;margin-bottom:8px;font-size:0.9rem}.news-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.news-meta .time,.news-meta .source{color:#888;font-size:0.75rem}.news-meta .impact{background:#fff3cd;color:#856404;padding:2px 8px;border-radius:6px;font-size:0.75rem}.analysis-card{background:linear-gradient(135deg,#667eea,#764ba2);color:white;border-radius:14px;padding:20px;margin-top:15px}.analysis-header{display:flex;justify-content:space-between;margin-bottom:15px}.trend{font-size:1rem;font-weight:700}.analysis-reasoning{background:rgba(255,255,255,0.1);padding:12px;border-radius:8px;font-size:0.85rem;line-height:1.6;margin-bottom:15px}.analysis-action{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.action-item{background:rgba(255,255,255,0.15);padding:10px;border-radius:8px;text-align:center}.action-item .label{font-size:0.75rem;opacity:0.8;display:block;margin-bottom:4px}.action-item .value{font-size:0.9rem;font-weight:700}.sector-card{background:#f8f9fa;border-radius:12px;padding:18px;margin-bottom:15px}.sector-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.sector-header h3{color:#667eea;font-size:1.1rem}.sector-header .action{background:#667eea;color:white;padding:3px 10px;border-radius:10px;font-size:0.75rem}.sector-stats{display:flex;gap:15px;font-size:0.8rem;color:#666;margin-bottom:12px}.sector-stocks{background:white;border-radius:10px;padding:12px}.stocks-title{font-size:0.85rem;color:#667eea;font-weight:600;margin-bottom:10px}.stock-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #eee}.stock-item:last-child{border-bottom:none}.stock-code{background:#667eea;color:white;padding:3px 8px;border-radius:6px;font-size:0.75rem;font-weight:600;flex-shrink:0}.stock-name{font-weight:600;color:#333;font-size:0.9rem}.stock-reason{color:#666;font-size:0.8rem;line-height:1.4}.footer{text-align:center;color:rgba(255,255,255,0.8);padding:20px;font-size:0.85rem}
+</style></head>
+<body><div class="container">
+<div class="header"><h1>📰 财经日报</h1><div class="date">2026-03-21</div><a href="index.html" class="back">← 返回主页</a></div>
+
     <div class="tracking-section">
-        <div class="tracking-card yesterday">
-            <div class="tracking-title">📈 昨日推荐表现</div>
-            <div class="tracking-gain">+3.12%</div>
-            <div class="tracking-detail">
-                <span class="stock-tag">宁德时代 +3.67%</span><span class="stock-tag">比亚迪 +3.02%</span><span class="stock-tag">寒武纪 +2.66%</span>
-            </div>
+        <div class="tracking-card"><div class="tracking-title">📈 昨日表现</div><div class="tracking-gain">+3.12%</div></div>
+        <div class="tracking-card"><div class="tracking-title">🎯 7 日胜率</div><div class="tracking-rate good">81.0%</div></div>
+    </div>
+<div class="section"><h2>🛢️ 期货锰硅</h2><div class="news-item"><div class="news-title">商品期货指数低开，黑色系走弱</div><div class="news-meta"><span class="time">09:30</span><span class="source">同花顺</span><span class="impact">⚠️ 利空</span></div></div><div class="news-item"><div class="news-title">焦煤主力合约跌超 3%</div><div class="news-meta"><span class="time">10:15</span><span class="source">金十数据</span><span class="impact">⚠️ 利空</span></div></div><div class="news-item"><div class="news-title">锰硅现货价格持稳，需求一般</div><div class="news-meta"><span class="time">11:00</span><span class="source">东方财富</span><span class="impact">➖ 中性</span></div></div>
+    <div class="analysis-card">
+        <div class="analysis-header"><span class="trend">偏空</span><span>置信度：中等</span></div>
+        <div class="analysis-reasoning"><strong>逻辑：</strong>2条利空消息</div>
+        <div class="analysis-action">
+            <div class="action-item"><span class="label">建议</span><span class="value">逢高做空</span></div>
+            <div class="action-item"><span class="label">目标</span><span class="value">6400-6600</span></div>
+            <div class="action-item"><span class="label">止损</span><span class="value">6900</span></div>
         </div>
-        
-        <div class="tracking-card week">
-            <div class="tracking-title">🎯 近 7 日胜率</div>
-            <div class="tracking-rate good">
-                81.0%
-            </div>
-            <div class="tracking-detail">
-                17/21 成功
-            </div>
+    </div></div>
+<div class="section"><h2>📈 A 股板块</h2>
+    <div class="sector-card">
+        <div class="sector-header"><h3>算力</h3><span class="action">关注</span></div>
+        <div class="sector-stats"><span>📰1条</span><span>🔥1催化</span></div>
+        <div class="sector-stocks"><div class="stocks-title">🎯 龙头</div>
+        <div class="stock-item"><span class="stock-code">603019</span><span class="stock-name">中科曙光</span><span class="stock-reason">国产算力龙头</span></div><div class="stock-item"><span class="stock-code">000977</span><span class="stock-name">浪潮信息</span><span class="stock-reason">服务器龙头</span></div>
         </div>
     </div>
-    
-        
-        <div class="section">
-            <h2>🛢️ 期货锰硅</h2>
-            
-            <div class="news-item">
-                <div class="news-title">商品期货指数下跌 2.93%</div>
-                <div class="news-meta">
-                    <span class="time">03-20 16:48</span>
-                    <span class="impact">⚠️ 利空</span>
-                </div>
-            </div>
-            
-            <div class="news-item">
-                <div class="news-title">黑色系期货集体走强，焦煤领涨</div>
-                <div class="news-meta">
-                    <span class="time">03-20 17:15</span>
-                    <span class="impact">⚠️ 成本波动</span>
-                </div>
-            </div>
-            
-            <div class="news-item">
-                <div class="news-title">焦煤主力大涨 6%</div>
-                <div class="news-meta">
-                    <span class="time">03-20 晚间</span>
-                    <span class="impact">⚠️ 成本波动</span>
-                </div>
-            </div>
-            
-            
-        <div class="rec-card">
-            <div class="rec-header">
-                <span>🛢️ 锰硅 SM2405</span>
-                <span class="badge 观望">观望</span>
-            </div>
-            <div class="rec-target">目标：6800-7200 | 止损：6500</div>
-        </div>
-        
-        </div>
-        
-        <div class="section">
-            <h2>📈 A 股板块</h2>
-            
-        <div class="sector">
-            <h3>算力</h3>
-        
-            <div class="news-item">
-                <div class="news-title">AI 算力需求持续爆发</div>
-                <div class="news-meta">
-                    <span class="time">3/22</span>
-                    <span class="impact">✅ 利好</span>
-                </div>
-            </div>
-                
-            <div class="stock-rec">
-                <div class="rec-title">🎯 龙头推荐</div>
-            
-                <div class="stock-item">
-                    <span class="stock-code">603019</span>
-                    <span class="stock-name">中科曙光</span>
-                </div>
-                
-                <div class="stock-item">
-                    <span class="stock-code">000977</span>
-                    <span class="stock-name">浪潮信息</span>
-                </div>
-                </div></div>
-        <div class="sector">
-            <h3>电力</h3>
-        
-            <div class="news-item">
-                <div class="news-title">清洁能源博览会 (北京)</div>
-                <div class="news-meta">
-                    <span class="time">3/25-27</span>
-                    <span class="impact">✅ 催化</span>
-                </div>
-            </div>
-                
-            <div class="news-item">
-                <div class="news-title">电力体制改革持续推进</div>
-                <div class="news-meta">
-                    <span class="time">3/21</span>
-                    <span class="impact">✅ 利好</span>
-                </div>
-            </div>
-                
-            <div class="stock-rec">
-                <div class="rec-title">🎯 龙头推荐</div>
-            
-                <div class="stock-item">
-                    <span class="stock-code">600900</span>
-                    <span class="stock-name">长江电力</span>
-                </div>
-                </div></div>
-        <div class="sector">
-            <h3>储能电池</h3>
-        
-            <div class="news-item">
-                <div class="news-title">国际储能大会</div>
-                <div class="news-meta">
-                    <span class="time">3/23-26</span>
-                    <span class="impact">✅ 重点</span>
-                </div>
-            </div>
-                
-            <div class="news-item">
-                <div class="news-title">钙钛矿论坛 (无锡)</div>
-                <div class="news-meta">
-                    <span class="time">3/25-27</span>
-                    <span class="impact">✅ 技术</span>
-                </div>
-            </div>
-                
-            <div class="stock-rec">
-                <div class="rec-title">🎯 龙头推荐</div>
-            
-                <div class="stock-item">
-                    <span class="stock-code">300750</span>
-                    <span class="stock-name">宁德时代</span>
-                </div>
-                
-                <div class="stock-item">
-                    <span class="stock-code">002594</span>
-                    <span class="stock-name">比亚迪</span>
-                </div>
-                </div></div>
-        <div class="sector">
-            <h3>机器人</h3>
-        
-            <div class="news-item">
-                <div class="news-title">人形机器人大会 (上海)</div>
-                <div class="news-meta">
-                    <span class="time">4/17-19</span>
-                    <span class="impact">✅ 中期</span>
-                </div>
-            </div>
-                
-            <div class="news-item">
-                <div class="news-title">机器人产业政策有望出台</div>
-                <div class="news-meta">
-                    <span class="time">3/20</span>
-                    <span class="impact">✅ 利好</span>
-                </div>
-            </div>
-                
-            <div class="stock-rec">
-                <div class="rec-title">🎯 龙头推荐</div>
-            
-                <div class="stock-item">
-                    <span class="stock-code">300124</span>
-                    <span class="stock-name">汇川技术</span>
-                </div>
-                
-                <div class="stock-item">
-                    <span class="stock-code">002747</span>
-                    <span class="stock-name">埃斯顿</span>
-                </div>
-                </div></div>
-        <div class="sector">
-            <h3>商业航天</h3>
-        
-            <div class="news-item">
-                <div class="news-title">商业航天列入重点发展方向</div>
-                <div class="news-meta">
-                    <span class="time">3/21</span>
-                    <span class="impact">✅ 利好</span>
-                </div>
-            </div>
-                
-            <div class="stock-rec">
-                <div class="rec-title">🎯 龙头推荐</div>
-            
-                <div class="stock-item">
-                    <span class="stock-code">600118</span>
-                    <span class="stock-name">中国卫星</span>
-                </div>
-                </div></div>
-        </div>
-        
-        <div class="footer">
-            <p>数据来源：东方财富 · 财联社 · 同花顺 · 金十数据</p>
-            <p>⚠️ 推荐仅供参考 · 投资需谨慎</p>
+    <div class="sector-card">
+        <div class="sector-header"><h3>储能电池</h3><span class="action">关注</span></div>
+        <div class="sector-stats"><span>📰1条</span><span>🔥1催化</span></div>
+        <div class="sector-stocks"><div class="stocks-title">🎯 龙头</div>
+        <div class="stock-item"><span class="stock-code">300750</span><span class="stock-name">宁德时代</span><span class="stock-reason">全球动力电池龙头</span></div><div class="stock-item"><span class="stock-code">002594</span><span class="stock-name">比亚迪</span><span class="stock-reason">储能业务快速增长</span></div>
         </div>
     </div>
-</body>
-</html>
+    <div class="sector-card">
+        <div class="sector-header"><h3>机器人</h3><span class="action">关注</span></div>
+        <div class="sector-stats"><span>📰1条</span><span>🔥1催化</span></div>
+        <div class="sector-stocks"><div class="stocks-title">🎯 龙头</div>
+        <div class="stock-item"><span class="stock-code">300124</span><span class="stock-name">汇川技术</span><span class="stock-reason">工控龙头</span></div><div class="stock-item"><span class="stock-code">002747</span><span class="stock-name">埃斯顿</span><span class="stock-reason">工业机器人龙头</span></div>
+        </div>
+    </div></div>
+<div class="footer"><p>数据来源：东方财富·财联社·同花顺·金十数据</p><p>⚠️ 投资需谨慎</p></div>
+</div></body></html>
