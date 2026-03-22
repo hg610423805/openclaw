@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>财经日报 - 2026-03-22</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+            min-height: 100vh; 
+            padding: 15px 15px 80px; 
+        }
+        .container { max-width: 600px; margin: 0 auto; }
+        .header { 
+            background: white; 
+            border-radius: 16px; 
+            padding: 20px; 
+            margin-bottom: 15px; 
+            text-align: center; 
+        }
+        .header h1 { color: #667eea; font-size: 1.8rem; margin-bottom: 10px; }
+        .header .datetime { color: #888; font-size: 0.95rem; }
+        .header .update-badge { 
+            display: inline-block; 
+            background: linear-gradient(135deg, #667eea, #764ba2); 
+            color: white; 
+            padding: 4px 12px; 
+            border-radius: 20px; 
+            font-size: 0.75rem; 
+            margin-top: 8px; 
+        }
+        .section { 
+            background: white; 
+            border-radius: 16px; 
+            padding: 20px; 
+            margin-bottom: 15px; 
+        }
+        .section h2 { 
+            color: #333; 
+            font-size: 1.3rem; 
+            margin-bottom: 15px; 
+            padding-bottom: 12px; 
+            border-bottom: 2px solid #667eea; 
+        }
+        .news-item { 
+            background: #f8f9fa; 
+            border-radius: 10px; 
+            padding: 14px; 
+            margin-bottom: 10px; 
+        }
+        .news-title { 
+            font-weight: 600; 
+            color: #333; 
+            margin-bottom: 8px; 
+            font-size: 0.9rem; 
+            line-height: 1.4; 
+        }
+        .news-meta { 
+            display: flex; 
+            gap: 8px; 
+            align-items: center; 
+            flex-wrap: wrap; 
+        }
+        .news-meta .time, .news-meta .source { color: #888; font-size: 0.75rem; }
+        .news-meta .impact { 
+            background: #fff3cd; 
+            color: #856404; 
+            padding: 2px 8px; 
+            border-radius: 6px; 
+            font-size: 0.75rem; 
+        }
+        .impact-positive { background: #d4edda; color: #155724; }
+        .impact-negative { background: #f8d7da; color: #721c24; }
+        .impact-neutral { background: #fff3cd; color: #856404; }
+        .analysis-card { 
+            background: linear-gradient(135deg, #667eea, #764ba2); 
+            color: white; 
+            border-radius: 14px; 
+            padding: 20px; 
+            margin-top: 15px; 
+        }
+        .analysis-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            margin-bottom: 15px; 
+        }
+        .trend { font-size: 1.1rem; font-weight: 700; }
+        .analysis-reasoning { 
+            background: rgba(255,255,255,0.1); 
+            padding: 12px; 
+            border-radius: 8px; 
+            font-size: 0.85rem; 
+            line-height: 1.6; 
+            margin-bottom: 15px; 
+        }
+        .analysis-action { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 10px; 
+        }
+        .action-item { 
+            background: rgba(255,255,255,0.15); 
+            padding: 10px; 
+            border-radius: 8px; 
+            text-align: center; 
+        }
+        .action-item .label { font-size: 0.75rem; opacity: 0.8; display: block; margin-bottom: 4px; }
+        .action-item .value { font-size: 0.9rem; font-weight: 700; }
+        .sector-card { 
+            background: #f8f9fa; 
+            border-radius: 12px; 
+            padding: 18px; 
+            margin-bottom: 15px; 
+        }
+        .sector-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 12px; 
+        }
+        .sector-header h3 { color: #667eea; font-size: 1.1rem; }
+        .sector-header .action { 
+            background: #667eea; 
+            color: white; 
+            padding: 3px 10px; 
+            border-radius: 10px; 
+            font-size: 0.75rem; 
+        }
+        .sector-header .action.recommend { background: #28a745; }
+        .sector-header .action.focus { background: #ffc107; color: #000; }
+        .sector-stats { 
+            display: flex; 
+            gap: 15px; 
+            font-size: 0.8rem; 
+            color: #666; 
+            margin-bottom: 12px; 
+        }
+        .sector-news { 
+            background: white; 
+            border-radius: 10px; 
+            padding: 12px; 
+        }
+        .mini-news { 
+            padding: 8px 0; 
+            border-bottom: 1px solid #eee; 
+            font-size: 0.85rem; 
+        }
+        .mini-news:last-child { border-bottom: none; }
+        .mini-time { color: #888; font-size: 0.75rem; margin-right: 8px; }
+        .mini-title { color: #333; }
+        .event-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+        }
+        .event-card .event-date { font-size: 0.85rem; opacity: 0.9; margin-bottom: 6px; }
+        .event-card .event-title { font-size: 0.95rem; font-weight: 600; }
+        .footer { 
+            text-align: center; 
+            color: rgba(255,255,255,0.8); 
+            padding: 20px; 
+            font-size: 0.85rem; 
+        }
+        .data-source {
+            background: rgba(255,255,255,0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📰 财经日报</h1>
+            <div class="datetime">2026 年 3 月 22 日 星期日</div>
+            <div class="update-badge">✅ 实时数据更新</div>
+        </div>
+        
+        <!-- 期货锰硅 -->
+        <div class="section">
+            <h2>🛢️ 期货锰硅</h2>
+            
+            <div class="news-item">
+                <div class="news-title">美国宣布有条件放松对伊朗石油制裁，将向全球供油</div>
+                <div class="news-meta">
+                    <span class="time">3/21 12:09</span>
+                    <span class="source">东方财富</span>
+                    <span class="impact impact-negative">⚠️ 利空</span>
+                </div>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-title">现货黄金价格跌破 4500 美元，创 43 年最大单周跌幅</div>
+                <div class="news-meta">
+                    <span class="time">3/21 10:26</span>
+                    <span class="source">东方财富</span>
+                    <span class="impact impact-negative">⚠️ 利空</span>
+                </div>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-title">特朗普称正考虑逐步降级对伊朗的军事行动</div>
+                <div class="news-meta">
+                    <span class="time">3/21 05:41</span>
+                    <span class="source">东方财富</span>
+                    <span class="impact impact-neutral">➖ 中性</span>
+                </div>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-title">中信证券：不宜对已经出现高波动的资产"单向押注"</div>
+                <div class="news-meta">
+                    <span class="time">3/21 11:11</span>
+                    <span class="source">东方财富</span>
+                    <span class="impact impact-neutral">➖ 中性</span>
+                </div>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-title">全球央行超级周落幕！通胀警报拉响 加息潮要来了？</div>
+                <div class="news-meta">
+                    <span class="time">3/21 08:50</span>
+                    <span class="source">东方财富</span>
+                    <span class="impact impact-negative">⚠️ 利空</span>
+                </div>
+            </div>
+            
+            <div class="analysis-card">
+                <div class="analysis-header">
+                    <span class="trend">📉 偏空震荡</span>
+                    <span>置信度：中等</span>
+                </div>
+                <div class="analysis-reasoning">
+                    <strong>逻辑：</strong>3 条利空 vs 0 条利好。宏观面偏空，黄金大跌带动大宗商品走弱，伊朗石油制裁放松可能压低原油价格，进而拖累黑色系。但锰硅自身供需相对平稳，下方空间有限。
+                </div>
+                <div class="analysis-action">
+                    <div class="action-item">
+                        <span class="label">建议</span>
+                        <span class="value">逢高做空</span>
+                    </div>
+                    <div class="action-item">
+                        <span class="label">目标</span>
+                        <span class="value">6400-6600</span>
+                    </div>
+                    <div class="action-item">
+                        <span class="label">止损</span>
+                        <span class="value">6900</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- A 股板块 -->
+        <div class="section">
+            <h2>📈 A 股板块</h2>
+            
+            <!-- 算力 -->
+            <div class="sector-card">
+                <div class="sector-header">
+                    <h3>🖥️ 算力</h3>
+                    <span class="action recommend">⭐⭐⭐⭐⭐ 重点推荐</span>
+                </div>
+                <div class="sector-stats">
+                    <span>📰 3 条</span>
+                    <span>🔥 3 催化</span>
+                </div>
+                <div class="sector-news">
+                    <div class="mini-news">
+                        <span class="mini-time">今日</span>
+                        <span class="mini-title">中国发展高层论坛 2026 年年会 3 月 22-23 日在北京召开</span>
+                    </div>
+                    <div class="mini-news">
+                        <span class="mini-time">3/23</span>
+                        <span class="mini-title">华为春季全场景新品发布会即将举行</span>
+                    </div>
+                    <div class="mini-news">
+                        <span class="mini-time">3/25</span>
+                        <span class="mini-title">上海国际半导体展览会开幕</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 储能电池 -->
+            <div class="sector-card">
+                <div class="sector-header">
+                    <h3>🔋 储能电池</h3>
+                    <span class="action recommend">⭐⭐⭐⭐⭐ 重点推荐</span>
+                </div>
+                <div class="sector-stats">
+                    <span>📰 3 条</span>
+                    <span>🔥 3 催化</span>
+                </div>
+                <div class="sector-news">
+                    <div class="mini-news">
+                        <span class="mini-time">3/23-26</span>
+                        <span class="mini-title">第十六届中国国际储能大会即将开幕</span>
+                    </div>
+                    <div class="mini-news">
+                        <span class="mini-time">3/25-27</span>
+                        <span class="mini-title">第十六届中国国际清洁能源博览会举办</span>
+                    </div>
+                    <div class="mini-news">
+                        <span class="mini-time">3/25</span>
+                        <span class="mini-title">钙钛矿与叠层电池产业化论坛召开</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 机器人 -->
+            <div class="sector-card">
+                <div class="sector-header">
+                    <h3>🤖 机器人</h3>
+                    <span class="action focus">⭐⭐⭐⭐ 重点关注</span>
+                </div>
+                <div class="sector-stats">
+                    <span>📰 2 条</span>
+                    <span>🔥 2 催化</span>
+                </div>
+                <div class="sector-news">
+                    <div class="mini-news">
+                        <span class="mini-time">4/17-19</span>
+                        <span class="mini-title">2026 中国人形机器人生态大会将在上海举办</span>
+                    </div>
+                    <div class="mini-news">
+                        <span class="mini-time">3/23</span>
+                        <span class="mini-title">诚迈科技将发布 OpenClaw AI 解决方案</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 电力 -->
+            <div class="sector-card">
+                <div class="sector-header">
+                    <h3>⚡ 电力</h3>
+                    <span class="action focus">⭐⭐⭐ 关注</span>
+                </div>
+                <div class="sector-stats">
+                    <span>📰 1 条</span>
+                    <span>🔥 1 催化</span>
+                </div>
+                <div class="sector-news">
+                    <div class="mini-news">
+                        <span class="mini-time">3/25-27</span>
+                        <span class="mini-title">第十六届中国国际清洁能源博览会举办</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 商业航天 -->
+            <div class="sector-card">
+                <div class="sector-header">
+                    <h3>🚀 商业航天</h3>
+                    <span class="action focus">⭐⭐⭐ 关注</span>
+                </div>
+                <div class="sector-stats">
+                    <span>📰 1 条</span>
+                    <span>🔥 1 催化</span>
+                </div>
+                <div class="sector-news">
+                    <div class="mini-news">
+                        <span class="mini-time">3/23-24</span>
+                        <span class="mini-title">西门子首届科技大会举办</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 今日重要事件 -->
+        <div class="section">
+            <h2>📅 今日重要事件</h2>
+            
+            <div class="event-card">
+                <div class="event-date">🔴 3 月 22-23 日（今日 - 明日）</div>
+                <div class="event-title">中国发展高层论坛 2026 年年会 · 北京</div>
+            </div>
+            
+            <div class="event-card" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); color: #333;">
+                <div class="event-date">🟡 3 月 23 日（明日）14:30</div>
+                <div class="event-title">华为春季全场景新品发布会</div>
+            </div>
+            
+            <div class="event-card" style="background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%); color: #333;">
+                <div class="event-date">🟡 3 月 23-26 日</div>
+                <div class="event-title">第十六届中国国际储能大会</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="data-source">数据来源：财联社 · 东方财富 · 同花顺 · 新浪财经</div>
+            <p style="margin-top: 15px;">⚠️ 投资需谨慎 · 数据仅供参考</p>
+            <p style="margin-top: 8px; opacity: 0.7;">更新时间：2026-03-22 09:38</p>
+        </div>
+    </div>
+</body>
+</html>
