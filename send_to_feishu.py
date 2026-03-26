@@ -135,8 +135,8 @@ def main():
     # Step 2: Send message
     print("\n[2/3] 发送消息...")
     links = {
-        "daily": "https://hg610423805.github.io/openclaw/daily-report-2026-03-22.html",
-        "backtest": "https://hg610423805.github.io/openclaw/reports/report-期货回测分析 -2026-03-20-2303.html"
+        "daily": "https://monkey-brother-11.gitee.io/openclaw/daily-report-2026-03-22.html",
+        "backtest": "https://monkey-brother-11.gitee.io/openclaw/reports/report-期货回测分析 -2026-03-20-2303.html"
     }
     result = send_message(token, USER_OPEN_ID, "财经日报", links)
     

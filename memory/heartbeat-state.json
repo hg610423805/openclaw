@@ -1,0 +1,11 @@
+{
+  "lastChecks": {
+    "email": null,
+    "calendar": null,
+    "weather": null,
+    "dailyNewsPush": 1743235920
+  },
+  "lastPushDate": "2026-03-27",
+  "lastPushTime": "07:32",
+  "notes": "提前推送（正常 8:00），爬虫数据源临时调整，手动抓取东方财富 + 财联社数据"
+}

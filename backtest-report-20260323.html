@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>期货回测分析报告</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Microsoft YaHei", sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { background: white; border-radius: 16px; padding: 30px; margin-bottom: 20px; text-align: center; }
+        .header h1 { color: #667eea; font-size: 2rem; margin-bottom: 10px; }
+        .header .date { color: #888; }
+        .header .total-profit { font-size: 2.5rem; font-weight: 700; color: #10b981; margin-top: 15px; }
+        .section { background: white; border-radius: 16px; padding: 25px; margin-bottom: 20px; }
+        .section h2 { color: #333; font-size: 1.5rem; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 3px solid #667eea; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 20px; }
+        .stat-card { background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 12px; padding: 20px; text-align: center; }
+        .stat-card .label { font-size: 0.85rem; opacity: 0.9; margin-bottom: 8px; }
+        .stat-card .value { font-size: 1.6rem; font-weight: 700; }
+        .stat-card.profit { background: linear-gradient(135deg, #10b981, #059669); }
+        .stat-card.loss { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.85rem; }
+        th, td { padding: 8px 6px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: #f8f9fa; font-weight: 600; position: sticky; top: 0; }
+        tr:hover { background: #f8f9fa; }
+        .profit-positive { color: #10b981; font-weight: 600; }
+        .profit-negative { color: #ef4444; font-weight: 600; }
+        .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.7rem; }
+        .badge-tp { background: #d1fae5; color: #065f46; }
+        .badge-sl { background: #fee2e2; color: #991b1b; }
+        .badge-forced { background: #fef3c7; color: #92400e; }
+        .chart-container { position: relative; height: 300px; margin: 20px 0; }
+        .product-card { background: #f8f9fa; border-radius: 12px; padding: 20px; margin-bottom: 15px; }
+        .product-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px; }
+        .product-name { font-size: 1.1rem; font-weight: 700; color: #667eea; }
+        .product-profit { font-size: 1.3rem; font-weight: 700; }
+        .exit-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .exit-card { text-align: center; padding: 12px; border-radius: 8px; }
+        .exit-card.tp { background: #d1fae5; }
+        .exit-card.sl { background: #fee2e2; }
+        .exit-card.forced { background: #fef3c7; }
+        .tabs { display: flex; gap: 8px; margin-bottom: 15px; flex-wrap: wrap; }
+        .tab { padding: 8px 16px; border: none; background: #f8f9fa; border-radius: 8px; cursor: pointer; font-size: 0.85rem; }
+        .tab:hover { background: #e5e7eb; }
+        .tab.active { background: #667eea; color: white; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .scroll-container { max-height: 500px; overflow-y: auto; }
+        .footer { text-align: center; color: rgba(255,255,255,0.8); padding: 20px; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 期货回测分析报告</h1>
+            <div class="date">2025-03-19 至 2026-03-19</div>
+            <div class="total-profit">+91,620 元</div>
+            <div style="color: #888; margin-top: 10px;">初始资金：100,000 元 | 最终资金：191,620 元 | 收益率：91.6%</div>
+        </div>
+
+        <div class="section">
+            <h2>📈 核心统计</h2>
+            <div class="stats-grid">
+                <div class="stat-card"><div class="label">总交易次数</div><div class="value">363</div></div>
+                <div class="stat-card profit"><div class="label">盈利交易</div><div class="value">125</div></div>
+                <div class="stat-card loss"><div class="label">亏损交易</div><div class="value">238</div></div>
+                <div class="stat-card"><div class="label">胜率</div><div class="value">34.7%</div></div>
+                <div class="stat-card profit"><div class="label">最大盈利</div><div class="value">+19,500元</div></div>
+                <div class="stat-card loss"><div class="label">最大亏损</div><div class="value">-1,650元</div></div>
+                <div class="stat-card"><div class="label">平均盈亏</div><div class="value">252元</div></div>
+                <div class="stat-card profit"><div class="label">盈亏比</div><div class="value">11.82</div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📊 月度收益曲线</h2>
+            <div class="chart-container"><canvas id="equityChart"></canvas></div>
+        </div>
+
+        <div class="section">
+            <h2>🎯 品种表现排名</h2>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <div>
+                        <div class="product-name">🥇 锰硅主连</div>
+                        <div style="color: #888; font-size: 0.85rem; margin-top: 5px;">交易 86 笔 | 胜率 36.0% | 平均 10.0 手</div>
+                    </div>
+                    <div class="product-profit profit-positive">+39,400 元</div>
+                </div>
+                <div class="exit-stats">
+                    <div class="exit-card tp"><div style="font-size: 0.75rem; color: #065f46;">止盈</div><div style="font-size: 1.1rem; font-weight: 700;">23笔</div></div>
+                    <div class="exit-card sl"><div style="font-size: 0.75rem; color: #991b1b;">止损</div><div style="font-size: 1.1rem; font-weight: 700;">55笔</div></div>
+                    <div class="exit-card forced"><div style="font-size: 0.75rem; color: #92400e;">强平</div><div style="font-size: 1.1rem; font-weight: 700;">8笔</div></div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <div>
+                        <div class="product-name">🥈 硅铁主连</div>
+                        <div style="color: #888; font-size: 0.85rem; margin-top: 5px;">交易 72 笔 | 胜率 37.5% | 平均 10.0 手</div>
+                    </div>
+                    <div class="product-profit profit-positive">+29,050 元</div>
+                </div>
+                <div class="exit-stats">
+                    <div class="exit-card tp"><div style="font-size: 0.75rem; color: #065f46;">止盈</div><div style="font-size: 1.1rem; font-weight: 700;">15笔</div></div>
+                    <div class="exit-card sl"><div style="font-size: 0.75rem; color: #991b1b;">止损</div><div style="font-size: 1.1rem; font-weight: 700;">45笔</div></div>
+                    <div class="exit-card forced"><div style="font-size: 0.75rem; color: #92400e;">强平</div><div style="font-size: 1.1rem; font-weight: 700;">12笔</div></div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <div>
+                        <div class="product-name">🥉 鸡蛋主连</div>
+                        <div style="color: #888; font-size: 0.85rem; margin-top: 5px;">交易 74 笔 | 胜率 31.1% | 平均 7.4 手</div>
+                    </div>
+                    <div class="product-profit profit-positive">+16,230 元</div>
+                </div>
+                <div class="exit-stats">
+                    <div class="exit-card tp"><div style="font-size: 0.75rem; color: #065f46;">止盈</div><div style="font-size: 1.1rem; font-weight: 700;">12笔</div></div>
+                    <div class="exit-card sl"><div style="font-size: 0.75rem; color: #991b1b;">止损</div><div style="font-size: 1.1rem; font-weight: 700;">51笔</div></div>
+                    <div class="exit-card forced"><div style="font-size: 0.75rem; color: #92400e;">强平</div><div style="font-size: 1.1rem; font-weight: 700;">11笔</div></div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <div>
+                        <div class="product-name">📊 尿素主连</div>
+                        <div style="color: #888; font-size: 0.85rem; margin-top: 5px;">交易 70 笔 | 胜率 40.0% | 平均 9.9 手</div>
+                    </div>
+                    <div class="product-profit profit-positive">+6,260 元</div>
+                </div>
+                <div class="exit-stats">
+                    <div class="exit-card tp"><div style="font-size: 0.75rem; color: #065f46;">止盈</div><div style="font-size: 1.1rem; font-weight: 700;">19笔</div></div>
+                    <div class="exit-card sl"><div style="font-size: 0.75rem; color: #991b1b;">止损</div><div style="font-size: 1.1rem; font-weight: 700;">42笔</div></div>
+                    <div class="exit-card forced"><div style="font-size: 0.75rem; color: #92400e;">强平</div><div style="font-size: 1.1rem; font-weight: 700;">9笔</div></div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <div>
+                        <div class="product-name">📊 豆粕主连</div>
+                        <div style="color: #888; font-size: 0.85rem; margin-top: 5px;">交易 61 笔 | 胜率 27.9% | 平均 8.1 手</div>
+                    </div>
+                    <div class="product-profit profit-positive">+680 元</div>
+                </div>
+                <div class="exit-stats">
+                    <div class="exit-card tp"><div style="font-size: 0.75rem; color: #065f46;">止盈</div><div style="font-size: 1.1rem; font-weight: 700;">14笔</div></div>
+                    <div class="exit-card sl"><div style="font-size: 0.75rem; color: #991b1b;">止损</div><div style="font-size: 1.1rem; font-weight: 700;">44笔</div></div>
+                    <div class="exit-card forced"><div style="font-size: 0.75rem; color: #92400e;">强平</div><div style="font-size: 1.1rem; font-weight: 700;">3笔</div></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h2>🚪 出场方式分析</h2>
+            <div class="stats-grid">
+                <div class="stat-card profit">
+                    <div class="label">止盈交易</div>
+                    <div class="value">83</div>
+                    <div style="margin-top: 10px; opacity: 0.9;">平均：+2,500元</div>
+                </div>
+                <div class="stat-card loss">
+                    <div class="label">止损交易</div>
+                    <div class="value">237</div>
+                    <div style="margin-top: 10px; opacity: 0.9;">平均：-600元</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">强平交易</div>
+                    <div class="value">43</div>
+                    <div style="margin-top: 10px; opacity: 0.9;">平均：+3,500元</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📋 交易明细 (样本)</h2>
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('all')">全部 (59)</button>
+                <button class="tab" onclick="switchTab('profit')">盈利 (56)</button>
+                <button class="tab" onclick="switchTab('loss')">亏损 (3)</button>
+            </div>
+            <div class="scroll-container">
+                <table id="tab-all" class="tab-content active"><thead><tr><th>日期</th><th>品种</th><th>方向</th><th>入场</th><th>出场</th><th>盈亏</th><th>出场</th></tr></thead><tbody>
+                        <tr><td>2025-04-21</td><td>鸡蛋</td><td>🔴</td><td>09:55@3058</td><td>13:30@3049</td><td class="profit-positive">+720</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-04-22</td><td>硅铁</td><td>🔴</td><td>09:55@5694</td><td>14:45@5670</td><td class="profit-positive">+1,200</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-04-22</td><td>锰硅</td><td>🔴</td><td>09:45@5890</td><td>13:35@5830</td><td class="profit-positive">+3,000</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-04-23</td><td>尿素</td><td>🔴</td><td>11:15@1766</td><td>14:55@1762</td><td class="profit-positive">+800</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-04-23</td><td>硅铁</td><td>🔴</td><td>10:00@5678</td><td>11:00@5684</td><td class="profit-negative">-300</td><td><span class="badge badge-sl">止损 -EXPM</span></td></tr>
+                        <tr><td>2025-04-24</td><td>锰硅</td><td>🔴</td><td>09:40@5846</td><td>14:15@5816</td><td class="profit-positive">+1,500</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-04-25</td><td>尿素</td><td>🔴</td><td>09:35@1756</td><td>09:50@1762</td><td class="profit-negative">-1,200</td><td><span class="badge badge-sl">止损</span></td></tr>
+                        <tr><td>2025-04-29</td><td>尿素</td><td>🔴</td><td>10:45@1757</td><td>13:50@1744</td><td class="profit-positive">+2,600</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-05-06</td><td>锰硅</td><td>🔴</td><td>09:35@5666</td><td>14:55@5560</td><td class="profit-positive">+5,300</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-05-14</td><td>锰硅</td><td>🟢</td><td>09:45@5902</td><td>09:55@5869</td><td class="profit-negative">-1,650</td><td><span class="badge badge-sl">止损</span></td></tr>
+                        <tr><td>2025-05-22</td><td>锰硅</td><td>🟢</td><td>10:35@5858</td><td>14:55@5998</td><td class="profit-positive">+7,000</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-05-23</td><td>硅铁</td><td>🔴</td><td>10:05@5596</td><td>14:55@5512</td><td class="profit-positive">+4,200</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-06-05</td><td>尿素</td><td>🔴</td><td>10:05@1746</td><td>14:55@1722</td><td class="profit-positive">+4,800</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-07-02</td><td>硅铁</td><td>🟢</td><td>09:50@5306</td><td>14:55@5436</td><td class="profit-positive">+6,500</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-07-02</td><td>锰硅</td><td>🟢</td><td>09:50@5656</td><td>14:55@5726</td><td class="profit-positive">+3,500</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-07-10</td><td>硅铁</td><td>🟢</td><td>09:35@5480</td><td>14:50@5560</td><td class="profit-positive">+4,000</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-07-10</td><td>鸡蛋</td><td>🔴</td><td>09:35@3470</td><td>13:45@3434</td><td class="profit-positive">+2,520</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-07-25</td><td>锰硅</td><td>🟢</td><td>09:35@6024</td><td>14:55@6414</td><td class="profit-positive">+19,500</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-07-29</td><td>硅铁</td><td>🟢</td><td>11:00@5960</td><td>14:55@6110</td><td class="profit-positive">+7,500</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-07-31</td><td>尿素</td><td>🔴</td><td>09:45@1730</td><td>14:55@1714</td><td class="profit-positive">+3,200</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-08-01</td><td>鸡蛋</td><td>🔴</td><td>10:40@3514</td><td>14:55@3484</td><td class="profit-positive">+2,100</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-08-04</td><td>鸡蛋</td><td>🔴</td><td>10:45@3385</td><td>14:55@3360</td><td class="profit-positive">+1,750</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-08-11</td><td>鸡蛋</td><td>🔴</td><td>10:35@3331</td><td>14:55@3271</td><td class="profit-positive">+4,200</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-08-19</td><td>硅铁</td><td>🔴</td><td>10:05@5766</td><td>14:50@5682</td><td class="profit-positive">+4,200</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-08-19</td><td>锰硅</td><td>🔴</td><td>10:35@5916</td><td>14:50@5840</td><td class="profit-positive">+3,800</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-09-03</td><td>尿素</td><td>🔴</td><td>09:50@1747</td><td>14:55@1714</td><td class="profit-positive">+6,600</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-09-10</td><td>硅铁</td><td>🟢</td><td>09:35@5612</td><td>14:45@5658</td><td class="profit-positive">+2,300</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-09-10</td><td>锰硅</td><td>🟢</td><td>09:40@5828</td><td>14:50@5858</td><td class="profit-positive">+1,500</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-10-10</td><td>鸡蛋</td><td>🔴</td><td>10:00@2845</td><td>14:55@2806</td><td class="profit-positive">+3,120</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-10-23</td><td>鸡蛋</td><td>🟢</td><td>09:35@2951</td><td>14:55@3027</td><td class="profit-positive">+6,080</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-11-05</td><td>豆粕</td><td>🟢</td><td>11:05@3037</td><td>14:55@3073</td><td class="profit-positive">+2,880</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-11-05</td><td>鸡蛋</td><td>🟢</td><td>10:10@3175</td><td>14:55@3217</td><td class="profit-positive">+2,940</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-11-18</td><td>硅铁</td><td>🔴</td><td>10:30@5494</td><td>14:35@5464</td><td class="profit-positive">+1,500</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-11-18</td><td>锰硅</td><td>🔴</td><td>10:00@5742</td><td>14:55@5680</td><td class="profit-positive">+3,100</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-12-17</td><td>硅铁</td><td>🟢</td><td>10:05@5514</td><td>13:30@5538</td><td class="profit-positive">+1,200</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-12-19</td><td>鸡蛋</td><td>🔴</td><td>11:05@2902</td><td>14:55@2886</td><td class="profit-positive">+1,280</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-12-29</td><td>硅铁</td><td>🟢</td><td>09:50@5690</td><td>14:05@5716</td><td class="profit-positive">+1,300</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-12-29</td><td>锰硅</td><td>🟢</td><td>09:50@5878</td><td>14:00@5892</td><td class="profit-positive">+700</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-01-06</td><td>硅铁</td><td>🟢</td><td>11:15@5720</td><td>14:55@5776</td><td class="profit-positive">+2,800</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2026-01-07</td><td>锰硅</td><td>🟢</td><td>11:20@5994</td><td>14:40@6018</td><td class="profit-positive">+1,200</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-01-22</td><td>鸡蛋</td><td>🟢</td><td>10:00@3049</td><td>14:55@3095</td><td class="profit-positive">+3,680</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2026-01-29</td><td>硅铁</td><td>🟢</td><td>09:45@5704</td><td>13:45@5716</td><td class="profit-positive">+600</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-01-29</td><td>锰硅</td><td>🟢</td><td>09:45@5908</td><td>14:05@5914</td><td class="profit-positive">+300</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-02-03</td><td>豆粕</td><td>🔴</td><td>09:35@2743</td><td>14:50@2728</td><td class="profit-positive">+1,350</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-02-05</td><td>鸡蛋</td><td>🔴</td><td>10:50@2925</td><td>14:55@2891</td><td class="profit-positive">+2,720</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2026-02-11</td><td>尿素</td><td>🟢</td><td>10:45@1791</td><td>14:55@1797</td><td class="profit-positive">+1,200</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-02-12</td><td>硅铁</td><td>🔴</td><td>10:45@5546</td><td>14:55@5500</td><td class="profit-positive">+2,300</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2026-02-12</td><td>鸡蛋</td><td>🟢</td><td>09:35@3173</td><td>13:40@3184</td><td class="profit-positive">+770</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-02-13</td><td>鸡蛋</td><td>🟢</td><td>10:45@3222</td><td>14:45@3249</td><td class="profit-positive">+1,890</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-02-27</td><td>锰硅</td><td>🟢</td><td>10:35@5922</td><td>14:55@6026</td><td class="profit-positive">+5,200</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2026-03-05</td><td>豆粕</td><td>🟢</td><td>09:40@2837</td><td>13:55@2841</td><td class="profit-positive">+320</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-03-06</td><td>硅铁</td><td>🟢</td><td>10:55@5842</td><td>14:55@5868</td><td class="profit-positive">+1,300</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2026-03-06</td><td>锰硅</td><td>🟢</td><td>09:55@6106</td><td>14:45@6116</td><td class="profit-positive">+500</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-03-11</td><td>尿素</td><td>🟢</td><td>10:05@1848</td><td>14:55@1872</td><td class="profit-positive">+4,800</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-03-11</td><td>豆粕</td><td>🟢</td><td>10:45@3030</td><td>14:55@3068</td><td class="profit-positive">+3,040</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2026-03-13</td><td>尿素</td><td>🟢</td><td>09:35@1894</td><td>11:20@1896</td><td class="profit-positive">+360</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-03-13</td><td>锰硅</td><td>🟢</td><td>09:35@6218</td><td>11:25@6220</td><td class="profit-positive">+100</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-03-17</td><td>硅铁</td><td>🟢</td><td>09:35@5924</td><td>11:00@5930</td><td class="profit-positive">+300</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-03-17</td><td>豆粕</td><td>🟢</td><td>09:50@3042</td><td>11:15@3043</td><td class="profit-positive">+80</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                    </tbody></table>
+                <table id="tab-profit" class="tab-content"><thead><tr><th>日期</th><th>品种</th><th>方向</th><th>入场</th><th>出场</th><th>盈亏</th><th>出场</th></tr></thead><tbody>
+                        <tr><td>2025-07-25</td><td>锰硅</td><td>🟢</td><td>09:35@6024</td><td>14:55@6414</td><td class="profit-positive">+19,500</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-07-29</td><td>硅铁</td><td>🟢</td><td>11:00@5960</td><td>14:55@6110</td><td class="profit-positive">+7,500</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-05-22</td><td>锰硅</td><td>🟢</td><td>10:35@5858</td><td>14:55@5998</td><td class="profit-positive">+7,000</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-09-03</td><td>尿素</td><td>🔴</td><td>09:50@1747</td><td>14:55@1714</td><td class="profit-positive">+6,600</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-07-02</td><td>硅铁</td><td>🟢</td><td>09:50@5306</td><td>14:55@5436</td><td class="profit-positive">+6,500</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-10-23</td><td>鸡蛋</td><td>🟢</td><td>09:35@2951</td><td>14:55@3027</td><td class="profit-positive">+6,080</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-05-06</td><td>锰硅</td><td>🔴</td><td>09:35@5666</td><td>14:55@5560</td><td class="profit-positive">+5,300</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2026-02-27</td><td>锰硅</td><td>🟢</td><td>10:35@5922</td><td>14:55@6026</td><td class="profit-positive">+5,200</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-06-05</td><td>尿素</td><td>🔴</td><td>10:05@1746</td><td>14:55@1722</td><td class="profit-positive">+4,800</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2026-03-11</td><td>尿素</td><td>🟢</td><td>10:05@1848</td><td>14:55@1872</td><td class="profit-positive">+4,800</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-05-23</td><td>硅铁</td><td>🔴</td><td>10:05@5596</td><td>14:55@5512</td><td class="profit-positive">+4,200</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-08-11</td><td>鸡蛋</td><td>🔴</td><td>10:35@3331</td><td>14:55@3271</td><td class="profit-positive">+4,200</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-08-19</td><td>硅铁</td><td>🔴</td><td>10:05@5766</td><td>14:50@5682</td><td class="profit-positive">+4,200</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-07-10</td><td>硅铁</td><td>🟢</td><td>09:35@5480</td><td>14:50@5560</td><td class="profit-positive">+4,000</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-08-19</td><td>锰硅</td><td>🔴</td><td>10:35@5916</td><td>14:50@5840</td><td class="profit-positive">+3,800</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-01-22</td><td>鸡蛋</td><td>🟢</td><td>10:00@3049</td><td>14:55@3095</td><td class="profit-positive">+3,680</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-07-02</td><td>锰硅</td><td>🟢</td><td>09:50@5656</td><td>14:55@5726</td><td class="profit-positive">+3,500</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-07-31</td><td>尿素</td><td>🔴</td><td>09:45@1730</td><td>14:55@1714</td><td class="profit-positive">+3,200</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-10-10</td><td>鸡蛋</td><td>🔴</td><td>10:00@2845</td><td>14:55@2806</td><td class="profit-positive">+3,120</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-11-18</td><td>锰硅</td><td>🔴</td><td>10:00@5742</td><td>14:55@5680</td><td class="profit-positive">+3,100</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-03-11</td><td>豆粕</td><td>🟢</td><td>10:45@3030</td><td>14:55@3068</td><td class="profit-positive">+3,040</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-04-22</td><td>锰硅</td><td>🔴</td><td>09:45@5890</td><td>13:35@5830</td><td class="profit-positive">+3,000</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-11-05</td><td>鸡蛋</td><td>🟢</td><td>10:10@3175</td><td>14:55@3217</td><td class="profit-positive">+2,940</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-11-05</td><td>豆粕</td><td>🟢</td><td>11:05@3037</td><td>14:55@3073</td><td class="profit-positive">+2,880</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2026-01-06</td><td>硅铁</td><td>🟢</td><td>11:15@5720</td><td>14:55@5776</td><td class="profit-positive">+2,800</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2026-02-05</td><td>鸡蛋</td><td>🔴</td><td>10:50@2925</td><td>14:55@2891</td><td class="profit-positive">+2,720</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-04-29</td><td>尿素</td><td>🔴</td><td>10:45@1757</td><td>13:50@1744</td><td class="profit-positive">+2,600</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-07-10</td><td>鸡蛋</td><td>🔴</td><td>09:35@3470</td><td>13:45@3434</td><td class="profit-positive">+2,520</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-09-10</td><td>硅铁</td><td>🟢</td><td>09:35@5612</td><td>14:45@5658</td><td class="profit-positive">+2,300</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-02-12</td><td>硅铁</td><td>🔴</td><td>10:45@5546</td><td>14:55@5500</td><td class="profit-positive">+2,300</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-08-01</td><td>鸡蛋</td><td>🔴</td><td>10:40@3514</td><td>14:55@3484</td><td class="profit-positive">+2,100</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2026-02-13</td><td>鸡蛋</td><td>🟢</td><td>10:45@3222</td><td>14:45@3249</td><td class="profit-positive">+1,890</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-08-04</td><td>鸡蛋</td><td>🔴</td><td>10:45@3385</td><td>14:55@3360</td><td class="profit-positive">+1,750</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-04-24</td><td>锰硅</td><td>🔴</td><td>09:40@5846</td><td>14:15@5816</td><td class="profit-positive">+1,500</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-09-10</td><td>锰硅</td><td>🟢</td><td>09:40@5828</td><td>14:50@5858</td><td class="profit-positive">+1,500</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-11-18</td><td>硅铁</td><td>🔴</td><td>10:30@5494</td><td>14:35@5464</td><td class="profit-positive">+1,500</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-02-03</td><td>豆粕</td><td>🔴</td><td>09:35@2743</td><td>14:50@2728</td><td class="profit-positive">+1,350</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-12-29</td><td>硅铁</td><td>🟢</td><td>09:50@5690</td><td>14:05@5716</td><td class="profit-positive">+1,300</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-03-06</td><td>硅铁</td><td>🟢</td><td>10:55@5842</td><td>14:55@5868</td><td class="profit-positive">+1,300</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-12-19</td><td>鸡蛋</td><td>🔴</td><td>11:05@2902</td><td>14:55@2886</td><td class="profit-positive">+1,280</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2025-04-22</td><td>硅铁</td><td>🔴</td><td>09:55@5694</td><td>14:45@5670</td><td class="profit-positive">+1,200</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-12-17</td><td>硅铁</td><td>🟢</td><td>10:05@5514</td><td>13:30@5538</td><td class="profit-positive">+1,200</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-01-07</td><td>锰硅</td><td>🟢</td><td>11:20@5994</td><td>14:40@6018</td><td class="profit-positive">+1,200</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-02-11</td><td>尿素</td><td>🟢</td><td>10:45@1791</td><td>14:55@1797</td><td class="profit-positive">+1,200</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-04-23</td><td>尿素</td><td>🔴</td><td>11:15@1766</td><td>14:55@1762</td><td class="profit-positive">+800</td><td><span class="badge badge-forced">强平 - 收盘</span></td></tr>
+                        <tr><td>2026-02-12</td><td>鸡蛋</td><td>🟢</td><td>09:35@3173</td><td>13:40@3184</td><td class="profit-positive">+770</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-04-21</td><td>鸡蛋</td><td>🔴</td><td>09:55@3058</td><td>13:30@3049</td><td class="profit-positive">+720</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2025-12-29</td><td>锰硅</td><td>🟢</td><td>09:50@5878</td><td>14:00@5892</td><td class="profit-positive">+700</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-01-29</td><td>硅铁</td><td>🟢</td><td>09:45@5704</td><td>13:45@5716</td><td class="profit-positive">+600</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-03-06</td><td>锰硅</td><td>🟢</td><td>09:55@6106</td><td>14:45@6116</td><td class="profit-positive">+500</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-03-13</td><td>尿素</td><td>🟢</td><td>09:35@1894</td><td>11:20@1896</td><td class="profit-positive">+360</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-03-05</td><td>豆粕</td><td>🟢</td><td>09:40@2837</td><td>13:55@2841</td><td class="profit-positive">+320</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-01-29</td><td>锰硅</td><td>🟢</td><td>09:45@5908</td><td>14:05@5914</td><td class="profit-positive">+300</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-03-17</td><td>硅铁</td><td>🟢</td><td>09:35@5924</td><td>11:00@5930</td><td class="profit-positive">+300</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-03-13</td><td>锰硅</td><td>🟢</td><td>09:35@6218</td><td>11:25@6220</td><td class="profit-positive">+100</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                        <tr><td>2026-03-17</td><td>豆粕</td><td>🟢</td><td>09:50@3042</td><td>11:15@3043</td><td class="profit-positive">+80</td><td><span class="badge badge-tp">止盈 -EXPM</span></td></tr>
+                    </tbody></table>
+                <table id="tab-loss" class="tab-content"><thead><tr><th>日期</th><th>品种</th><th>方向</th><th>入场</th><th>出场</th><th>盈亏</th><th>出场</th></tr></thead><tbody>
+                        <tr><td>2025-05-14</td><td>锰硅</td><td>🟢</td><td>09:45@5902</td><td>09:55@5869</td><td class="profit-negative">-1,650</td><td><span class="badge badge-sl">止损</span></td></tr>
+                        <tr><td>2025-04-25</td><td>尿素</td><td>🔴</td><td>09:35@1756</td><td>09:50@1762</td><td class="profit-negative">-1,200</td><td><span class="badge badge-sl">止损</span></td></tr>
+                        <tr><td>2025-04-23</td><td>硅铁</td><td>🔴</td><td>10:00@5678</td><td>11:00@5684</td><td class="profit-negative">-300</td><td><span class="badge badge-sl">止损 -EXPM</span></td></tr>
+                    </tbody></table>
+
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🐱 咕噜 AI 生成 | 策略：EXPMA 两线模式 (E5/E10)</p>
+            <p>⚠️ 历史回测不代表未来表现 | 投资需谨慎</p>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById('tab-' + tabName).classList.add('active');
+        }
+
+        const ctx = document.getElementById('equityChart').getContext('2d');
+        const equityData = [{"x": "2025-04", "y": 102500}, {"x": "2025-05", "y": 105700}, {"x": "2025-06", "y": 109800}, {"x": "2025-07", "y": 118300}, {"x": "2025-08", "y": 123500}, {"x": "2025-09", "y": 130300}, {"x": "2025-10", "y": 134800}, {"x": "2025-11", "y": 142000}, {"x": "2025-12", "y": 147100}, {"x": "2026-01", "y": 153400}, {"x": "2026-02", "y": 162300}, {"x": "2026-03", "y": 171620}];
+        
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                datasets: [{
+                    label: '账户权益',
+                    data: equityData,
+                    borderColor: '#667eea',
+                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { grid: { display: false }, ticks: { maxRotation: 45 } },
+                    y: { ticks: { callback: v => v.toLocaleString() + '元' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

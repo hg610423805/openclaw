@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXPMA 策略回测报告 - 锰硅/硅铁</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { background: white; border-radius: 15px; padding: 30px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .header h1 { color: #667eea; margin-bottom: 10px; }
+        .header p { color: #666; }
+        .card { background: white; border-radius: 15px; padding: 25px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .card h2 { color: #333; margin-bottom: 20px; border-bottom: 3px solid #667eea; padding-bottom: 10px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .stat-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 10px; text-align: center; }
+        .stat-box.green { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
+        .stat-box.red { background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%); }
+        .stat-box.orange { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .stat-value { font-size: 32px; font-weight: bold; margin-bottom: 5px; }
+        .stat-label { font-size: 14px; opacity: 0.9; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: #f8f9fa; color: #333; font-weight: 600; }
+        tr:hover { background: #f8f9fa; }
+        .profit { color: #11998e; font-weight: bold; }
+        .loss { color: #eb3349; font-weight: bold; }
+        .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        .badge-success { background: #d4edda; color: #155724; }
+        .badge-warning { background: #fff3cd; color: #856404; }
+        .badge-info { background: #d1ecf1; color: #0c5460; }
+        .footer { text-align: center; color: white; margin-top: 30px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 EXPMA 双向策略回测报告</h1>
+            <p>回测周期：2025-03-22 至 2026-03-22（1 年）| 数据来源：天勤量化真实历史数据</p>
+        </div>
+
+        <div class="card">
+            <h2>🎯 锰硅主力连续 (KQ.m@CZCE.SM)</h2>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-value">¥180</div>
+                    <div class="stat-label">总盈利</div>
+                </div>
+                <div class="stat-box green">
+                    <div class="stat-value">0.18%</div>
+                    <div class="stat-label">年化收益</div>
+                </div>
+                <div class="stat-box orange">
+                    <div class="stat-value">31.19%</div>
+                    <div class="stat-label">胜率</div>
+                </div>
+                <div class="stat-box red">
+                    <div class="stat-value">2.00%</div>
+                    <div class="stat-label">最大回撤</div>
+                </div>
+            </div>
+            <div style="margin-top: 20px;">
+                <h3>📈 月度盈亏</h3>
+                <table>
+                    <tr><th>月份</th><th>盈亏 (元)</th><th>状态</th></tr>
+                    <tr><td>2025-05</td><td class="profit">+1,340</td><td><span class="badge badge-success">盈利</span></td></tr>
+                    <tr><td>2025-06</td><td class="profit">+350</td><td><span class="badge badge-success">盈利</span></td></tr>
+                    <tr><td>2025-07</td><td class="loss">-40</td><td><span class="badge badge-warning">亏损</span></td></tr>
+                    <tr><td>2025-08</td><td class="loss">-520</td><td><span class="badge badge-warning">亏损</span></td></tr>
+                    <tr><td>2025-09</td><td class="profit">+750</td><td><span class="badge badge-success">盈利</span></td></tr>
+                    <tr><td>2025-10</td><td class="loss">-320</td><td><span class="badge badge-warning">亏损</span></td></tr>
+                    <tr><td>2025-11</td><td class="loss">-40</td><td><span class="badge badge-warning">亏损</span></td></tr>
+                    <tr><td>2025-12</td><td class="loss">-40</td><td><span class="badge badge-warning">亏损</span></td></tr>
+                    <tr><td>2026-01</td><td class="profit">+510</td><td><span class="badge badge-success">盈利</span></td></tr>
+                    <tr><td>2026-02</td><td class="loss">-20</td><td><span class="badge badge-warning">亏损</span></td></tr>
+                    <tr><td>2026-03</td><td class="loss">-1,790</td><td><span class="badge badge-warning">亏损</span></td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🎯 硅铁主力连续 (KQ.m@CZCE.SF)</h2>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-value">¥5,120</div>
+                    <div class="stat-label">总盈利</div>
+                </div>
+                <div class="stat-box green">
+                    <div class="stat-value">5.12%</div>
+                    <div class="stat-label">年化收益</div>
+                </div>
+                <div class="stat-box orange">
+                    <div class="stat-value">31.61%</div>
+                    <div class="stat-label">胜率</div>
+                </div>
+                <div class="stat-box red">
+                    <div class="stat-value">1.09%</div>
+                    <div class="stat-label">最大回撤</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>💡 策略说明</h2>
+            <ul style="line-height: 2; color: #555;">
+                <li><strong>日线趋势判断：</strong>EXPMA5/10/20 多头/空头排列</li>
+                <li><strong>5 分钟入场：</strong>突破前 6 根 K 线高低点</li>
+                <li><strong>止损：</strong>跌破/突破入场 K 线最低/高点</li>
+                <li><strong>止盈：</strong>EXPMA 死叉/金叉出场</li>
+                <li><strong>强制平仓：</strong>每日 14:57 收盘前平仓</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>📋 结论与建议</h2>
+            <div style="line-height: 2; color: #555;">
+                <p><strong>✅ 硅铁表现较好：</strong>年化收益 5.12%，最大回撤仅 1.09%，策略在硅铁品种上表现稳健。</p>
+                <p><strong>⚠️ 锰硅表现一般：</strong>年化收益仅 0.18%，2026 年 3 月出现较大亏损 (-1,790 元)，需优化止损策略。</p>
+                <p><strong>📊 共同问题：</strong>胜率均低于 35%，说明策略在震荡市中表现不佳，建议增加趋势过滤条件。</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>生成时间：2026-03-22 11:00 | 咕噜量化助手 🐱</p>
+        </div>
+    </div>
+</body>
+</html>

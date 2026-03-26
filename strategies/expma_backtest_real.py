@@ -319,10 +319,10 @@ if __name__ == "__main__":
     END_DATE = "2026-03-22"
     INITIAL_CAPITAL = 100000
     
-    # 测试品种（使用正确的郑商所合约代码）
+    # 测试品种（使用天勤量化 KQ.m@主力连续格式）
     SYMBOLS = [
-        ("CZCE.SF00", "硅铁主力连续"),
-        ("CZCE.SM00", "锰硅主力连续")
+        ("KQ.m@CZCE.SM", "锰硅主力连续"),
+        ("KQ.m@CZCE.SF", "硅铁主力连续")
     ]
     
     results = {}
