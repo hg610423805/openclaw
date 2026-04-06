@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🐱 咕噜期货私教课 · 补充课：实战纪律10条</title>
+<style>
+:root {
+  --bg: #0f1419;
+  --card: #1a2332;
+  --border: #2d3f54;
+  --accent: #f7931a;
+  --green: #26a69a;
+  --red: #ef5350;
+  --text: #e8eaed;
+  --muted: #8899aa;
+  --highlight: #ffd54f;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+h1 {
+  text-align: center;
+  font-size: 2em;
+  margin: 30px 0;
+  background: linear-gradient(135deg, var(--accent), var(--highlight));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+h2 {
+  font-size: 1.5em;
+  color: var(--accent);
+  margin: 40px 0 20px;
+  padding-left: 15px;
+  border-left: 4px solid var(--accent);
+}
+h3 {
+  font-size: 1.2em;
+  color: var(--highlight);
+  margin: 25px 0 15px;
+}
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  margin: 20px 0;
+}
+.quote {
+  border-left: 3px solid var(--accent);
+  padding: 12px 20px;
+  margin: 15px 0;
+  background: rgba(247, 147, 26, 0.08);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--highlight);
+}
+.rule-num {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  background: var(--accent);
+  color: var(--bg);
+  border-radius: 50%;
+  font-weight: bold;
+  margin-right: 10px;
+}
+.compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin: 15px 0;
+}
+.compare-wrong {
+  background: rgba(239, 83, 80, 0.12);
+  border: 1px solid rgba(239, 83, 80, 0.3);
+  border-radius: 8px;
+  padding: 15px;
+}
+.compare-right {
+  background: rgba(38, 166, 154, 0.12);
+  border: 1px solid rgba(38, 166, 154, 0.3);
+  border-radius: 8px;
+  padding: 15px;
+}
+.compare-wrong::before { content: "❌ 错误做法"; display: block; color: var(--red); font-weight: bold; margin-bottom: 8px; }
+.compare-right::before { content: "✅ 正确做法"; display: block; color: var(--green); font-weight: bold; margin-bottom: 8px; }
+canvas {
+  display: block;
+  margin: 15px auto;
+  border-radius: 8px;
+  max-width: 100%;
+}
+.chart-title {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9em;
+  margin-top: 8px;
+}
+.key-point {
+  background: rgba(255, 213, 79, 0.1);
+  border: 1px solid rgba(255, 213, 79, 0.3);
+  border-radius: 8px;
+  padding: 15px 20px;
+  margin: 15px 0;
+  font-size: 1.1em;
+}
+.key-point::before { content: "⚡ "; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 15px 0;
+}
+th, td {
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  text-align: left;
+}
+th { background: rgba(247, 147, 26, 0.15); color: var(--accent); }
+tr:nth-child(even) { background: rgba(255,255,255,0.03); }
+.tag-red { color: var(--red); font-weight: bold; }
+.tag-green { color: var(--green); font-weight: bold; }
+.summary-box {
+  background: linear-gradient(135deg, rgba(247,147,26,0.1), rgba(255,213,79,0.05));
+  border: 2px solid var(--accent);
+  border-radius: 12px;
+  padding: 24px;
+  margin: 30px 0;
+}
+p { margin: 10px 0; }
+ul, ol { margin: 10px 0 10px 20px; }
+li { margin: 5px 0; }
+</style>
+</head>
+<body>
+
+<h1>🐱 补充课：实战纪律10条</h1>
+<p style="text-align:center;color:var(--muted);">前4课遗漏的重要知识点，全部补齐。每条配案例图解。</p>
+
+<!-- ====== 第1条：死鱼口诀 ====== -->
+<h2><span class="rule-num">1</span>死鱼口诀——最简单的方向判定</h2>
+
+<div class="card">
+<p>这是整个知识库里<strong>最适合新手的公式</strong>，来自Q020和Q031。做日内5分钟交易时，方向判断只需要看一样东西：</p>
+
+<div class="key-point">
+日线最近出现的是<span class="tag-green">底分型</span> → 只做<span class="tag-green">多</span><br>
+日线最近出现的是<span class="tag-red">顶分型</span> → 只做<span class="tag-red">空</span>
+</div>
+
+<p>为什么叫"死鱼"？因为这个方法简单到像死鱼一样——不需要动脑子，看一眼日线就知道今天只做什么方向。</p>
+
+<canvas id="chart1" width="880" height="400"></canvas>
+<div class="chart-title">图1：死鱼口诀示意 · 日线走势决定5分钟交易方向</div>
+
+<div class="quote">"5分钟的日内交易，死鱼口诀：日线顶分型下，就做空；日线底分型上，就做多。" ——高维牛 Q020</div>
+</div>
+
+<!-- ====== 第2条：建仓两阶段 ====== -->
+<h2><span class="rule-num">2</span>建仓两阶段——先保命，后赚钱</h2>
+
+<div class="card">
+<p>开仓后你的心态应该分成<strong>两个截然不同的阶段</strong>：</p>
+
+<canvas id="chart2" width="880" height="360"></canvas>
+<div class="chart-title">图2：建仓两阶段 · 做空案例</div>
+
+<table>
+<tr><th>阶段</th><th>状态</th><th>核心任务</th><th>心态</th></tr>
+<tr><td><strong>第一阶段</strong></td><td>还没盈利 / 微亏微赚</td><td>保本！力求全身而退</td><td>随时准备跑</td></tr>
+<tr><td><strong>第二阶段</strong></td><td>有了浮动盈利</td><td>赚得多！移动止损，不急着平仓</td><td>让利润奔跑</td></tr>
+</table>
+
+<div class="quote">"盈利之前主要任务是保本，有了盈利之后主要任务是赚的多，跟随主趋势，移动止损，不必急着获利了结。" ——高维牛 Q020</div>
+</div>
+
+<!-- ====== 第3条：不交易的情形 ====== -->
+<h2><span class="rule-num">3</span>什么时候不做——比"做什么"更重要</h2>
+
+<div class="card">
+<p>高手和新手最大的区别不是怎么赚钱，而是<strong>知道什么时候不出手</strong>。</p>
+
+<canvas id="chart3" width="880" height="360"></canvas>
+<div class="chart-title">图3：三种不交易的走势形态</div>
+
+<h3>不交易清单：</h3>
+<ol>
+<li><strong>多空势均力敌</strong>——反弹幅度≈下跌幅度，时间也差不多 → 不押注</li>
+<li><strong>方向不明朗</strong>——走势纠缠在一起，分不清涨跌 → 看看就行</li>
+<li><strong>不是单边流畅走势</strong>——走势像夹心饼干来回晃 → 不开仓</li>
+<li><strong>走势胜率不高</strong> → 不下注</li>
+<li><strong>心情不好</strong> → 关电脑出门玩</li>
+</ol>
+
+<div class="key-point">要捡死鱼，不参与肉搏。不稳赢的事情，没啥干的。</div>
+
+<div class="quote">"需要的是单边流畅走势，不是夹心饼干。" ——高维牛 Q020</div>
+</div>
+
+<!-- ====== 第4条：猜vs已经 ====== -->
+<h2><span class="rule-num">4</span>「猜」vs「已经」——一字之差，天壤之别</h2>
+
+<div class="card">
+<p>这是新手最容易犯的错。看到前期高点就想"肯定过不去"，提前做空——这叫<strong>碰瓷</strong>。</p>
+
+<canvas id="chart4" width="880" height="380"></canvas>
+<div class="chart-title">图4：「猜突破不了」vs「已经突破不了」的区别</div>
+
+<div class="compare">
+<div class="compare-wrong">
+看到价格接近前期高点 → <strong>猜</strong>它突破不了 → 提前做空<br><br>
+结果：价格可能直接突破新高，你被打脸止损
+</div>
+<div class="compare-right">
+价格冲到前期高点附近 → 等它<strong>已经</strong>冲不过去 → 等它<strong>已经</strong>开始往回走 → 再做空<br><br>
+结果：确认了空头占优，胜率大增
+</div>
+</div>
+
+<div class="quote">"真要做空，是他'已经'突破不了，'已经'往回走。正在往上攻，去做空是碰瓷。" ——高维牛 Q020</div>
+</div>
+
+<!-- ====== 第5条：趋势≠走势 ====== -->
+<h2><span class="rule-num">5</span>趋势 ≠ 走势——别混用这两个词</h2>
+
+<div class="card">
+<p>我之前把这两个概念混着用了，但原文（Q021）有严格区分：</p>
+
+<canvas id="chart5" width="880" height="350"></canvas>
+<div class="chart-title">图5：走势 vs 趋势——有没有经过「考验」是关键</div>
+
+<table>
+<tr><th></th><th>走势</th><th>趋势</th></tr>
+<tr><td><strong>定义</strong></td><td>泛指所有价格运动，几根K线也算</td><td>经过「考验」（至少一个中继）后依然延续原方向</td></tr>
+<tr><td><strong>稳定性</strong></td><td>低——可能只是假动作</td><td>高——经历了"肯定→否定→再肯定"</td></tr>
+<tr><td><strong>可交易性</strong></td><td>不一定能做</td><td>可以放心顺势做</td></tr>
+<tr><td><strong>中继数量</strong></td><td>可能没有</td><td>至少1个以上</td></tr>
+</table>
+
+<div class="key-point">一段价格运动不叫趋势。只有经过反方向的「考验」后继续原方向，才叫趋势。趋势是经过验证的走势。</div>
+</div>
+
+<!-- ====== 第6条：方向一致性 ====== -->
+<h2><span class="rule-num">6</span>方向一致性——频繁切换 = 快速亏损</h2>
+
+<div class="card">
+<p>这条来自Q014和Q032。很多新手看到一个小反弹就切做多，跌一下又切做空——<strong>来回被打耳光</strong>。</p>
+
+<canvas id="chart6" width="880" height="380"></canvas>
+<div class="chart-title">图6：频繁切换多空 vs 坚持方向一致性</div>
+
+<div class="compare">
+<div class="compare-wrong">
+下跌中看到反弹 → 切做多<br>
+反弹失败又跌 → 切做空<br>
+又反弹 → 又切做多<br>
+<br>
+<strong>结果：3次交易3次止损</strong>
+</div>
+<div class="compare-right">
+日线下跌确认 → 只做空<br>
+反弹出现 → 不管，等反弹到压力位再开空<br>
+反弹突破止损 → 退出等待，不反手做多<br>
+<br>
+<strong>结果：只在确定性高的位置出手</strong>
+</div>
+</div>
+
+<div class="quote">"在琐屑无聊的波动中反反复复在多空之间频繁切换，妄想通吃所有交易机会，这是快速亏损的最佳策略。" ——高维牛 Q014</div>
+</div>
+
+<!-- ====== 第7条：走势分解唯一性 ====== -->
+<h2><span class="rule-num">7</span>走势分解的唯一性——一种走势只有一种分法</h2>
+
+<div class="card">
+<p>来自Q032。大走势里套着小走势，容易看花眼。解决方法：</p>
+
+<canvas id="chart7" width="880" height="380"></canvas>
+<div class="chart-title">图7：走势分解唯一性 · 橡胶5分钟示例</div>
+
+<h3>三个关键原则：</h3>
+<ol>
+<li><strong>统一周期</strong>：选定5分钟，就只看5分钟，不来回切换</li>
+<li><strong>分段唯一</strong>：一段走势从方向确认到方向改变，能分解为N段且只能分解为N段</li>
+<li><strong>当下优先</strong>：前面是什么走势不是最重要的，<strong>你正在做的这一段是什么方向才最重要</strong></li>
+</ol>
+
+<div class="quote">"能分解为4个，且只能分解为这4个——这就是唯一性。" ——高维牛 Q032</div>
+</div>
+
+<!-- ====== 第8条：降低频率 ====== -->
+<h2><span class="rule-num">8</span>少做 = 多赚——降低频率提高胜率</h2>
+
+<div class="card">
+<p>来自Q023。不需要提升任何技术，只需要<strong>减少冲动交易</strong>，胜率自动提高：</p>
+
+<canvas id="chart8" width="880" height="300"></canvas>
+<div class="chart-title">图8：去掉冲动交易后胜率变化</div>
+
+<table>
+<tr><th></th><th>交易次数</th><th>成功次数</th><th>胜率</th></tr>
+<tr><td>原来（含冲动交易）</td><td>100次</td><td>60次</td><td>60%</td></tr>
+<tr><td>去掉冲动交易后</td><td>80次</td><td>55次</td><td><strong>69%</strong></td></tr>
+<tr><td>只做高确定性机会</td><td>30次</td><td>22次</td><td><strong>73%</strong></td></tr>
+</table>
+
+<div class="key-point">去掉的20次冲动交易里，只有5次成功（胜率25%）。砍掉这些垃圾交易，整体胜率立刻提升。</div>
+
+<div class="quote">"啥也没干，甚至干的事情还变少了，胜率却提高了。这就像经营企业，涨价10%难，成本减少10%容易。" ——高维牛 Q023</div>
+</div>
+
+<!-- ====== 第9条：隐含前提 ====== -->
+<h2><span class="rule-num">9</span>隐含前提——散户不能照搬大师</h2>
+
+<div class="card">
+<p>来自Q002和Q012。索罗斯说要结合基本面，傅海棠说基本面第一——他们都对，但<strong>隐含前提不同</strong>：</p>
+
+<canvas id="chart9" width="880" height="300"></canvas>
+<div class="chart-title">图9：不同资金量级的隐含前提对比</div>
+
+<table>
+<tr><th></th><th>索罗斯/大基金</th><th>散户（你）</th></tr>
+<tr><td><strong>资金量</strong></td><td>千亿美元</td><td>几万到几十万</td></tr>
+<tr><td><strong>周期</strong></td><td>一年到几年</td><td>日内到几天</td></tr>
+<tr><td><strong>止损幅度</strong></td><td>50%-100%</td><td>几个点到几十个点</td></tr>
+<tr><td><strong>基本面作用</strong></td><td>核心驱动力</td><td>几乎没用（5分钟走势不需要）</td></tr>
+<tr><td><strong>建仓方式</strong></td><td>慢慢建仓几个月</td><td>一次性开仓</td></tr>
+</table>
+
+<div class="key-point">经典期货书里的策略，隐含前提是大资金+长周期。散户几万块钱做日内，要走「散户特色」的制胜之路。</div>
+
+<div class="quote">"不能把国外期货书上的理念套在自己身上来用，因为隐含前提不同。散户要走'散户特色'的制胜之路。" ——高维牛 Q012</div>
+</div>
+
+<!-- ====== 第10条：持仓量 ====== -->
+<h2><span class="rule-num">10</span>持仓量——被忽视的重要指标</h2>
+
+<div class="card">
+<p>来自Q012。期货不看MACD，但<strong>持仓量（OPI）</strong>很有用。建议用它替换MACD显示在图表底部。</p>
+
+<canvas id="chart10" width="880" height="400"></canvas>
+<div class="chart-title">图10：持仓量与走势的关系 · 军事比喻</div>
+
+<h3>持仓量的军事解读：</h3>
+<table>
+<tr><th>持仓量状态</th><th>军事比喻</th><th>交易含义</th></tr>
+<tr><td>持仓量小</td><td>小股部队零星战斗</td><td>行情小，随时可能被终结</td></tr>
+<tr><td>持仓量逐步增加</td><td>双方不断增兵</td><td>大行情正在酝酿</td></tr>
+<tr><td>盘整中持仓量极大</td><td>双方陈兵百万，准备恶战</td><td>突破后将是大行情</td></tr>
+<tr><td>持仓量达到极大值</td><td>倾巢而出</td><td>物极必反，走势可能转折</td></tr>
+<tr><td>持仓量减少</td><td>部队撤退</td><td>行情趋于弱势/盘整</td></tr>
+</table>
+
+<div class="quote">"大战都发生在双方投入重兵的时候，全军出动，全力以赴，不管谁输，都是严重的后果。" ——高维牛 Q012</div>
+</div>
+
+<!-- ====== 总结 ====== -->
+<div class="summary-box">
+<h2 style="border:none;padding:0;margin:0 0 15px;">📋 10条实战纪律速查表</h2>
+<table>
+<tr><th>#</th><th>纪律</th><th>一句话</th></tr>
+<tr><td>1</td><td>死鱼口诀</td><td>日线顶分型下做空，底分型上做多</td></tr>
+<tr><td>2</td><td>建仓两阶段</td><td>没赚先保命，赚了让它跑</td></tr>
+<tr><td>3</td><td>不交易情形</td><td>捡死鱼，不参与肉搏</td></tr>
+<tr><td>4</td><td>猜 vs 已经</td><td>不碰瓷，等「已经」确认再出手</td></tr>
+<tr><td>5</td><td>趋势≠走势</td><td>经过考验的走势才叫趋势</td></tr>
+<tr><td>6</td><td>方向一致性</td><td>频繁切换多空=快速亏损</td></tr>
+<tr><td>7</td><td>走势分解唯一性</td><td>统一周期，一段走势只有一种分法</td></tr>
+<tr><td>8</td><td>少做多赚</td><td>砍掉冲动交易，胜率自动提升</td></tr>
+<tr><td>9</td><td>隐含前提</td><td>散户不能照搬大师，走自己的路</td></tr>
+<tr><td>10</td><td>持仓量</td><td>替换MACD，辅助判断行情大小</td></tr>
+</table>
+</div>
+
+<p style="text-align:center;color:var(--muted);margin:40px 0;">—— 🐱 咕噜期货私教课 · 补充课完 ——</p>
+
+<script>
+// ====== 通用绘图工具 ======
+function drawKLine(ctx, x, o, h, l, c, w) {
+  const isUp = c >= o;
+  ctx.strokeStyle = isUp ? '#26a69a' : '#ef5350';
+  ctx.fillStyle = isUp ? '#26a69a' : '#ef5350';
+  // 影线
+  ctx.beginPath();
+  ctx.moveTo(x, h);
+  ctx.lineTo(x, l);
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+  // 实体
+  const top = Math.min(o, c);
+  const body = Math.abs(c - o) || 1;
+  if (isUp) {
+    ctx.strokeRect(x - w/2, top, w, body);
+  } else {
+    ctx.fillRect(x - w/2, top, w, body);
+  }
+}
+
+function yScale(val, min, max, top, bottom) {
+  return bottom - (val - min) / (max - min) * (bottom - top);
+}
+
+function drawArrow(ctx, x1, y1, x2, y2, color) {
+  ctx.strokeStyle = color;
+  ctx.fillStyle = color;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
+  ctx.stroke();
+  const angle = Math.atan2(y2-y1, x2-x1);
+  ctx.beginPath();
+  ctx.moveTo(x2, y2);
+  ctx.lineTo(x2 - 10*Math.cos(angle-0.4), y2 - 10*Math.sin(angle-0.4));
+  ctx.lineTo(x2 - 10*Math.cos(angle+0.4), y2 - 10*Math.sin(angle+0.4));
+  ctx.closePath();
+  ctx.fill();
+}
+
+function label(ctx, text, x, y, color, size, align) {
+  ctx.fillStyle = color || '#e8eaed';
+  ctx.font = (size||13) + 'px "Microsoft YaHei", sans-serif';
+  ctx.textAlign = align || 'center';
+  ctx.fillText(text, x, y);
+}
+
+// ====== 图1：死鱼口诀 ======
+(function(){
+  const c = document.getElementById('chart1');
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height;
+  ctx.fillStyle = '#1a2332'; ctx.fillRect(0,0,W,H);
+  
+  // 日线K线数据（模拟）
+  const data = [
+    {o:100,h:103,l:98,c:102}, {o:102,h:106,l:101,c:105}, {o:105,h:108,l:104,c:107},
+    {o:107,h:110,l:106,c:109}, {o:109,h:112,l:107,c:108}, // 顶分型
+    {o:108,h:109,l:104,c:105}, {o:105,h:107,l:103,c:104},
+    {o:104,h:106,l:101,c:102}, {o:102,h:104,l:99,c:100},
+    {o:100,h:102,l:97,c:98}, {o:98,h:100,l:95,c:96}, // 底分型
+    {o:96,h:99,l:95,c:98}, {o:98,h:101,l:97,c:100},
+    {o:100,h:104,l:99,c:103}, {o:103,h:106,l:102,c:105},
+    {o:105,h:109,l:104,c:108}, {o:108,h:111,l:107,c:106}, // 顶分型
+    {o:106,h:107,l:103,c:104}, {o:104,h:105,l:100,c:101},
+    {o:101,h:103,l:98,c:99}
+  ];
+  
+  const min = 93, max = 114;
+  const top = 50, bot = 330;
+  const startX = 60, gap = 42;
+  const kw = 16;
+  
+  // 网格
+  ctx.strokeStyle = '#2d3f54'; ctx.lineWidth = 0.5;
+  for(let v=95; v<=112; v+=5) {
+    const y = yScale(v, min, max, top, bot);
+    ctx.beginPath(); ctx.moveTo(40,y); ctx.lineTo(W-20,y); ctx.stroke();
+    label(ctx, v, 28, y+4, '#8899aa', 11, 'right');
+  }
+  
+  // K线
+  data.forEach((d, i) => {
+    const x = startX + i * gap;
+    drawKLine(ctx, x, yScale(d.o,min,max,top,bot), yScale(d.h,min,max,top,bot), yScale(d.l,min,max,top,bot), yScale(d.c,min,max,top,bot), kw);
+  });
+  
+  // 标注顶分型
+  const topIdx = 4;
+  const topX = startX + topIdx * gap;
+  const topY = yScale(112, min, max, top, bot);
+  ctx.setLineDash([5,3]);
+  ctx.strokeStyle = '#ef5350'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(topX, topY); ctx.lineTo(W-20, topY); ctx.stroke();
+  ctx.setLineDash([]);
+  label(ctx, '日线顶分型 ▼', topX, topY - 12, '#ef5350', 14);
+  
+  // 标注顶分型下做空区域
+  ctx.fillStyle = 'rgba(239, 83, 80, 0.08)';
+  ctx.fillRect(startX + 5*gap - 20, topY, 6*gap, bot - topY);
+  label(ctx, '👇 顶分型之下：只做空', startX + 8*gap, topY + 25, '#ef5350', 14);
+  
+  // 标注底分型
+  const botIdx = 10;
+  const botX = startX + botIdx * gap;
+  const botY = yScale(95, min, max, top, bot);
+  ctx.setLineDash([5,3]);
+  ctx.strokeStyle = '#26a69a'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(botX, botY); ctx.lineTo(W-20, botY); ctx.stroke();
+  ctx.setLineDash([]);
+  label(ctx, '日线底分型 ▲', botX, botY + 20, '#26a69a', 14);
+  
+  // 标注底分型上做多区域
+  ctx.fillStyle = 'rgba(38, 166, 154, 0.08)';
+  ctx.fillRect(startX + 11*gap - 20, top, 5*gap, botY - top);
+  label(ctx, '👆 底分型之上：只做多', startX + 14*gap, botY - 15, '#26a69a', 14);
+  
+  // 第二个顶分型
+  const top2Idx = 16;
+  const top2X = startX + top2Idx * gap;
+  const top2Y = yScale(111, min, max, top, bot);
+  ctx.setLineDash([5,3]);
+  ctx.strokeStyle = '#ef5350'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(top2X, top2Y); ctx.lineTo(W-20, top2Y); ctx.stroke();
+  ctx.setLineDash([]);
+  label(ctx, '新顶分型 ▼', top2X, top2Y - 12, '#ef5350', 14);
+  
+  label(ctx, '日线K线走势', W/2, H - 15, '#8899aa', 12);
+})();
+
+// ====== 图2：建仓两阶段 ======
+(function(){
+  const c = document.getElementById('chart2');
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height;
+  ctx.fillStyle = '#1a2332'; ctx.fillRect(0,0,W,H);
+  
+  // 做空案例：价格线
+  const prices = [200, 202, 205, 203, 198, 196, 200, 197, 192, 188, 185, 190, 186, 182, 178, 175, 172, 176, 170, 168];
+  const min = 165, max = 210;
+  const top = 40, bot = 300;
+  const startX = 80, gap = 40;
+  
+  // 网格
+  ctx.strokeStyle = '#2d3f54'; ctx.lineWidth = 0.5;
+  for(let v=170; v<=205; v+=5) {
+    const y = yScale(v, min, max, top, bot);
+    ctx.beginPath(); ctx.moveTo(60,y); ctx.lineTo(W-20,y); ctx.stroke();
+    label(ctx, v, 45, y+4, '#8899aa', 11, 'right');
+  }
+  
+  // 价格线
+  ctx.strokeStyle = '#e8eaed'; ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  prices.forEach((p,i) => {
+    const x = startX + i * gap;
+    const y = yScale(p, min, max, top, bot);
+    i === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  });
+  ctx.stroke();
+  
+  // 开仓点
+  const entryIdx = 2, entryPrice = 205;
+  const entryX = startX + entryIdx * gap;
+  const entryY = yScale(entryPrice, min, max, top, bot);
+  ctx.fillStyle = '#f7931a';
+  ctx.beginPath(); ctx.arc(entryX, entryY, 7, 0, Math.PI*2); ctx.fill();
+  label(ctx, '开空仓 @205', entryX + 5, entryY - 15, '#f7931a', 13, 'left');
+  
+  // 止损线
+  const stopY = yScale(208, min, max, top, bot);
+  ctx.setLineDash([5,3]); ctx.strokeStyle = '#ef5350'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(entryX, stopY); ctx.lineTo(startX + 6*gap, stopY); ctx.stroke();
+  ctx.setLineDash([]);
+  label(ctx, '止损 @208', entryX + 50, stopY - 8, '#ef5350', 12);
+  
+  // 第一阶段标注
+  ctx.fillStyle = 'rgba(239, 83, 80, 0.08)';
+  ctx.fillRect(entryX - 10, top, 5*gap, bot - top);
+  label(ctx, '第一阶段：保本', entryX + 2*gap, H - 25, '#ef5350', 14);
+  
+  // 保本线（移动止损到成本）
+  const costY = yScale(205, min, max, top, bot);
+  const moveIdx = 7;
+  const moveX = startX + moveIdx * gap;
+  ctx.setLineDash([5,3]); ctx.strokeStyle = '#26a69a'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(moveX, costY); ctx.lineTo(W-30, costY); ctx.stroke();
+  ctx.setLineDash([]);
+  label(ctx, '移动止损到成本 @205（保本）', moveX + 100, costY - 10, '#26a69a', 12);
+  
+  // 第二阶段标注
+  ctx.fillStyle = 'rgba(38, 166, 154, 0.08)';
+  ctx.fillRect(moveX - 10, top, (prices.length - moveIdx)*gap, bot - top);
+  label(ctx, '第二阶段：让利润奔跑', moveX + 4.5*gap, H - 25, '#26a69a', 14);
+  
+  // 继续下移止损
+  const stop2Y = yScale(197, min, max, top, bot);
+  const stop2X = startX + 11 * gap;
+  ctx.setLineDash([5,3]); ctx.strokeStyle = '#ffd54f'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(stop2X, stop2Y); ctx.lineTo(W-30, stop2Y); ctx.stroke();
+  ctx.setLineDash([]);
+  label(ctx, '再下移止损 @197（锁利润）', stop2X + 80, stop2Y - 10, '#ffd54f', 12);
+})();
+
+// ====== 图3：不交易的走势形态 ======
+(function(){
+  const c = document.getElementById('chart3');
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height;
+  ctx.fillStyle = '#1a2332'; ctx.fillRect(0,0,W,H);
+  
+  // 三个子图
+  const sections = [
+    { title: '① 势均力敌 → 不做', x: 30, w: 260 },
+    { title: '② 方向不明 → 不做', x: 310, w: 260 },
+    { title: '③ 单边流畅 → 做！', x: 590, w: 260 }
+  ];
+  
+  sections.forEach(s => {
+    ctx.strokeStyle = '#2d3f54'; ctx.lineWidth = 1;
+    ctx.strokeRect(s.x, 40, s.w, 260);
+    label(ctx, s.title, s.x + s.w/2, 30, s.title.includes('做！') ? '#26a69a' : '#ef5350', 13);
+  });
+  
+  // ① 势均力敌：V形上下对称
+  const p1 = [200,195,190,185,190,195,200,195,190,195,200];
+  ctx.strokeStyle = '#8899aa'; ctx.lineWidth = 2;
+  ctx.beginPath();
+  p1.forEach((v,i) => {
+    const x = 40 + i * 24;
+    const y = 60 + (210 - v) * 2.5;
+    i === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  });
+  ctx.stroke();
+  label(ctx, '反弹≈下跌', 160, 270, '#ef5350', 12);
+  label(ctx, '❌', 160, 170, '#ef5350', 24);
+  
+  // ② 方向不明：锯齿形
+  const p2 = [195,200,192,198,190,196,188,194,192,198,190];
+  ctx.strokeStyle = '#8899aa'; ctx.lineWidth = 2;
+  ctx.beginPath();
+  p2.forEach((v,i) => {
+    const x = 320 + i * 24;
+    const y = 60 + (210 - v) * 2.5;
+    i === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  });
+  ctx.stroke();
+  label(ctx, '纠缠不清', 440, 270, '#ef5350', 12);
+  label(ctx, '❌', 440, 170, '#ef5350', 24);
+  
+  // ③ 单边流畅：明确下跌
+  const p3 = [205,202,198,200,195,192,188,190,185,182,178];
+  ctx.strokeStyle = '#26a69a'; ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  p3.forEach((v,i) => {
+    const x = 600 + i * 24;
+    const y = 60 + (210 - v) * 2.5;
+    i === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  });
+  ctx.stroke();
+  label(ctx, '方向清晰，顺势做空', 720, 270, '#26a69a', 12);
+  label(ctx, '✅', 720, 120, '#26a69a', 24);
+})();
+
+// ====== 图4：猜 vs 已经 ======
+(function(){
+  const c = document.getElementById('chart4');
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height;
+  ctx.fillStyle = '#1a2332'; ctx.fillRect(0,0,W,H);
+  
+  // 左半：猜（错误）
+  ctx.strokeStyle = '#2d3f54'; ctx.lineWidth = 1;
+  ctx.strokeRect(20, 40, W/2 - 30, 300);
+  label(ctx, '❌ 猜它过不去 → 碰瓷', W/4, 30, '#ef5350', 14);
+  
+  const prices1 = [170,175,180,185,190,195,198,200,203,208,212,215];
+  ctx.strokeStyle = '#26a69a'; ctx.lineWidth = 2;
+  ctx.beginPath();
+  prices1.forEach((v,i) => {
+    const x = 40 + i * 34;
+    const y = 320 - (v-165)*3.5;
+    i === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  });
+  ctx.stroke();
+  
+  // 前高线
+  const prevHighY = 320 - (200-165)*3.5;
+  ctx.setLineDash([5,3]); ctx.strokeStyle = '#8899aa'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(30, prevHighY); ctx.lineTo(W/2-20, prevHighY); ctx.stroke();
+  ctx.setLineDash([]);
+  label(ctx, '前期高点 200', 100, prevHighY - 8, '#8899aa', 11);
+  
+  // 碰瓷开空位置
+  const crashX = 40 + 7 * 34, crashY = 320 - (200-165)*3.5;
+  ctx.fillStyle = '#ef5350';
+  ctx.beginPath(); ctx.arc(crashX, crashY, 7, 0, Math.PI*2); ctx.fill();
+  label(ctx, '在这里猜顶做空', crashX - 20, crashY + 25, '#ef5350', 12);
+  label(ctx, '结果直接突破！', crashX + 30, crashY - 40, '#ef5350', 13);
+  drawArrow(ctx, crashX + 20, crashY - 30, crashX + 80, crashY - 70, '#ef5350');
+  
+  // 右半：已经（正确）
+  ctx.strokeStyle = '#2d3f54'; ctx.lineWidth = 1;
+  ctx.strokeRect(W/2 + 10, 40, W/2 - 30, 300);
+  label(ctx, '✅ 等它已经过不去再做', W*3/4, 30, '#26a69a', 14);
+  
+  const prices2 = [170,175,180,185,190,195,199,197,193,195,198,196,192,188,184];
+  ctx.strokeStyle = '#e8eaed'; ctx.lineWidth = 2;
+  ctx.beginPath();
+  prices2.forEach((v,i) => {
+    const x = W/2 + 30 + i * 28;
+    const y = 320 - (v-165)*3.5;
+    i === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  });
+  ctx.stroke();
+  
+  // 前高线
+  ctx.setLineDash([5,3]); ctx.strokeStyle = '#8899aa'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(W/2+20, prevHighY); ctx.lineTo(W-20, prevHighY); ctx.stroke();
+  ctx.setLineDash([]);
+  label(ctx, '前期高点 200', W/2 + 100, prevHighY - 8, '#8899aa', 11);
+  
+  // 冲高回落
+  const peakX = W/2 + 30 + 6 * 28;
+  const peakY = 320 - (199-165)*3.5;
+  label(ctx, '冲到199 过不去', peakX, peakY - 15, '#ffd54f', 11);
+  
+  // 确认做空位置
+  const confirmX = W/2 + 30 + 10 * 28;
+  const confirmY = 320 - (198-165)*3.5;
+  label(ctx, '再冲198 还是过不去', confirmX, confirmY - 15, '#ffd54f', 11);
+  
+  const entryX = W/2 + 30 + 11 * 28;
+  const entryY = 320 - (196-165)*3.5;
+  ctx.fillStyle = '#26a69a';
+  ctx.beginPath(); ctx.arc(entryX, entryY, 7, 0, Math.PI*2); ctx.fill();
+  label(ctx, '「已经」回落 → 做空', entryX - 20, entryY + 22, '#26a69a', 12);
+})();
+
+// ====== 图5：走势 vs 趋势 ======
+(function(){
+  const c = document.getElementById('chart5');
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height;
+  ctx.fillStyle = '#1a2332'; ctx.fillRect(0,0,W,H);
+  
+  // 左：走势（没有中继）
+  ctx.strokeStyle = '#2d3f54'; ctx.lineWidth = 1;
+  ctx.strokeRect(20, 50, W/2 - 30, 250);
+  label(ctx, '走势（几根K线上涨，没有考验）', W/4, 38, '#8899aa', 13);
+  
+  const p1 = [100,103,106,109,112,115];
+  ctx.strokeStyle = '#26a69a'; ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  p1.forEach((v,i) => {
+    const x = 60 + i * 60;
+    const y = 280 - (v-95)*6;
+    i === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  });
+  ctx.stroke();
+  label(ctx, '只是上涨，没经过回调考验', W/4, 275, '#8899aa', 12);
+  label(ctx, '❓ 不确定能不能持续', W/4, 295, '#ffd54f', 12);
+  
+  // 右：趋势（有中继）
+  ctx.strokeStyle = '#2d3f54'; ctx.lineWidth = 1;
+  ctx.strokeRect(W/2 + 10, 50, W/2 - 30, 250);
+  label(ctx, '趋势（有中继，经过考验）', W*3/4, 38, '#26a69a', 13);
+  
+  const p2 = [100,105,110,107,104,108,113,110,107,112,118,115,113,118,124];
+  ctx.strokeStyle = '#26a69a'; ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  p2.forEach((v,i) => {
+    const x = W/2 + 30 + i * 27;
+    const y = 280 - (v-95)*6;
+    i === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  });
+  ctx.stroke();
+  
+  // 标注中继
+  const midX1 = W/2 + 30 + 4*27, midY1 = 280 - (104-95)*6;
+  ctx.fillStyle = 'rgba(247,147,26,0.3)';
+  ctx.beginPath(); ctx.arc(midX1, midY1, 15, 0, Math.PI*2); ctx.fill();
+  label(ctx, '中继1', midX1, midY1 + 28, '#f7931a', 11);
+  
+  const midX2 = W/2 + 30 + 8*27, midY2 = 280 - (107-95)*6;
+  ctx.fillStyle = 'rgba(247,147,26,0.3)';
+  ctx.beginPath(); ctx.arc(midX2, midY2, 15, 0, Math.PI*2); ctx.fill();
+  label(ctx, '中继2', midX2, midY2 + 28, '#f7931a', 11);
+  
+  const midX3 = W/2 + 30 + 12*27, midY3 = 280 - (113-95)*6;
+  ctx.fillStyle = 'rgba(247,147,26,0.3)';
+  ctx.beginPath(); ctx.arc(midX3, midY3, 15, 0, Math.PI*2); ctx.fill();
+  label(ctx, '中继3', midX3, midY3 + 28, '#f7931a', 11);
+  
+  label(ctx, '回调后继续涨 = 经过考验', W*3/4, 275, '#26a69a', 12);
+  label(ctx, '✅ 这才是趋势，可以放心做', W*3/4, 295, '#26a69a', 12);
+})();
+
+// ====== 图6：频繁切换 vs 方向一致 ======
+(function(){
+  const c = document.getElementById('chart6');
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height;
+  ctx.fillStyle = '#1a2332'; ctx.fillRect(0,0,W,H);
+  
+  // 走势线（下跌趋势中有反弹）
+  const prices = [210,207,204,208,205,201,198,203,200,196,193,197,194,190,187];
+  const min = 183, max = 215;
+  const top = 50, bot = 310;
+  
+  // 网格
+  ctx.strokeStyle = '#2d3f54'; ctx.lineWidth = 0.5;
+  for(let v = 185; v <= 210; v += 5) {
+    const y = yScale(v, min, max, top, bot);
+    ctx.beginPath(); ctx.moveTo(40, y); ctx.lineTo(W-20, y); ctx.stroke();
+  }
+  
+  // 价格线
+  const gap = 56;
+  ctx.strokeStyle = '#e8eaed'; ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  prices.forEach((v,i) => {
+    const x = 60 + i * gap;
+    const y = yScale(v, min, max, top, bot);
+    i === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  });
+  ctx.stroke();
+  
+  // 错误做法标注：每次反弹都切换
+  const wrongTrades = [
+    {idx:3, dir:'多', reason:'看到反弹切做多'},
+    {idx:5, dir:'空', reason:'又跌了切做空'},
+    {idx:7, dir:'多', reason:'又反弹切做多'},
+    {idx:9, dir:'空', reason:'又跌了切做空'}
+  ];
+  wrongTrades.forEach(t => {
+    const x = 60 + t.idx * gap;
+    const y = yScale(prices[t.idx], min, max, top, bot);
+    ctx.fillStyle = '#ef5350';
+    ctx.beginPath(); ctx.arc(x, y, 5, 0, Math.PI*2); ctx.fill();
+    label(ctx, '❌' + t.dir, x, y - 15, '#ef5350', 11);
+  });
+  label(ctx, '频繁切换 → 4次交易4次止损', W/2, bot + 25, '#ef5350', 13);
+  
+  // 正确做法标注
+  const rightTrades = [
+    {idx:3, price:208}, {idx:7, price:203}, {idx:11, price:197}
+  ];
+  rightTrades.forEach(t => {
+    const x = 60 + t.idx * gap;
+    const y = yScale(t.price, min, max, top, bot);
+    ctx.fillStyle = '#26a69a';
+    ctx.beginPath(); ctx.arc(x, y, 5, 0, Math.PI*2); ctx.fill();
+    label(ctx, '✅空', x, y + 18, '#26a69a', 11);
+  });
+  label(ctx, '方向一致 → 每次反弹到压力位都开空', W/2, bot + 45, '#26a69a', 13);
+})();
+
+// ====== 图7：走势分解唯一性 ======
+(function(){
+  const c = document.getElementById('chart7');
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height;
+  ctx.fillStyle = '#1a2332'; ctx.fillRect(0,0,W,H);
+  
+  // 模拟4段走势
+  const segments = [
+    {prices:[200,196,192,188,185,183], color:'#ef5350', label:'①下跌'},
+    {prices:[183,187,190,194,198,201], color:'#26a69a', label:'②上涨'},
+    {prices:[201,198,195,191,188,186], color:'#ef5350', label:'③下跌'},
+    {prices:[186,190,193,197,200,204], color:'#26a69a', label:'④上涨'}
+  ];
+  
+  const min = 178, max = 210;
+  const top = 50, bot = 310;
+  let x = 50;
+  const gap = 32;
+  
+  // 网格
+  ctx.strokeStyle = '#2d3f54'; ctx.lineWidth = 0.5;
+  for(let v = 180; v <= 205; v += 5) {
+    const y = yScale(v, min, max, top, bot);
+    ctx.beginPath(); ctx.moveTo(40, y); ctx.lineTo(W-20, y); ctx.stroke();
+    label(ctx, v, 30, y+4, '#8899aa', 10, 'right');
+  }
+  
+  segments.forEach((seg, si) => {
+    const startX = x;
+    ctx.strokeStyle = seg.color;
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    seg.prices.forEach((v,i) => {
+      const px = x + i * gap;
+      const py = yScale(v, min, max, top, bot);
+      i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+    });
+    ctx.stroke();
+    
+    // 段标签
+    const midX = startX + (seg.prices.length-1)*gap/2;
+    const midP = seg.prices[Math.floor(seg.prices.length/2)];
+    const midY = yScale(midP, min, max, top, bot);
+    
+    // 背景色块
+    ctx.fillStyle = seg.color === '#ef5350' ? 'rgba(239,83,80,0.06)' : 'rgba(38,166,154,0.06)';
+    ctx.fillRect(startX - 5, top, (seg.prices.length-1)*gap + 10, bot - top);
+    
+    label(ctx, seg.label, midX, bot + 25, seg.color, 14);
+    
+    x += (seg.prices.length - 1) * gap;
+  });
+  
+  label(ctx, '能分解为4段，且只能分解为4段 → 唯一性', W/2, bot + 50, '#ffd54f', 14);
+})();
+
+// ====== 图8：降低频率提高胜率 ======
+(function(){
+  const c = document.getElementById('chart8');
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height;
+  ctx.fillStyle = '#1a2332'; ctx.fillRect(0,0,W,H);
+  
+  const data = [
+    {label:'原来\n100次交易', total:100, win:60, rate:'60%'},
+    {label:'去掉冲动\n80次交易', total:80, win:55, rate:'69%'},
+    {label:'只做高确定性\n30次交易', total:30, win:22, rate:'73%'}
+  ];
+  
+  const barW = 120, barGap = 180;
+  const startX = 130;
+  const maxH = 200;
+  const botY = 250;
+  
+  data.forEach((d, i) => {
+    const x = startX + i * (barW + barGap);
+    
+    // 总交易次数柱
+    const h1 = d.total / 100 * maxH;
+    ctx.fillStyle = 'rgba(136,153,170,0.3)';
+    ctx.fillRect(x, botY - h1, barW/2 - 5, h1);
+    label(ctx, d.total + '次', x + barW/4 - 3, botY - h1 - 8, '#8899aa', 11);
+    
+    // 成功次数柱
+    const h2 = d.win / 100 * maxH;
+    ctx.fillStyle = i === 2 ? '#26a69a' : (i === 1 ? '#f7931a' : '#8899aa');
+    ctx.fillRect(x + barW/2 + 5, botY - h2, barW/2 - 5, h2);
+    label(ctx, d.win + '次', x + barW*3/4 + 3, botY - h2 - 8, i === 2 ? '#26a69a' : '#f7931a', 11);
+    
+    // 标签
+    const lines = d.label.split('\n');
+    label(ctx, lines[0], x + barW/2, botY + 18, '#e8eaed', 12);
+    if(lines[1]) label(ctx, lines[1], x + barW/2, botY + 35, '#8899aa', 11);
+    
+    // 胜率
+    label(ctx, '胜率 ' + d.rate, x + barW/2, 30, i === 2 ? '#26a69a' : (i === 1 ? '#f7931a' : '#8899aa'), 16);
+  });
+  
+  // 箭头
+  drawArrow(ctx, startX + barW + 30, 30, startX + barW + barGap - 30, 30, '#ffd54f');
+  drawArrow(ctx, startX + 2*(barW+barGap) - barGap + 30, 30, startX + 2*(barW+barGap) - 30, 30, '#ffd54f');
+})();
+
+// ====== 图9：隐含前提 ======
+(function(){
+  const c = document.getElementById('chart9');
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height;
+  ctx.fillStyle = '#1a2332'; ctx.fillRect(0,0,W,H);
+  
+  // 左：大基金
+  ctx.strokeStyle = '#2d3f54'; ctx.lineWidth = 1;
+  ctx.strokeRect(30, 40, W/2 - 50, 220);
+  label(ctx, '🏦 索罗斯 / 大基金', W/4, 30, '#f7931a', 15);
+  
+  const items1 = ['资金：千亿美元', '周期：一年到几年', '止损：50%-100%', '基本面：核心驱动力', '建仓：慢慢建仓几个月'];
+  items1.forEach((t, i) => {
+    label(ctx, t, W/4, 75 + i * 38, '#e8eaed', 13);
+  });
+  
+  // 右：散户
+  ctx.strokeRect(W/2 + 20, 40, W/2 - 50, 220);
+  label(ctx, '🧑 散户（你）', W*3/4, 30, '#26a69a', 15);
+  
+  const items2 = ['资金：几万到几十万', '周期：日内到几天', '止损：几个到几十个点', '基本面：不需要', '建仓：一次性开仓'];
+  items2.forEach((t, i) => {
+    label(ctx, t, W*3/4, 75 + i * 38, '#e8eaed', 13);
+  });
+  
+  // 大叉号
+  label(ctx, '≠', W/2, 150, '#ef5350', 36);
+  label(ctx, '隐含前提完全不同，不能照搬！', W/2, 280, '#ffd54f', 14);
+})();
+
+// ====== 图10：持仓量 ======
+(function(){
+  const c = document.getElementById('chart10');
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height;
+  ctx.fillStyle = '#1a2332'; ctx.fillRect(0,0,W,H);
+  
+  // 价格走势
+  const prices = [200,198,197,199,198,196,194,192,195,193,190,187,184,186,183,180,178,182,186,190,194,198,202,205,208];
+  const min = 174, max = 212;
+  const top = 40, bot = 220;
+  const gap = 34;
+  
+  // 网格
+  ctx.strokeStyle = '#2d3f54'; ctx.lineWidth = 0.5;
+  for(let v = 180; v <= 210; v += 10) {
+    const y = yScale(v, min, max, top, bot);
+    ctx.beginPath(); ctx.moveTo(40, y); ctx.lineTo(W-20, y); ctx.stroke();
+    label(ctx, v, 30, y+4, '#8899aa', 10, 'right');
+  }
+  
+  // 价格线
+  ctx.strokeStyle = '#e8eaed'; ctx.lineWidth = 2;
+  ctx.beginPath();
+  prices.forEach((v,i) => {
+    const x = 50 + i * gap;
+    const y = yScale(v, min, max, top, bot);
+    i === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  });
+  ctx.stroke();
+  
+  // 持仓量（柱状图）
+  const opi = [50,55,60,65,70,80,90,100,95,105,120,135,150,145,155,160,150,130,110,90,75,65,55,50,45];
+  const opiMax = 170;
+  const opiBot = 370;
+  const opiTop = 240;
+  
+  label(ctx, '持仓量 (OPI)', 50, opiTop - 5, '#f7931a', 12, 'left');
+  
+  opi.forEach((v,i) => {
+    const x = 50 + i * gap;
+    const h = v / opiMax * (opiBot - opiTop);
+    const isHigh = v > 120;
+    ctx.fillStyle = isHigh ? 'rgba(247,147,26,0.7)' : 'rgba(247,147,26,0.3)';
+    ctx.fillRect(x - 10, opiBot - h, 20, h);
+  });
+  
+  // 标注
+  // 持仓量高峰
+  const peakIdx = 15;
+  const peakX = 50 + peakIdx * gap;
+  label(ctx, '⚠️ 持仓量极大', peakX, opiTop + 10, '#ffd54f', 12);
+  label(ctx, '物极必反！', peakX, opiTop + 28, '#ef5350', 13);
+  
+  // 转折点
+  const turnIdx = 17;
+  const turnX = 50 + turnIdx * gap;
+  const turnY = yScale(prices[turnIdx], min, max, top, bot);
+  ctx.fillStyle = '#26a69a';
+  ctx.beginPath(); ctx.arc(turnX, turnY, 6, 0, Math.PI*2); ctx.fill();
+  label(ctx, '走势转折', turnX + 10, turnY - 12, '#26a69a', 12, 'left');
+  
+  // 持仓量减少
+  label(ctx, '持仓量下降 → 部队撤退', 50 + 22*gap, opiBot - 20, '#8899aa', 11);
+  
+  label(ctx, '价格走势', 50, top - 5, '#e8eaed', 12, 'left');
+})();
+</script>
+
+</body>
+</html>
